@@ -1,0 +1,16 @@
+[
+{
+  "modid": "floricraft2",
+  "name": "Floricraft2",
+  "description": "Ornamental Horticulture mod.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Hosta"],
+  "credits": "",
+  "logoFile": "assets/floricraft2/logo.png",
+  "screenshots": [],
+  "dependencies": []
+}
+]

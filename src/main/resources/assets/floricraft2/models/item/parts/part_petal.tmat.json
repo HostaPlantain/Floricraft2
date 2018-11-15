@@ -1,0 +1,10 @@
+{
+    "parent": "builtin/generated",
+    "textures": {
+        "layer0": "floricraft2:items/parts/part_petal"
+    },
+    "offset": {
+        "x": -1,
+        "y": 1
+    }
+}

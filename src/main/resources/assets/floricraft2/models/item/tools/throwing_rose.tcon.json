@@ -1,0 +1,8 @@
+{
+    "textures": {
+        "layer0": "floricraft2:items/throwing_rose/shaft",
+        "layer1": "floricraft2:items/throwing_rose/part_petal",
+        "layer2": "floricraft2:items/throwing_rose/part_petal2",
+        "layer3": "floricraft2:items/throwing_rose/fletching"
+    }
+}

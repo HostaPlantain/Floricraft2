@@ -1,0 +1,6 @@
+{
+    "parent": "floricraft2:item/petals_salty",
+    "textures": {
+        "petal": "floricraft2:items/petals_raw_dandelion"
+    }
+}

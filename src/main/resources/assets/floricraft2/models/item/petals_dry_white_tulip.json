@@ -1,0 +1,6 @@
+{
+    "parent": "floricraft2:item/petals_dry",
+    "textures": {
+        "layer0": "floricraft2:items/petals_dry_white_tulip"
+    }
+}

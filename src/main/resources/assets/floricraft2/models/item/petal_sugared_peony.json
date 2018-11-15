@@ -1,0 +1,6 @@
+{
+    "parent": "floricraft2:item/petal_sugared",
+    "textures": {
+        "petal": "floricraft2:items/petal_raw_peony"
+    }
+}
