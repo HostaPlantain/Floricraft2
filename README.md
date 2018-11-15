@@ -13,8 +13,7 @@ Get new effects from flowers!
 
 ## Author
 
-Hosta_Plantain
-
++ Hosta_Plantain
 	+ [Twitter](https://twitter.com/hosta_plantain)
 	+ [GitHub](https://github.com/HostaPlantain)
 	+ [CurseForge](https://minecraft.curseforge.com/members/Hosta_Plantain)
