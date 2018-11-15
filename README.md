@@ -7,9 +7,9 @@ Get new effects from flowers!
 + [Baubles](https://minecraft.curseforge.com/projects/baubles)
 + [Tinkers' Construct](https://minecraft.curseforge.com/projects/tinkers-construct)
 
-## Licence
+## License
 
-[MIT Licence](/LICENCE)
+[MIT License](/LICENSE)
 
 ## Author
 
