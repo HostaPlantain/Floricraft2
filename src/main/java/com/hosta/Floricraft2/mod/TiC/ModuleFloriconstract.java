@@ -42,9 +42,11 @@ import slimeknights.tconstruct.tools.TinkerTools;
 @Pulse(id = "Floriconstract", description = "All the Floric Constract in one handy package")
 public class ModuleFloriconstract extends Module{
 
+	//Part
 	public static ToolPart partPetal;
+	//Tool
 	public static ToolCore throwingRose;
-
+	//Modifier
 	public static Modifier modFloric;
 
 	public static final List<ToolPart> PARTS = new ArrayList<ToolPart>();

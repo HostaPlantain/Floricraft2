@@ -45,16 +45,21 @@ public class ModuleOthers extends Module {
 	//Potion
 	public static final Potion POTION_FLORIC = new EffectActive("effect.floric", 0xFFDAFF, false).setIconIndex(0, 0);
 	public static final Potion POTION_HILLSTEP = new EffectActive("effect.hillstep", 0xEEFFDA, false).setIconIndex(0, 0);
-	public static final Potion[] POTION_ANTIS = new EffectAntiMob[ModuleItems.ANTI_MOBS.length];
+	public static final Potion[] POTION_ANTIS = new Potion[ModuleItems.ANTI_MOBS.length];
 	static
 	{
 		int i = 0;
+		Class[][] antiClass = new Class[POTION_ANTIS.length][];
+		antiClass[i++] = new Class[]{EntityZombie.class, EntityZombieVillager.class};
+		antiClass[i++] = new Class[]{EntitySkeleton.class, EntityWitherSkeleton.class};
+		antiClass[i++] = new Class[]{EntityCreeper.class};
+		antiClass[i++] = new Class[]{EntitySpider.class, EntityCaveSpider.class};
+		antiClass[i++] = new Class[]{EntityEnderman.class};
 		String effectAnti = "effect.anti_";
-		POTION_ANTIS[i] = new EffectAntiMob(effectAnti + ModuleItems.ANTI_MOBS[i], 0xADDAAD, new Class[]{EntityZombie.class, EntityZombieVillager.class}).setIconIndex(0, 0);
-		POTION_ANTIS[++i] = new EffectAntiMob(effectAnti + ModuleItems.ANTI_MOBS[i], 0xADDAAD, new Class[]{EntitySkeleton.class, EntityWitherSkeleton.class}).setIconIndex(0, 0);
-		POTION_ANTIS[++i] = new EffectAntiMob(effectAnti + ModuleItems.ANTI_MOBS[i], 0xADDAAD, new Class[]{EntityCreeper.class}).setIconIndex(0, 0);
-		POTION_ANTIS[++i] = new EffectAntiMob(effectAnti + ModuleItems.ANTI_MOBS[i], 0xADDAAD, new Class[]{EntitySpider.class, EntityCaveSpider.class}).setIconIndex(0, 0);
-		POTION_ANTIS[++i] = new EffectAntiMob(effectAnti + ModuleItems.ANTI_MOBS[i], 0xADDAAD, new Class[]{EntityEnderman.class}).setIconIndex(0, 0);
+		for (int j = 0; j < i; j++)
+		{
+			POTION_ANTIS[j] = new EffectAntiMob(effectAnti + ModuleItems.ANTI_MOBS[j], 0xADDAAD, antiClass[j]);
+		}
 	}
 	public static final Potion POTION_NO_TARGET = new EffectActive("effect.no_target", 0xFFDAFF, true).setIconIndex(0, 0);
 	
@@ -78,19 +83,13 @@ public class ModuleOthers extends Module {
 		
 		potions.add(POTION_FLORIC);
 		potions.add(POTION_HILLSTEP);
-		for(Potion potion : POTION_ANTIS)
+		for (Potion potion : POTION_ANTIS)
 		{
-			if (potion != null)
-			{
-				potions.add(potion);
-			}
+			potions.add(potion);
 		}
 		potions.add(POTION_NO_TARGET);
 		
-		for(Potion potion : potions)
-		{
-			Module.registerPotion(event.getRegistry(), potion);
-		}
+		potions.forEach(potion -> Module.registerPotion(event.getRegistry(), potion));
 	}
 	
 	@SubscribeEvent
@@ -100,10 +99,7 @@ public class ModuleOthers extends Module {
 		
 		enchantments.add(ENCHANT_FLORIC);
 		
-		for(Enchantment enchantment : enchantments)
-		{
-			Module.registerEnchantment(event.getRegistry(), enchantment);
-		}
+		enchantments.forEach(enchantment -> Module.registerEnchantment(event.getRegistry(), enchantment));
 	}
 	
 	@Subscribe

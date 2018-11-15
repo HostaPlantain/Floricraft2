@@ -34,7 +34,7 @@ public class ModuleRecipes extends Module {
 		int count = 0;
 		for (IRecipe recipe : recipes)
 		{
-			Module.registerRecipe(event.getRegistry(), recipe, "recipe_" + count++);
+			Module.registerRecipe(event.getRegistry(), recipe, recipe.getRecipeOutput().getUnlocalizedName().substring(5) + "_" + count++);
 		}
 	}
 	

@@ -26,7 +26,7 @@ public class ModuleBlocks extends Module {
 	public static final Block[] STACK_FLOWER = new Block[ModuleItems.ALL.length];
 	static 
 	{
-		for(int i = 0; i < STACK_FLOWER.length; i++)
+		for (int i = 0; i < STACK_FLOWER.length; i++)
 		{
 			STACK_FLOWER[i] = new BlockStackFlower("stack_" + ModuleItems.ALL[i], i);
 		}
@@ -71,7 +71,7 @@ public class ModuleBlocks extends Module {
 	private static final List<Block> BLOCKS = new ArrayList<Block>();
 	static
 	{
-		for(Block block : STACK_FLOWER)
+		for (Block block : STACK_FLOWER)
 		{
 			BLOCKS.add(block);
 		}
@@ -82,16 +82,13 @@ public class ModuleBlocks extends Module {
 	@SubscribeEvent
 	public void registerBlocks(Register<Block> event)
 	{
-		for(Block block : BLOCKS)
-		{
-			Module.registerBlock(event.getRegistry(), block);
-		}
+		BLOCKS.forEach(block -> Module.registerBlock(event.getRegistry(), block));
 	}
 	
 	@SubscribeEvent
 	public void registerItems(Register<Item> event)
 	{
-		for(Block block : BLOCKS)
+		for (Block block : BLOCKS)
 		{
 			if (block instanceof IMetaName)
 			{
@@ -112,10 +109,7 @@ public class ModuleBlocks extends Module {
 	@SubscribeEvent
 	public void registerModels(ModelRegistryEvent event)
 	{
-		for(Block block : BLOCKS)
-		{
-			Module.registerItemRender(Item.getItemFromBlock(block));
-		}
+		BLOCKS.forEach(block -> Module.registerItemRender(Item.getItemFromBlock(block)));
 	}
 	
 	@Subscribe

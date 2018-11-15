@@ -1,12 +1,13 @@
 package com.hosta.Floricraft2.mod;
 
+import com.hosta.Floricraft2.mod.Baubles.BaublesInit;
 import com.hosta.Floricraft2.mod.TiC.TiCInit;
 
 import net.minecraftforge.fml.common.Loader;
 
 public class ModedInit {
 
-	//public static boolean isBaublesLoaded;
+	public static boolean isBaublesLoaded;
 	//public static boolean isBotaniaLoaded;
 	//public static boolean isJEILoaded;
 	//public static boolean isMantleLoaded;
@@ -16,13 +17,16 @@ public class ModedInit {
 	
 	public static void init()
 	{
-		//isBaublesLoaded = Loader.isModLoaded("baubles");
+		isBaublesLoaded = Loader.isModLoaded("baubles");
+		if (isBaublesLoaded)
+		{
+			BaublesInit.init();
+		}
 		//isBotaniaLoaded = Loader.isModLoaded("Botania");
 		//isJEILoaded = Loader.isModLoaded("jei");
 		//isMantleLoaded = Loader.isModLoaded("mantle");
 		//isRFLoaded = Loader.isModLoaded("redstoneflux");
 		//isTOPLoaded = Loader.isModLoaded("theoneprobe");
-		
 		isTiCLoaded = Loader.isModLoaded("tconstruct");
 		if (isTiCLoaded)
 		{

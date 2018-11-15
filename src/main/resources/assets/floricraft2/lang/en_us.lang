@@ -151,7 +151,7 @@ effect.floric=Floric
 effect.hillstep=Hill Step
 
 enchantment.floric=Floric
-
+enchantment.floricraft.enchantment.floric.desc=Applies floric to the wielder, and generates flower particles when attacking
 
 
 item.part_petal.name=Petal

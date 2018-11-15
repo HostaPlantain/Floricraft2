@@ -27,14 +27,20 @@ public class ToolSachet extends ToolBasic {
 		if (entityIn instanceof EntityPlayer) 
 		{
 			EntityPlayer player = (EntityPlayer) entityIn ;
-			
-			this.addEffect(player, ModuleOthers.POTION_FLORIC, 400, 0);
-			this.addEffect(player, POTION, 400, 0);
+			this.addEffect(player);
 			this.damageItem(stack, player, itemSlot);
-			
-			super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
 		}
+		super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
     }
+	
+	protected void addEffect(EntityPlayer player) 
+    {
+		this.addEffect(player, ModuleOthers.POTION_FLORIC, 400, 0);
+		if (POTION != null)
+		{
+			this.addEffect(player, POTION, 400, 0);
+		}
+	}
 	
 	private void addEffect(EntityPlayer player, Potion potion, int duration, int amplifier)
 	{
@@ -47,7 +53,7 @@ public class ToolSachet extends ToolBasic {
     	}
 	}
 	
-	private void damageItem(ItemStack stack, EntityPlayer player, int itemSlot)
+	protected void damageItem(ItemStack stack, EntityPlayer player, int itemSlot)
 	{
 		if (stack.getItemDamage() < this.getMaxDamage())
 		{
