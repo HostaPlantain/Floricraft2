@@ -1,6 +1,6 @@
 # Floricraft2
 
-Get new effects from flowers!
+Ornamental horticulture mod for Minecraft. Get new effects from flowers!
 
 ## Optional Dependencies
 

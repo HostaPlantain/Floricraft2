@@ -66,9 +66,9 @@ public class ModuleItems extends Module {
 	//Basket
 	//public static final Item BASKET_FLOWER;
 	//public static final Item BASKET_LUNCH;
-	//
-	//public static final Item
-	//public static final Item
+	//Shepherd
+	//public static final Item SHEPHERD_CROOK;
+	//public static final Item SHEPHERD_WHISTLE;
 	//Sachet
 	public static final Item SACHET_SAC = new ItemBasic("sachet_sac");
 	public static final Item SACHET_FLOWER = new ToolSachet("sachet_flower", (Potion)null);

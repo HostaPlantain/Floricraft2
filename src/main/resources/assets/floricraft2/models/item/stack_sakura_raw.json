@@ -1,0 +1,6 @@
+{
+    "parent": "floricraft2:item/stack",
+    "textures": {
+        "layer0": "floricraft2:blocks/stack_sakura_raw"
+    }
+}

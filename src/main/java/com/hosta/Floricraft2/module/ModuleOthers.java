@@ -36,7 +36,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ModuleOthers extends Module {
 	
 	//Tab
-	public static final CreativeTabs TAB_FLORICRAFT = new CreativeTabs("floricraft")
+	public static final CreativeTabs TAB_FLORICRAFT = new CreativeTabs("floricraft2")
     {
         @SideOnly(Side.CLIENT)
         public ItemStack getTabIconItem() {return new ItemStack(ModuleItems.CUT_FLOWER, 1, 12);}
@@ -58,7 +58,7 @@ public class ModuleOthers extends Module {
 		String effectAnti = "effect.anti_";
 		for (int j = 0; j < i; j++)
 		{
-			POTION_ANTIS[j] = new EffectAntiMob(effectAnti + ModuleItems.ANTI_MOBS[j], 0xADDAAD, antiClass[j]);
+			POTION_ANTIS[j] = new EffectAntiMob(effectAnti + ModuleItems.ANTI_MOBS[j], 0xADDAAD, antiClass[j]).setIconIndex(0, 0);
 		}
 	}
 	public static final Potion POTION_NO_TARGET = new EffectActive("effect.no_target", 0xFFDAFF, true).setIconIndex(0, 0);

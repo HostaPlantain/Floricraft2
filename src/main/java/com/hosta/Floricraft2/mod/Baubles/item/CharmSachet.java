@@ -14,9 +14,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.world.World;
 
-public class AmuletSachet extends ToolSachet implements IBauble{
+public class CharmSachet extends ToolSachet implements IBauble{
 
-	public AmuletSachet(String unlocalizedName, Potion potion)
+	public CharmSachet(String unlocalizedName, Potion potion)
 	{
 		super(unlocalizedName, potion);
 	}
@@ -27,7 +27,7 @@ public class AmuletSachet extends ToolSachet implements IBauble{
 	@Override
 	public BaubleType getBaubleType(ItemStack itemstack)
 	{
-		return BaubleType.AMULET;
+		return BaubleType.CHARM;
 	}
 	
 	@Override
@@ -37,7 +37,7 @@ public class AmuletSachet extends ToolSachet implements IBauble{
 		{
 			EntityPlayer player = (EntityPlayer)playerIn;
 			super.addEffect(player);
-			this.damageItem(itemstack, player, 0);
+			this.damageItem(itemstack, player, this.getBaubleType(itemstack).getValidSlots()[0]);
 		}
 	}
 	

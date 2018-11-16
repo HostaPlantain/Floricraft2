@@ -31,7 +31,7 @@ public class EffectAntiMob<T extends EntityLiving> extends EffectBasic {
 	@Override
 	public void performEffect(EntityLivingBase entityLivingBaseIn, int amplifier)
     {
-		if (entityLivingBaseIn instanceof EntityPlayer && !entityLivingBaseIn.world.isRemote)
+		if (entityLivingBaseIn instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer)entityLivingBaseIn;
 			AxisAlignedBB bb = player.getEntityBoundingBox().expand(8, 2, 8).expand(-8, -2, -8);
@@ -52,40 +52,11 @@ public class EffectAntiMob<T extends EntityLiving> extends EffectBasic {
 					if (!entity.targetTasks.isControlFlagDisabled(8))
 					{
 						entity.targetTasks.disableControlFlag(8);
+						entity.setAttackTarget((EntityLivingBase)null);
 					}
-					//monster.setAttackTarget((EntityLivingBase)null);
 					entity.addPotionEffect(new PotionEffect(ModuleOthers.POTION_NO_TARGET, 60, 0, false, false));
 				}
 			}
-			
-			/**
-			List<Entity> list = player.world.getEntitiesWithinAABBExcludingEntity(player, bb);
-			for (Entity entity : list)
-			{
-				for (Class c : ANTI_CALSS)
-				{
-					if (entity.getClass() == c)
-					{
-						EntityLiving monster = (EntityLiving)entity;
-						
-						if (true)
-						{
-							for (EntityAITasks.EntityAITaskEntry entry : monster.targetTasks.taskEntries)
-							{
-								if (entry.action instanceof EntityAINearestAttackableTarget && entry.action.getMutexBits() < 8)
-								{
-									entry.action.setMutexBits(entry.action.getMutexBits() + 8);
-								}
-							}
-							monster.targetTasks.disableControlFlag(8);
-							//monster.setAttackTarget((EntityLivingBase)null);
-							monster.addPotionEffect(new PotionEffect(ModuleOthers.POTION_NO_TARGET, 60, 0, false, false));
-						}
-					}
-					break;
-				}
-			}
-			**/
 		}
     }
 }

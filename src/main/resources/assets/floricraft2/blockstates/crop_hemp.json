@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "age=0": { "model": "floricraft2:crop_hemp_1" },
+        "age=1": { "model": "floricraft2:crop_hemp_2" },
+        "age=2": { "model": "floricraft2:crop_hemp_2" },
+        "age=3": { "model": "floricraft2:crop_hemp_2" },
+        "age=4": { "model": "floricraft2:crop_hemp_3" },
+        "age=5": { "model": "floricraft2:crop_hemp_3" },
+        "age=6": { "model": "floricraft2:crop_hemp_3" },
+        "age=7": { "model": "floricraft2:crop_hemp_4" }
+    }
+}

@@ -48,7 +48,7 @@ public class ModuleRecipes extends Module {
 		return ModuleRecipes.compressRecipe(new ResourceLocation(Reference.MOD_ID, group), result, item, amount);
 	}
 	
-	public static IRecipe compressRecipe(ResourceLocation group, ItemStack result, ItemStack item, int amount)
+	private static IRecipe compressRecipe(ResourceLocation group, ItemStack result, ItemStack item, int amount)
 	{
 		Object[] recipe = new ItemStack[amount];
 		for (int i = 0; i < amount; i++)
@@ -68,7 +68,7 @@ public class ModuleRecipes extends Module {
 		return ModuleRecipes.unCompressRecipe(new ResourceLocation(Reference.MOD_ID, group), result, item);
 	}
 	
-	public static IRecipe unCompressRecipe(ResourceLocation group, ItemStack result, ItemStack item)
+	private static IRecipe unCompressRecipe(ResourceLocation group, ItemStack result, ItemStack item)
 	{
 		return new ShapelessOreRecipe(group, result, item);
 	}
