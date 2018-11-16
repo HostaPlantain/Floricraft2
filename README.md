@@ -9,7 +9,7 @@ Ornamental horticulture mod for Minecraft. Get new effects from flowers!
 
 ## License
 
-[MIT License](/LICENSE)
+This mod is released under [The MIT License](/LICENSE).
 
 ## Author
 
