@@ -12,7 +12,9 @@ import com.hosta.Floricraft2.item.tool.ToolPruner;
 import com.hosta.Floricraft2.item.tool.ToolSachet;
 
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent.Register;
@@ -20,31 +22,31 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class ModuleItems extends Module {
 
 	public static final String[] FLOWERS = new String[]{"dandelion", "poppy", "blue_orchid", "allium", "azure_bluet", "red_tulip", "orange_tulip", "white_tulip", "pink_tulip", "oxeye_daisy", "sunflower", "lilac", "rose", "peony", "sakura"};
 	public static final String[] COLORS = new String[]{"black", "red", "green", "brown", "blue", "purple", "cyan", "light_gray", "gray", "pink", "lime", "yellow", "light_blue", "magenta", "orange", "white"};
-	public static final String[] ALL = new String[FLOWERS.length + COLORS.length];
+	/*public static final String[] ALL = new String[FLOWERS.length + COLORS.length];
 	static
 	{
 		System.arraycopy(FLOWERS, 0, ALL, 0, FLOWERS.length);
 		System.arraycopy(COLORS, 0, ALL, FLOWERS.length, COLORS.length);
-	}
-	public static final String[] ANTI_MOBS = new String[]{"zombie", "skeleton", "creeper", "spider", "ender"};
+	}*/
 	
 	//Material
 	//Cut Flower
-	public static final Item CUT_FLOWER = new ItemBasicMeta("cut_flower", ALL);
+	public static final Item CUT_FLOWER = new ItemBasicMeta("cut_flower", FLOWERS);
 	//Petal
-	public static final Item PETAL_RAW = new ItemBasicMeta("petal_raw", ALL);
-	public static final Item PETAL_DRY = new ItemBasicMeta("petal_dry", ALL);
-	public static final Item PETAL_SALTY = new ItemBasicMeta("petal_salty", ALL);
-	public static final Item PETAL_SUGARED = new ItemFoodSugared("petal_sugared", ALL, 1, 0.5F);
-	public static final Item PETALS_RAW = new ItemBasicMeta("petals_raw", ALL);
-	public static final Item PETALS_DRY = new ItemBasicMeta("petals_dry", ALL);
-	public static final Item PETALS_SALTY = new ItemBasicMeta("petals_salty", ALL);
-	public static final Item PETALS_SUGARED = new ItemFoodSugared("petals_sugared", ALL, 2, 1.0F);
+	public static final Item PETAL_RAW = new ItemBasicMeta("petal_raw", FLOWERS);
+	public static final Item PETAL_DRY = new ItemBasicMeta("petal_dry", FLOWERS);
+	public static final Item PETAL_SALTY = new ItemBasicMeta("petal_salty", FLOWERS);
+	public static final Item PETAL_SUGARED = new ItemFoodSugared("petal_sugared", FLOWERS, 1, 0.5F);
+	public static final Item PETALS_RAW = new ItemBasicMeta("petals_raw", FLOWERS);
+	public static final Item PETALS_DRY = new ItemBasicMeta("petals_dry", FLOWERS);
+	public static final Item PETALS_SALTY = new ItemBasicMeta("petals_salty", FLOWERS);
+	public static final Item PETALS_SUGARED = new ItemFoodSugared("petals_sugared", FLOWERS, 2, 1.0F);
 	//Ingot
 	//public static final Item DUST_SALT;
 	//Crop
@@ -73,13 +75,13 @@ public class ModuleItems extends Module {
 	public static final Item SACHET_SAC = new ItemBasic("sachet_sac");
 	public static final Item SACHET_FLOWER = new ToolSachet("sachet_flower", (Potion)null);
 	//public static final Item SACHET_ENDEARING;
-	public static final Item[] SACHET_ANTIS = new Item[ANTI_MOBS.length];
+	public static final Item[] SACHET_ANTIS = new Item[ModuleOthers.ANTI_MOBS.length];
 	static
 	{
 		String sachetAnti = "sachet_anti_";
 		for (int i = 0; i < SACHET_ANTIS.length; i++)
 		{
-			SACHET_ANTIS[i] = new ToolSachet(sachetAnti + ANTI_MOBS[i], ModuleOthers.POTION_ANTIS[i]);
+			SACHET_ANTIS[i] = new ToolSachet(sachetAnti + ModuleOthers.ANTI_MOBS[i], ModuleOthers.POTION_ANTIS[i]);
 		}
 	}
 	//Armor
@@ -121,6 +123,23 @@ public class ModuleItems extends Module {
 	public void registerItems(Register<Item> event)
 	{
 		ITEMS.forEach(item -> Module.registerItem(event.getRegistry(), item));
+		registerOreDictionary();
+	}
+
+	public void registerOreDictionary()
+	{
+		//Vanilla
+		OreDictionary.registerOre("dustSugar", Items.SUGAR);
+		//Petal
+		for (int i = 0; i < FLOWERS.length; i++)
+		{
+			OreDictionary.registerOre("petalsDry", new ItemStack(PETALS_DRY, 1, i));
+		}
+		//Crop
+		OreDictionary.registerOre("seedHemp", SEED_HEMP);
+		//Hemp
+		OreDictionary.registerOre("fiberHemp", HEMP_YARN);
+		OreDictionary.registerOre("fabricHemp", HEMP_CLOTH);
 	}
 	
 	@SideOnly(Side.CLIENT)

@@ -35,6 +35,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ModuleOthers extends Module {
 	
+	public static final String[] ANTI_MOBS = new String[]{"zombie", "skeleton", "creeper", "spider", "ender"};
+	
 	//Tab
 	public static final CreativeTabs TAB_FLORICRAFT = new CreativeTabs("floricraft2")
     {
@@ -45,7 +47,7 @@ public class ModuleOthers extends Module {
 	//Potion
 	public static final Potion POTION_FLORIC = new EffectActive("effect.floric", 0xFFDAFF, false).setIconIndex(0, 0);
 	public static final Potion POTION_HILLSTEP = new EffectActive("effect.hillstep", 0xEEFFDA, false).setIconIndex(0, 0);
-	public static final Potion[] POTION_ANTIS = new Potion[ModuleItems.ANTI_MOBS.length];
+	public static final Potion[] POTION_ANTIS = new Potion[ANTI_MOBS.length];
 	static
 	{
 		int i = 0;
@@ -58,7 +60,7 @@ public class ModuleOthers extends Module {
 		String effectAnti = "effect.anti_";
 		for (int j = 0; j < i; j++)
 		{
-			POTION_ANTIS[j] = new EffectAntiMob(effectAnti + ModuleItems.ANTI_MOBS[j], 0xADDAAD, antiClass[j]).setIconIndex(0, 0);
+			POTION_ANTIS[j] = new EffectAntiMob(effectAnti + ANTI_MOBS[j], 0xADDAAD, antiClass[j]).setIconIndex(0, 0);
 		}
 	}
 	public static final Potion POTION_NO_TARGET = new EffectActive("effect.no_target", 0xFFDAFF, true).setIconIndex(0, 0);

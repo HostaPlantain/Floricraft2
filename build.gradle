@@ -2,14 +2,14 @@ repositories {
     maven {     //Mantle, TiC, JEI
         name 'DVS1 Maven FS'
         url 'http://dvs1.progwml6.com/files/maven'
-    }  
-    maven {     //Baubles
-        name "thiakil"
-        url "http://maven.thiakil.com"
     }
     maven {     // TOP
         name 'tterrag maven'
         url "http://maven.tterrag.com"
+    }  
+    maven {     //Baubles
+        name "thiakil"
+        url "http://maven.thiakil.com"
     }
     maven {     // CoFH
         name "CoFH Maven"

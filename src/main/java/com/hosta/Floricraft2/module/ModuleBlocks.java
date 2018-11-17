@@ -21,14 +21,14 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ModuleBlocks extends Module {
-
+	
 	//Stack Flower
-	public static final Block[] STACK_FLOWER = new Block[ModuleItems.ALL.length];
+	public static final Block[] STACK_FLOWER = new Block[ModuleItems.FLOWERS.length];
 	static 
 	{
 		for (int i = 0; i < STACK_FLOWER.length; i++)
 		{
-			STACK_FLOWER[i] = new BlockStackFlower("stack_" + ModuleItems.ALL[i], i);
+			STACK_FLOWER[i] = new BlockStackFlower("stack_" + ModuleItems.FLOWERS[i], i);
 		}
 	}
 	public static final Block STACK_DEAD = new BlockStackDead("stack_dead");
