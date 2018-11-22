@@ -1,0 +1,24 @@
+
+{
+  "entries" :[
+    {
+      "key": "INGOT_TWINKLE",
+      "name": "floricraft.research.ingot_twinkle",
+      "icons": ["floricraft2:textures/items/ingot_twinkle.png"],
+      "category": "FLORALIA",
+      "parents": ["FIRSTSTEPS"],
+      "siblings": [],
+      "meta": [
+        "ROUND",
+        "AUTOUNLOCK"
+      ],
+      "location": [0, 0],
+      "stages": [
+        {
+          "text": "",
+          "recipes": [],
+          "required_craft":[]
+        }
+      ]
+    }
+ ]

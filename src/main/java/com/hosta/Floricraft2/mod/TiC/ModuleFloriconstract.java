@@ -9,8 +9,11 @@ import com.hosta.Floricraft2.mod.TiC.modifier.ModifierFloric;
 import com.hosta.Floricraft2.mod.TiC.ranged.EntityThrowingRose;
 import com.hosta.Floricraft2.mod.TiC.ranged.ThrowingRose;
 import com.hosta.Floricraft2.module.Module;
+import com.hosta.Floricraft2.module.ModuleBlocks;
 import com.hosta.Floricraft2.module.ModuleItems;
+import com.hosta.Floricraft2.module.ModuleOthers;
 
+import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -20,14 +23,13 @@ import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.registries.IForgeRegistry;
 import slimeknights.mantle.pulsar.pulse.Pulse;
+import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.common.ModelRegisterUtil;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.TinkerRegistryClient;
@@ -52,18 +54,35 @@ public class ModuleFloriconstract extends Module{
 	public static final List<ToolPart> PARTS = new ArrayList<ToolPart>();
 	public static final List<ToolCore> TOOLS = new ArrayList<ToolCore>();
 	
+	@Override
+	public void preInit()
+	{
+		TConstruct.pulseManager.registerPulse(this);
+	}
+	
 	@SubscribeEvent
 	public void registerItems(Register<Item> event)
 	{
+		List<Item> items = new ArrayList<Item>();
+		
 		partPetal = new ToolPart(Material.VALUE_Ingot);
 		partPetal.setUnlocalizedName("part_petal");
 		PARTS.add(partPetal);
-		PARTS.forEach(part -> ModuleFloriconstract.registerToolPart(event.getRegistry(), part));
-		
+
 		throwingRose = new ThrowingRose();
 		throwingRose.setUnlocalizedName("throwing_rose");
 		TOOLS.add(throwingRose);
-		TOOLS.forEach(tool -> ModuleFloriconstract.registerItem(event.getRegistry(), tool));
+		
+		items.addAll(PARTS);
+		items.addAll(TOOLS);
+		registerItems(event.getRegistry(), items);
+
+		for (ToolPart part : PARTS)
+		{
+			ItemStack stencil = new ItemStack(TinkerTools.pattern);
+	        Pattern.setTagForPart(stencil, part);
+	        TinkerRegistry.registerStencilTableCrafting(stencil);
+		}
 		
 		modFloric = new ModifierFloric("floric", 0xFFDAFF, 3, 72);
 		modFloric.addItem(new ItemStack(ModuleItems.PETAL_RAW, 1, OreDictionary.WILDCARD_VALUE), 1, 1);
@@ -71,62 +90,12 @@ public class ModuleFloriconstract extends Module{
 	}
 	
 	@SubscribeEvent
-	public void registerEntities(Register<EntityEntry> event)
-	{
-		Module.registerEntity(EntityThrowingRose.class, "throwing_rose");
-	}
-	
-	@SideOnly(Side.CLIENT)
-	@SubscribeEvent
-	public void registerModels(ModelRegistryEvent event)
-	{
-		ModuleFloriconstract.PARTS.forEach(part -> ModelRegisterUtil.registerPartModel(part));
-		ModuleFloriconstract.TOOLS.forEach(tool -> ModelRegisterUtil.registerToolModel(tool));
-	    RenderingRegistry.registerEntityRenderingHandler(EntityThrowingRose.class, RenderThrowingRose::new);
-	}
-
-	@SubscribeEvent
 	public void registerRecipes(Register<IRecipe> event)
 	{
-		
-	}
-	
-	@Subscribe
-	public void init(FMLInitializationEvent event)
-	{
-		if (event.getSide().isClient())
+		for (Block stack : ModuleBlocks.STACK_FLOWER)
 		{
-			this.registerToolBuildInfo();
+			registerDryingRecipes(new ItemStack(stack, 1, 0), new ItemStack(stack, 1, 3), 300);
 		}
-		
-		TOOLS.forEach(tool -> TinkerRegistry.registerToolForgeCrafting(tool));
-	}
-
-	@Subscribe
-	public void postInit(FMLPostInitializationEvent event)
-	{
-		PARTS.clear();
-		TOOLS.clear();
-	}
-	
-	private static void registerToolPart(IForgeRegistry<Item> registry, ToolPart part)
-	{
-		Module.registerItem(registry, part);
-		ItemStack stencil = new ItemStack(TinkerTools.pattern);
-        Pattern.setTagForPart(stencil, part);
-        TinkerRegistry.registerStencilTableCrafting(stencil);
-	}
-	
-	@SideOnly(Side.CLIENT)
-	private void registerToolBuildInfo()
-	{
-		ToolBuildGuiInfo throwingRoseInfo;
-		throwingRoseInfo = new ToolBuildGuiInfo(ModuleFloriconstract.throwingRose);
-		throwingRoseInfo.addSlotPosition(33 - 5, 42);
-		throwingRoseInfo.addSlotPosition(33 + 10, 42 - 20);
-		throwingRoseInfo.addSlotPosition(33 - 10, 42 - 20);
-		throwingRoseInfo.addSlotPosition(33 - 10, 42 + 20);
-		TinkerRegistryClient.addToolBuilding(throwingRoseInfo);
 	}
 	
 	private static void registerDryingRecipes(ItemStack input, ItemStack output, int sec)
@@ -136,5 +105,54 @@ public class ModuleFloriconstract extends Module{
 		tagCompound.setTag("output", output.writeToNBT(new NBTTagCompound()));
 		tagCompound.setInteger("time", sec);
 		FMLInterModComms.sendMessage("tconstruct", "addDryingRecipe", tagCompound);
+	}
+
+	@SubscribeEvent
+	public void registerEntities(Register<EntityEntry> event)
+	{
+		registerEntity(EntityThrowingRose.class, "throwing_rose", ModuleOthers.THROWING_ROSE);
+	}
+
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public void registerModels(ModelRegistryEvent event)
+	{
+		ModuleFloriconstract.PARTS.forEach(part -> ModelRegisterUtil.registerPartModel(part));
+		ModuleFloriconstract.TOOLS.forEach(tool -> ModelRegisterUtil.registerToolModel(tool));
+	    RenderingRegistry.registerEntityRenderingHandler(EntityThrowingRose.class, RenderThrowingRose::new);
+	}
+
+	@Subscribe
+	public void init(FMLInitializationEvent event)
+	{
+		if (event.getSide().isClient())
+		{
+			this.registerToolBuildInfo();
+		}
+		TOOLS.forEach(tool -> TinkerRegistry.registerToolForgeCrafting(tool));
+	}
+
+	@SideOnly(Side.CLIENT)
+	private void registerToolBuildInfo()
+	{
+		List<ToolBuildGuiInfo> builds = new ArrayList<ToolBuildGuiInfo>();
+		
+		//Throwing Rose
+		ToolBuildGuiInfo throwingRoseInfo;
+		throwingRoseInfo = new ToolBuildGuiInfo(ModuleFloriconstract.throwingRose);
+		throwingRoseInfo.addSlotPosition(33 - 5, 42);
+		throwingRoseInfo.addSlotPosition(33 + 10, 42 - 20);
+		throwingRoseInfo.addSlotPosition(33 - 10, 42 - 20);
+		throwingRoseInfo.addSlotPosition(33 - 10, 42 + 20);
+		builds.add(throwingRoseInfo);
+		
+		builds.forEach(buildInfo -> TinkerRegistryClient.addToolBuilding(buildInfo));
+	}
+
+	@Override
+	public void postInit()
+	{
+		PARTS.clear();
+		TOOLS.clear();
 	}
 }

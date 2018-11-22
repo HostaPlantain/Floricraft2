@@ -6,5 +6,4 @@ public class MathHelper {
 	{
 		return Math.random() * (max - min) + min;
 	}
-	
 }

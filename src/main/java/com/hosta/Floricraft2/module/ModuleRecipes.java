@@ -3,15 +3,12 @@ package com.hosta.Floricraft2.module;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.hosta.Floricraft2.Reference;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.OreDictionary;
@@ -56,28 +53,27 @@ public class ModuleRecipes extends Module {
 			recipes.add(shapelessRecipe("petal_sugared_from_petals",new ItemStack(ModuleItems.PETAL_SUGARED, 9, i),		new ItemStack(ModuleItems.PETALS_SUGARED, 1, i)));
 			recipes.add(compressRecipe(	"petals_sugared",			new ItemStack(ModuleItems.PETALS_SUGARED, 1, i),	new ItemStack(ModuleItems.PETAL_SUGARED, 1, i),	9));
 		}
+		//Salt
+		recipes.add(shapelessRecipe(null,			new ItemStack(ModuleItems.DUST_SALT, 4, 0),			ModuleBlocks.BLOCK_SALT));
+		recipes.add(shapedRecipe(	null,			ModuleBlocks.BLOCK_SALT,							"dd", "dd", 'd', ModuleItems.DUST_SALT));
 		//Hemp
-		recipes.add(shapelessRecipe(null,			Items.STRING,			"fiberHemp"));
-		recipes.add(shapelessRecipe(null,			ModuleItems.HEMP_TWINE,	"fiberHemp", "fiberHemp", "fiberHemp"));
-		recipes.add(shapedRecipe(	null,			ModuleItems.HEMP_CLOTH,	"tt", "tt", 't', ModuleItems.HEMP_TWINE));
+		recipes.add(shapelessRecipe(null,			Items.STRING,										"fiberHemp"));
+		recipes.add(shapelessRecipe(null,			ModuleItems.HEMP_TWINE,								"fiberHemp", "fiberHemp", "fiberHemp"));
+		recipes.add(shapedRecipe(	null,			ModuleItems.HEMP_CLOTH,								"tt", "tt", 't', ModuleItems.HEMP_TWINE));
 		//Tool
-		recipes.add(shapedRecipe(	"pruner",		ModuleItems.PRUNER,		"i ", "i ", " i", 'i', Items.IRON_INGOT));
-		recipes.add(shapedRecipe(	"pruner",		ModuleItems.PRUNER,		"i  ", " ii", 'i', Items.IRON_INGOT));
+		recipes.add(shapedRecipe(	"pruner",		ModuleItems.PRUNER,									"i ", "i ", " i", 'i', Items.IRON_INGOT));
+		recipes.add(shapedRecipe(	"pruner",		ModuleItems.PRUNER,									"i  ", " ii", 'i', Items.IRON_INGOT));
 		//Sachet
-		recipes.add(shapedRecipe(	null,			ModuleItems.SACHET_SAC,	"ttt", "c c", " c ", 't', ModuleItems.HEMP_TWINE, 'c', ModuleItems.HEMP_CLOTH));
-		recipes.add(shapedRecipe(	null,			new ItemStack(ModuleItems.SACHET_FLOWER, 1, 0),			"ppp", "ppp", "tst", 'p', "petalsDry", 's', ModuleItems.SACHET_SAC, 't', ModuleItems.HEMP_TWINE));
+		recipes.add(shapedRecipe(	null,			ModuleItems.SACHET_SAC,								"ttt", "c c", " c ", 't', ModuleItems.HEMP_TWINE, 'c', ModuleItems.HEMP_CLOTH));
+		recipes.add(shapedRecipe(	null,			new ItemStack(ModuleItems.SACHET_FLOWER, 1, 0),		"ppp", "ppp", "tst", 'p', "petalsDry", 's', ModuleItems.SACHET_SAC, 't', ModuleItems.HEMP_TWINE));
 		int j = 0;
-		recipes.add(shapedRecipe(	"sachet_anti",	new ItemStack(ModuleItems.SACHET_ANTIS[j++], 1, 0),		"ppp", "ppp", "tst", 'p', Items.ROTTEN_FLESH, 's', new ItemStack(ModuleItems.SACHET_FLOWER, 1, OreDictionary.WILDCARD_VALUE), 't', ModuleItems.HEMP_TWINE));
-		recipes.add(shapedRecipe(	"sachet_anti",	new ItemStack(ModuleItems.SACHET_ANTIS[j++], 1, 0),		"ppp", "ppp", "tst", 'p', Items.BONE, 's', new ItemStack(ModuleItems.SACHET_FLOWER, 1, OreDictionary.WILDCARD_VALUE), 't', ModuleItems.HEMP_TWINE));
-		recipes.add(shapedRecipe(	"sachet_anti",	new ItemStack(ModuleItems.SACHET_ANTIS[j++], 1, 0),		"ppp", "ppp", "tst", 'p', Items.GUNPOWDER, 's', new ItemStack(ModuleItems.SACHET_FLOWER, 1, OreDictionary.WILDCARD_VALUE), 't', ModuleItems.HEMP_TWINE));
-		recipes.add(shapedRecipe(	"sachet_anti",	new ItemStack(ModuleItems.SACHET_ANTIS[j++], 1, 0),		"ppp", "ppp", "tst", 'p', Items.SPIDER_EYE, 's', new ItemStack(ModuleItems.SACHET_FLOWER, 1, OreDictionary.WILDCARD_VALUE), 't', ModuleItems.HEMP_TWINE));
-		recipes.add(shapedRecipe(	"sachet_anti",	new ItemStack(ModuleItems.SACHET_ANTIS[j++], 1, 0),		"ppp", "ppp", "tst", 'p', Items.ENDER_PEARL, 's', new ItemStack(ModuleItems.SACHET_FLOWER, 1, OreDictionary.WILDCARD_VALUE), 't', ModuleItems.HEMP_TWINE));
+		recipes.add(shapedRecipe(	"sachet_anti",	new ItemStack(ModuleItems.SACHET_ANTIS[j++], 1, 0),	"ppp", "ppp", "tst", 'p', Items.ROTTEN_FLESH, 's', new ItemStack(ModuleItems.SACHET_FLOWER, 1, OreDictionary.WILDCARD_VALUE), 't', ModuleItems.HEMP_TWINE));
+		recipes.add(shapedRecipe(	"sachet_anti",	new ItemStack(ModuleItems.SACHET_ANTIS[j++], 1, 0),	"ppp", "ppp", "tst", 'p', Items.BONE, 's', new ItemStack(ModuleItems.SACHET_FLOWER, 1, OreDictionary.WILDCARD_VALUE), 't', ModuleItems.HEMP_TWINE));
+		recipes.add(shapedRecipe(	"sachet_anti",	new ItemStack(ModuleItems.SACHET_ANTIS[j++], 1, 0),	"ppp", "ppp", "tst", 'p', Items.GUNPOWDER, 's', new ItemStack(ModuleItems.SACHET_FLOWER, 1, OreDictionary.WILDCARD_VALUE), 't', ModuleItems.HEMP_TWINE));
+		recipes.add(shapedRecipe(	"sachet_anti",	new ItemStack(ModuleItems.SACHET_ANTIS[j++], 1, 0),	"ppp", "ppp", "tst", 'p', Items.SPIDER_EYE, 's', new ItemStack(ModuleItems.SACHET_FLOWER, 1, OreDictionary.WILDCARD_VALUE), 't', ModuleItems.HEMP_TWINE));
+		recipes.add(shapedRecipe(	"sachet_anti",	new ItemStack(ModuleItems.SACHET_ANTIS[j++], 1, 0),	"ppp", "ppp", "tst", 'p', Items.ENDER_PEARL, 's', new ItemStack(ModuleItems.SACHET_FLOWER, 1, OreDictionary.WILDCARD_VALUE), 't', ModuleItems.HEMP_TWINE));
 		
-		int count = 0;
-		for (IRecipe recipe : recipes)
-		{
-			Module.registerRecipe(event.getRegistry(), recipe, recipe.getRecipeOutput().getUnlocalizedName().substring(5) + "_" + count++);
-		}
+		registerRecipes(event.getRegistry(), recipes);
 	}
 
 	public static IRecipe shapedRecipe(String group, Item result, Object... recipe)	{return shapedRecipe(group, new ItemStack(result), recipe);}
@@ -104,10 +100,5 @@ public class ModuleRecipes extends Module {
 			recipe[i] = item;
 		}
 		return new ShapelessOreRecipe(getResourceLocation(group), result, recipe);
-	}
-	
-	private static ResourceLocation getResourceLocation(String string)
-	{
-		return string != null ? new ResourceLocation(Reference.MOD_ID, string) : (ResourceLocation)null;
 	}
 }

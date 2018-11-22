@@ -97,7 +97,7 @@ public class BlockStackFlower extends BlockStack implements IMetaName{
 	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	{
-        if(!worldIn.isRemote)
+        if(!worldIn.isRemote && rand.nextBoolean())
         {
     		int meta = getMetaFromState(state);
     		if((meta % 4) < 3)

@@ -1,6 +1,0 @@
-{
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "floricraft2:items/charm_sachet_anti_enderman"
-    }
-}

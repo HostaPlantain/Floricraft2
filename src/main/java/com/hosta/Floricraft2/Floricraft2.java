@@ -2,6 +2,7 @@ package com.hosta.Floricraft2;
 
 import com.hosta.Floricraft2.config.Config;
 import com.hosta.Floricraft2.mod.ModedInit;
+import com.hosta.Floricraft2.module.Module;
 import com.hosta.Floricraft2.module.ModuleBlocks;
 import com.hosta.Floricraft2.module.ModuleItems;
 import com.hosta.Floricraft2.module.ModuleOthers;
@@ -12,6 +13,8 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION)
@@ -23,18 +26,42 @@ public class Floricraft2 {
 	@SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
 	public static CommonProxy proxy;
 	
+	private static final Module[] MODULES = new Module[] {new ModuleBlocks(), new ModuleItems(), new ModuleOthers(), new ModuleRecipes()};
+	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
 		Config.lord(event.getSuggestedConfigurationFile());
 		
-		MinecraftForge.EVENT_BUS.register(new ModuleBlocks());
-		MinecraftForge.EVENT_BUS.register(new ModuleItems());
-		MinecraftForge.EVENT_BUS.register(new ModuleOthers());
-		MinecraftForge.EVENT_BUS.register(new ModuleRecipes());
-
+		for (Module module : MODULES)
+		{
+			module.preInit();
+		}
+		
 		proxy.registerEvents();
 		
+		ModedInit.preInit();
+	}
+	
+	@EventHandler
+	public void init(FMLInitializationEvent event)
+	{
+		for (Module module : MODULES)
+		{
+			module.init();
+		}
+		
 		ModedInit.init();
+	}
+	
+	@EventHandler
+	public void postInit(FMLPostInitializationEvent event)
+	{
+		for (Module module : MODULES)
+		{
+			module.postInit();
+		}
+		
+		ModedInit.postInit();
 	}
 }

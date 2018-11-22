@@ -3,22 +3,20 @@ package com.hosta.Floricraft2.module;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.eventbus.Subscribe;
 import com.hosta.Floricraft2.block.BlockBasicCrops;
+import com.hosta.Floricraft2.block.BlockBasicFalling;
+import com.hosta.Floricraft2.block.BlockBasicOre;
 import com.hosta.Floricraft2.block.BlockStackDead;
 import com.hosta.Floricraft2.block.BlockStackFlower;
-import com.hosta.Floricraft2.item.IMetaName;
-import com.hosta.Floricraft2.item.ItemBlockMeta;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent.Register;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class ModuleBlocks extends Module {
 	
@@ -45,8 +43,8 @@ public class ModuleBlocks extends Module {
 	//public static final Block SILAGE;
 	//Ore
 	//Salt
-	//public static final Block ORE_SALT;
-	//public static final Block BLOCK_SALT;
+	public static final Block ORE_SALT = new BlockBasicOre("ore_salt").setHardness(1.5F).setResistance(10.0F);
+	public static final Block BLOCK_SALT = new BlockBasicFalling("block_salt").setHardness(0.5F);
 	//Plant
 	//Flower
 	//public static final Block FLOWER;
@@ -75,6 +73,8 @@ public class ModuleBlocks extends Module {
 		{
 			BLOCKS.add(block);
 		}
+		BLOCKS.add(ORE_SALT);
+		BLOCKS.add(BLOCK_SALT);
 		BLOCKS.add(STACK_DEAD);
 		BLOCKS.add(CROP_HEMP);
 	}
@@ -82,38 +82,32 @@ public class ModuleBlocks extends Module {
 	@SubscribeEvent
 	public void registerBlocks(Register<Block> event)
 	{
-		BLOCKS.forEach(block -> Module.registerBlock(event.getRegistry(), block));
+		registerBlocks(event.getRegistry(), BLOCKS);
+		registerOreDictionary();
+	}
+	
+	private void registerOreDictionary()
+	{
+		//Salt
+		OreDictionary.registerOre("oreSalt", ORE_SALT);
+		OreDictionary.registerOre("block_salt", BLOCK_SALT);
 	}
 	
 	@SubscribeEvent
 	public void registerItems(Register<Item> event)
 	{
-		for (Block block : BLOCKS)
-		{
-			if (block instanceof IMetaName)
-			{
-				Module.registerItem(event.getRegistry(), new ItemBlockMeta(block));
-			}
-			else if (block instanceof BlockBasicCrops)
-			{
-				
-			}
-			else
-			{
-				Module.registerItem(event.getRegistry(), new ItemBlock(block));
-			}
-		}
+		registerItemBlocks(event.getRegistry(), BLOCKS);
 	}
 
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void registerModels(ModelRegistryEvent event)
 	{
-		BLOCKS.forEach(block -> Module.registerItemRender(Item.getItemFromBlock(block)));
+		registerItemBlockRenders(BLOCKS);
 	}
 	
-	@Subscribe
-	public void postInit(FMLPostInitializationEvent event)
+	@Override
+	public void postInit()
 	{
 		BLOCKS.clear();
 	}

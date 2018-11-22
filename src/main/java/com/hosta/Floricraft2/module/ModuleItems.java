@@ -3,7 +3,6 @@ package com.hosta.Floricraft2.module;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.eventbus.Subscribe;
 import com.hosta.Floricraft2.item.ItemBasic;
 import com.hosta.Floricraft2.item.ItemBasicMeta;
 import com.hosta.Floricraft2.item.ItemBasicSeeds;
@@ -18,7 +17,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent.Register;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -48,7 +46,7 @@ public class ModuleItems extends Module {
 	public static final Item PETALS_SALTY = new ItemBasicMeta("petals_salty", FLOWERS);
 	public static final Item PETALS_SUGARED = new ItemFoodSugared("petals_sugared", FLOWERS, 2, 1.0F);
 	//Ingot
-	//public static final Item DUST_SALT;
+	public static final Item DUST_SALT = new ItemBasic("dust_salt");
 	//Crop
 	//Hemp
 	public static final Item SEED_HEMP = new ItemBasicSeeds("seed_hemp", ModuleBlocks.CROP_HEMP, Blocks.FARMLAND);
@@ -106,6 +104,7 @@ public class ModuleItems extends Module {
 		ITEMS.add(PETALS_DRY);
 		ITEMS.add(PETALS_SALTY);
 		ITEMS.add(PETALS_SUGARED);
+		ITEMS.add(DUST_SALT);
 		ITEMS.add(SEED_HEMP);
 		ITEMS.add(HEMP_YARN);
 		ITEMS.add(HEMP_TWINE);
@@ -122,11 +121,11 @@ public class ModuleItems extends Module {
 	@SubscribeEvent
 	public void registerItems(Register<Item> event)
 	{
-		ITEMS.forEach(item -> Module.registerItem(event.getRegistry(), item));
+		registerItems(event.getRegistry(), ITEMS);
 		registerOreDictionary();
 	}
 
-	public void registerOreDictionary()
+	private void registerOreDictionary()
 	{
 		//Vanilla
 		OreDictionary.registerOre("dustSugar", Items.SUGAR);
@@ -135,6 +134,9 @@ public class ModuleItems extends Module {
 		{
 			OreDictionary.registerOre("petalsDry", new ItemStack(PETALS_DRY, 1, i));
 		}
+		//Salt
+		OreDictionary.registerOre("dustSalt", DUST_SALT);
+		OreDictionary.registerOre("itemSalt", DUST_SALT);
 		//Crop
 		OreDictionary.registerOre("seedHemp", SEED_HEMP);
 		//Hemp
@@ -146,11 +148,11 @@ public class ModuleItems extends Module {
 	@SubscribeEvent
 	public void registerModels(ModelRegistryEvent event)
 	{
-		ITEMS.forEach(item -> Module.registerItemRender(item));
+		registerItemRenders(ITEMS);
 	}
 	
-	@Subscribe
-	public void postInit(FMLPostInitializationEvent event)
+	@Override
+	public void postInit()
 	{
 		ITEMS.clear();
 	}

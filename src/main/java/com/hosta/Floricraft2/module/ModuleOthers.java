@@ -3,7 +3,6 @@ package com.hosta.Floricraft2.module;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.eventbus.Subscribe;
 import com.hosta.Floricraft2.Reference;
 import com.hosta.Floricraft2.enchantment.EnchantmentFloric;
 import com.hosta.Floricraft2.packet.PacketNBTParticle;
@@ -26,7 +25,6 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.event.RegistryEvent.Register;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
@@ -74,9 +72,18 @@ public class ModuleOthers extends Module {
 	
 	//Network
 	public static final SimpleNetworkWrapper NETWORK_PARTICLE = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.MOD_ID_SHORT + "." + "part");
-
+		
 	//Entity
-	public static int entityId = 0;
+	public static final int THROWING_ROSE = 0;
+	
+	//Advancement
+	
+	@Override
+	public void preInit()
+	{
+		super.preInit();
+		NETWORK_PARTICLE.registerMessage(PacketNBTParticleHandler.class, PacketNBTParticle.class, 0, Side.CLIENT);
+	}
 	
 	@SubscribeEvent
 	public void registerPotions(Register<Potion> event)
@@ -91,7 +98,7 @@ public class ModuleOthers extends Module {
 		}
 		potions.add(POTION_NO_TARGET);
 		
-		potions.forEach(potion -> Module.registerPotion(event.getRegistry(), potion));
+		registerPotion(event.getRegistry(), potions);
 	}
 	
 	@SubscribeEvent
@@ -101,12 +108,6 @@ public class ModuleOthers extends Module {
 		
 		enchantments.add(ENCHANT_FLORIC);
 		
-		enchantments.forEach(enchantment -> Module.registerEnchantment(event.getRegistry(), enchantment));
-	}
-	
-	@Subscribe
-	public static void preInit(FMLPreInitializationEvent event)
-	{
-		NETWORK_PARTICLE.registerMessage(PacketNBTParticleHandler.class, PacketNBTParticle.class, 0, Side.CLIENT);
+		registerEnchantments(event.getRegistry(), enchantments);
 	}
 }
