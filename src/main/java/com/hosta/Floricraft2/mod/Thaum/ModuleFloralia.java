@@ -1,4 +1,4 @@
-package com.hosta.Floricraft2.mod.thaumcraft;
+package com.hosta.Floricraft2.mod.Thaum;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,7 @@ import thaumcraft.api.aspects.AspectRegistryEvent;
 import thaumcraft.api.crafting.CrucibleRecipe;
 import thaumcraft.api.research.ResearchCategories;
 
-public class ModuleThaum extends Module{
+public class ModuleFloralia extends Module{
 	
 	public static final Item INGOT_TWINKLE = new ItemBasic("ingot_twinkle");
 	public static final Item NUGGET_TWINKLE = new ItemBasic("nugget_twinkle");

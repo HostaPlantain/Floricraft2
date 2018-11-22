@@ -3,18 +3,24 @@ package com.hosta.Floricraft2.mod.TiC.ranged;
 import java.util.List;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import com.hosta.Floricraft2.mod.TiC.ModuleFloriconstract;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import slimeknights.tconstruct.library.client.BooleanItemPropertyGetter;
 import slimeknights.tconstruct.library.entity.EntityProjectileBase;
 import slimeknights.tconstruct.library.materials.ArrowShaftMaterialStats;
 import slimeknights.tconstruct.library.materials.FletchingMaterialStats;
@@ -37,6 +43,14 @@ public class ThrowingRose extends ProjectileCore {
 	{
 		super(PartMaterialType.arrowShaft(TinkerTools.arrowShaft), petalPMT, petalPMT, PartMaterialType.fletching(TinkerTools.fletching));
 	    this.addCategory(Category.NO_MELEE, Category.PROJECTILE);
+	    this.addPropertyOverride(new ResourceLocation("pulling"), new BooleanItemPropertyGetter()
+        {
+            @SideOnly(Side.CLIENT)
+            public boolean applyIf(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
+            {
+                return entityIn != null && entityIn.isHandActive() && entityIn.getActiveItemStack() == stack;
+            }
+        });
 	}
 	
 	@Override
@@ -60,6 +74,12 @@ public class ThrowingRose extends ProjectileCore {
         return 72000;
     }
 	
+	@Override
+	public EnumAction getItemUseAction(ItemStack stack)
+	{
+		return EnumAction.BOW;
+	}
+	
 	@Nonnull
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand)
@@ -79,7 +99,7 @@ public class ThrowingRose extends ProjectileCore {
 	    playerIn.setActiveHand(hand);
         return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
 	}
-	
+
 	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft)
 	{

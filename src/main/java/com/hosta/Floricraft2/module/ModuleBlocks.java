@@ -83,22 +83,22 @@ public class ModuleBlocks extends Module {
 	public void registerBlocks(Register<Block> event)
 	{
 		registerBlocks(event.getRegistry(), BLOCKS);
-		registerOreDictionary();
-	}
-	
-	private void registerOreDictionary()
-	{
-		//Salt
-		OreDictionary.registerOre("oreSalt", ORE_SALT);
-		OreDictionary.registerOre("block_salt", BLOCK_SALT);
 	}
 	
 	@SubscribeEvent
 	public void registerItems(Register<Item> event)
 	{
 		registerItemBlocks(event.getRegistry(), BLOCKS);
+		registerOreDictionary();
 	}
 
+	private void registerOreDictionary()
+	{
+		//Salt
+		OreDictionary.registerOre("oreSalt", ORE_SALT);
+		OreDictionary.registerOre("blockSalt", BLOCK_SALT);
+	}
+	
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void registerModels(ModelRegistryEvent event)

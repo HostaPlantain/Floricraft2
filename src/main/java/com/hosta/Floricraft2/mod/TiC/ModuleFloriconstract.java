@@ -54,11 +54,14 @@ public class ModuleFloriconstract extends Module{
 	public static final List<ToolPart> PARTS = new ArrayList<ToolPart>();
 	public static final List<ToolCore> TOOLS = new ArrayList<ToolCore>();
 	
-	@Override
-	public void preInit()
+	public Module registerPulse()
 	{
 		TConstruct.pulseManager.registerPulse(this);
+		return this;
 	}
+	
+	@Override
+	public void preInit() {	}
 	
 	@SubscribeEvent
 	public void registerItems(Register<Item> event)
@@ -148,7 +151,7 @@ public class ModuleFloriconstract extends Module{
 		
 		builds.forEach(buildInfo -> TinkerRegistryClient.addToolBuilding(buildInfo));
 	}
-
+	
 	@Override
 	public void postInit()
 	{

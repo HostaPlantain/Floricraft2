@@ -9,7 +9,6 @@ import com.hosta.Floricraft2.module.ModuleOthers;
 import com.hosta.Floricraft2.module.ModuleRecipes;
 import com.hosta.Floricraft2.proxy.CommonProxy;
 
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -27,6 +26,10 @@ public class Floricraft2 {
 	public static CommonProxy proxy;
 	
 	private static final Module[] MODULES = new Module[] {new ModuleBlocks(), new ModuleItems(), new ModuleOthers(), new ModuleRecipes()};
+	static
+	{
+		ModedInit.load();
+	}
 	
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
