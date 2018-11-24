@@ -8,7 +8,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class EffectBasic extends Potion {
 	
-	public static final ResourceLocation icon = new ResourceLocation(Reference.MOD_ID,"textures/gui/container/inventory.png");
+	public static final ResourceLocation icon = new ResourceLocation(Reference.MOD_ID,"textures/gui/effects.png");
 	
 	public EffectBasic(String name, int liquidColorIn, boolean isBadEffect)
 	{

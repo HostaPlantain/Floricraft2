@@ -1,0 +1,16 @@
+[
+  {
+    "name": "floricraft2",
+    "type": "image with text below",
+    "data": "intro/floriconstruct.json"
+  },
+  {
+    "name": "throwing_rose",
+    "type": "tool",
+    "data": "tools/throwing_rose.json"
+  },
+  {
+  	"type": "modifier",
+    "data": "modifiers/floric.json"
+  }
+]

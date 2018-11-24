@@ -22,7 +22,7 @@ public class ModifierFloric extends ModifierTrait {
 	@Override
 	public void afterHit(ItemStack tool, EntityLivingBase player, EntityLivingBase target, float damageDealt, boolean wasCritical, boolean wasHit)
 	{
-		if (!target.world.isRemote && target.getHealth() == 0.0F)
+		if (!target.world.isRemote)
 		{
 			Vec3d pos = target.getPositionEyes(1.0F);
 			Floricraft2.proxy.spawnParticleFloric(target.world, pos, 12, false, 8);

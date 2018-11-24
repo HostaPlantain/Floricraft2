@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.eventbus.Subscribe;
+import com.hosta.Floricraft2.Floricraft2;
 import com.hosta.Floricraft2.mod.TiC.client.RenderThrowingRose;
 import com.hosta.Floricraft2.mod.TiC.modifier.ModifierFloric;
 import com.hosta.Floricraft2.mod.TiC.ranged.EntityThrowingRose;
 import com.hosta.Floricraft2.mod.TiC.ranged.ThrowingRose;
 import com.hosta.Floricraft2.module.Module;
-import com.hosta.Floricraft2.module.ModuleBlocks;
 import com.hosta.Floricraft2.module.ModuleItems;
 import com.hosta.Floricraft2.module.ModuleOthers;
 
@@ -28,11 +28,13 @@ import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
+import slimeknights.mantle.client.book.repository.FileRepository;
 import slimeknights.mantle.pulsar.pulse.Pulse;
 import slimeknights.tconstruct.TConstruct;
 import slimeknights.tconstruct.common.ModelRegisterUtil;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.TinkerRegistryClient;
+import slimeknights.tconstruct.library.book.TinkerBook;
 import slimeknights.tconstruct.library.client.ToolBuildGuiInfo;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.modifiers.Modifier;
@@ -95,7 +97,7 @@ public class ModuleFloriconstract extends Module{
 	@SubscribeEvent
 	public void registerRecipes(Register<IRecipe> event)
 	{
-		for (Block stack : ModuleBlocks.STACK_FLOWER)
+		for (Block stack : ModuleItems.STACK_FLOWER)
 		{
 			registerDryingRecipes(new ItemStack(stack, 1, 0), new ItemStack(stack, 1, 3), 300);
 		}
@@ -157,5 +159,13 @@ public class ModuleFloriconstract extends Module{
 	{
 		PARTS.clear();
 		TOOLS.clear();
+		
+		Floricraft2.proxy.registerTiCBook();
+	}
+	
+	@SideOnly(Side.CLIENT)
+	public static void registerBookPage()
+	{
+		TinkerBook.INSTANCE.addRepository(new FileRepository("floricraft2:book"));
 	}
 }

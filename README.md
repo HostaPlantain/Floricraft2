@@ -9,6 +9,7 @@ This mod is still work in progress. When you find a bug, report [here](https://g
 ## Optional Dependencies
 
 + [Baubles](https://minecraft.curseforge.com/projects/baubles)
++ [Mantle](https://minecraft.curseforge.com/projects/mantle)
 + [Thaumcraft](https://minecraft.curseforge.com/projects/thaumcraft)
 + [Tinkers' Construct](https://minecraft.curseforge.com/projects/tinkers-construct)
 

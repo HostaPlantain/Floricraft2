@@ -3,6 +3,11 @@ package com.hosta.Floricraft2.module;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.hosta.Floricraft2.block.BlockBasicCrops;
+import com.hosta.Floricraft2.block.BlockBasicFalling;
+import com.hosta.Floricraft2.block.BlockBasicOre;
+import com.hosta.Floricraft2.block.BlockStackDead;
+import com.hosta.Floricraft2.block.BlockStackFlower;
 import com.hosta.Floricraft2.item.ItemBasic;
 import com.hosta.Floricraft2.item.ItemBasicMeta;
 import com.hosta.Floricraft2.item.ItemBasicSeeds;
@@ -10,6 +15,7 @@ import com.hosta.Floricraft2.item.food.ItemFoodSugared;
 import com.hosta.Floricraft2.item.tool.ToolPruner;
 import com.hosta.Floricraft2.item.tool.ToolSachet;
 
+import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -25,7 +31,7 @@ import net.minecraftforge.oredict.OreDictionary;
 public class ModuleItems extends Module {
 
 	public static final String[] FLOWERS = new String[]{"dandelion", "poppy", "blue_orchid", "allium", "azure_bluet", "red_tulip", "orange_tulip", "white_tulip", "pink_tulip", "oxeye_daisy", "sunflower", "lilac", "rose", "peony", "sakura"};
-	public static final String[] COLORS = new String[]{"black", "red", "green", "brown", "blue", "purple", "cyan", "light_gray", "gray", "pink", "lime", "yellow", "light_blue", "magenta", "orange", "white"};
+	//public static final String[] COLORS = new String[]{"black", "red", "green", "brown", "blue", "purple", "cyan", "light_gray", "gray", "pink", "lime", "yellow", "light_blue", "magenta", "orange", "white"};
 	/*public static final String[] ALL = new String[FLOWERS.length + COLORS.length];
 	static
 	{
@@ -33,9 +39,18 @@ public class ModuleItems extends Module {
 		System.arraycopy(COLORS, 0, ALL, FLOWERS.length, COLORS.length);
 	}*/
 	
-	//Material
 	//Cut Flower
 	public static final Item CUT_FLOWER = new ItemBasicMeta("cut_flower", FLOWERS);
+	//Stack Flower
+	public static final Block[] STACK_FLOWER = new Block[ModuleItems.FLOWERS.length];
+	static 
+	{
+		for (int i = 0; i < STACK_FLOWER.length; i++)
+		{
+			STACK_FLOWER[i] = new BlockStackFlower("stack_" + ModuleItems.FLOWERS[i], i);
+		}
+	}
+	public static final Block STACK_DEAD = new BlockStackDead("stack_dead");
 	//Petal
 	public static final Item PETAL_RAW = new ItemBasicMeta("petal_raw", FLOWERS);
 	public static final Item PETAL_DRY = new ItemBasicMeta("petal_dry", FLOWERS);
@@ -45,13 +60,27 @@ public class ModuleItems extends Module {
 	public static final Item PETALS_DRY = new ItemBasicMeta("petals_dry", FLOWERS);
 	public static final Item PETALS_SALTY = new ItemBasicMeta("petals_salty", FLOWERS);
 	public static final Item PETALS_SUGARED = new ItemFoodSugared("petals_sugared", FLOWERS, 2, 1.0F);
-	//Ingot
+	//Torch
+	/*public static final Block[] TORCH_FLORIC = new Block[ModuleItems.ALL.length];
+	static
+	{
+		for(int i = 0; i < TORCH_FLORIC.length; i++)
+		{
+			TORCH_FLORIC[i];
+		}
+	}*/
+	//Ore
+	//Salt
 	public static final Item DUST_SALT = new ItemBasic("dust_salt");
+	public static final Block ORE_SALT = new BlockBasicOre("ore_salt").setHardness(1.5F).setResistance(10.0F);
+	public static final Block BLOCK_SALT = new BlockBasicFalling("block_salt").setHardness(0.5F);
 	//Crop
 	//Hemp
-	public static final Item SEED_HEMP = new ItemBasicSeeds("seed_hemp", ModuleBlocks.CROP_HEMP, Blocks.FARMLAND);
+	public static final Block CROP_HEMP = new BlockBasicCrops("crop_hemp");
+	public static final Item SEED_HEMP = new ItemBasicSeeds("seed_hemp", CROP_HEMP, Blocks.FARMLAND);
 	public static final Item HEMP_YARN = new ItemBasic("hemp_yarn");
 	public static final Item HEMP_TWINE = new ItemBasic("hemp_twine");
+	//public static final Item HEMP_SPOOL = new ItemBasic("hemp_spool");
 	public static final Item HEMP_CLOTH = new ItemBasic("hemp_cloth");
 	//Potion Item
 	//Vial
@@ -93,9 +122,16 @@ public class ModuleItems extends Module {
 	//Weapon
 	
 	private static final List<Item> ITEMS = new ArrayList<Item>();
+	private static final List<Block> BLOCKS = new ArrayList<Block>();
+	
 	static
 	{
 		ITEMS.add(CUT_FLOWER);
+		for (Block block : STACK_FLOWER)
+		{
+			BLOCKS.add(block);
+		}
+		BLOCKS.add(STACK_DEAD);
 		ITEMS.add(PETAL_RAW);
 		ITEMS.add(PETAL_DRY);
 		ITEMS.add(PETAL_SALTY);
@@ -103,8 +139,11 @@ public class ModuleItems extends Module {
 		ITEMS.add(PETALS_RAW);
 		ITEMS.add(PETALS_DRY);
 		ITEMS.add(PETALS_SALTY);
-		ITEMS.add(PETALS_SUGARED);
+		ITEMS.add(PETALS_SUGARED);		
 		ITEMS.add(DUST_SALT);
+		BLOCKS.add(ORE_SALT);
+		BLOCKS.add(BLOCK_SALT);
+		BLOCKS.add(CROP_HEMP);
 		ITEMS.add(SEED_HEMP);
 		ITEMS.add(HEMP_YARN);
 		ITEMS.add(HEMP_TWINE);
@@ -119,9 +158,16 @@ public class ModuleItems extends Module {
 	}
 	
 	@SubscribeEvent
+	public void registerBlocks(Register<Block> event)
+	{
+		registerBlocks(event.getRegistry(), BLOCKS);
+	}
+	
+	@SubscribeEvent
 	public void registerItems(Register<Item> event)
 	{
 		registerItems(event.getRegistry(), ITEMS);
+		registerItemBlocks(event.getRegistry(), BLOCKS);
 		registerOreDictionary();
 	}
 
@@ -137,6 +183,8 @@ public class ModuleItems extends Module {
 		//Salt
 		OreDictionary.registerOre("dustSalt", DUST_SALT);
 		OreDictionary.registerOre("itemSalt", DUST_SALT);
+		OreDictionary.registerOre("oreSalt", ORE_SALT);
+		OreDictionary.registerOre("blockSalt", BLOCK_SALT);
 		//Crop
 		OreDictionary.registerOre("seedHemp", SEED_HEMP);
 		//Hemp
@@ -149,11 +197,13 @@ public class ModuleItems extends Module {
 	public void registerModels(ModelRegistryEvent event)
 	{
 		registerItemRenders(ITEMS);
+		registerItemBlockRenders(BLOCKS);
 	}
 	
 	@Override
 	public void postInit()
 	{
 		ITEMS.clear();
+		BLOCKS.clear();
 	}
 }

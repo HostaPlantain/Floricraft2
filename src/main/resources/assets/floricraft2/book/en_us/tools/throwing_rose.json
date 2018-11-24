@@ -1,0 +1,20 @@
+{
+  "tool": "throwing_rose",
+  "text": [
+    {
+      "text": "The Throwing Rose is a stylish throwing weapon, and also for a gift."
+    },
+    {
+      "text": "\n"
+    },
+    {
+      "text": "Their range is short, however, pulling cause multishot. Maximum is 11 roses in one shot."
+    }
+  ],
+  "properties": [
+    "Multishot",
+    "Cool",
+    "Can not be picked back up",
+    "Can be thrown from the offhand"
+  ]
+}

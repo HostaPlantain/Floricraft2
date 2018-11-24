@@ -6,7 +6,6 @@ import java.util.List;
 import com.hosta.Floricraft2.block.BlockBasic;
 import com.hosta.Floricraft2.item.ItemBasic;
 import com.hosta.Floricraft2.module.Module;
-import com.hosta.Floricraft2.module.ModuleBlocks;
 import com.hosta.Floricraft2.module.ModuleItems;
 import com.hosta.Floricraft2.module.ModuleRecipes;
 
@@ -23,6 +22,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
+import thaumcraft.Thaumcraft;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectEventProxy;
@@ -35,19 +35,14 @@ public class ModuleFloralia extends Module{
 	
 	public static final Item INGOT_TWINKLE = new ItemBasic("ingot_twinkle");
 	public static final Item NUGGET_TWINKLE = new ItemBasic("nugget_twinkle");
+	public static final Block BLOCK_TWINKLE = new BlockBasic("block_twinkle", Material.IRON);
 	
 	private static final List<Item> ITEMS = new ArrayList<Item>();
+	private static final List<Block> BLOCKS = new ArrayList<Block>();
 	static
 	{
 		ITEMS.add(INGOT_TWINKLE);
 		ITEMS.add(NUGGET_TWINKLE);
-	}
-	
-	public static final Block BLOCK_TWINKLE = new BlockBasic("block_twinkle", Material.IRON);
-	
-	private static final List<Block> BLOCKS = new ArrayList<Block>();
-	static
-	{
 		BLOCKS.add(BLOCK_TWINKLE);
 	}
 	
@@ -59,21 +54,21 @@ public class ModuleFloralia extends Module{
 	{
 		AspectEventProxy register = event.register;
 		//Flower
-		registerAspect(new ItemStack(ModuleItems.CUT_FLOWER,  1, OreDictionary.WILDCARD_VALUE), new AspectList().add(FLOWER, 5).add(Aspect.PLANT, 1), register);
-		registerAspect(new ItemStack(ModuleItems.PETAL_RAW,  1, OreDictionary.WILDCARD_VALUE), new AspectList().add(FLOWER, 1).add(Aspect.PLANT, 1), register);
-		registerAspect(new ItemStack(ModuleItems.PETAL_DRY,  1, OreDictionary.WILDCARD_VALUE), new AspectList().add(FLOWER, 1), register);
-		registerAspect(new ItemStack(ModuleItems.PETAL_SALTY,  1, OreDictionary.WILDCARD_VALUE), new AspectList().add(FLOWER, 1).add(Aspect.PLANT, 1).add(Aspect.CRAFT, 1), register);
-		registerAspect(new ItemStack(ModuleItems.PETAL_SUGARED,  1, OreDictionary.WILDCARD_VALUE), new AspectList().add(FLOWER, 1).add(Aspect.PLANT, 1).add(Aspect.LIFE, 1), register);
-		for (Block stack : ModuleBlocks.STACK_FLOWER)
+		registerAspect(new ItemStack(ModuleItems.CUT_FLOWER,  1, OreDictionary.WILDCARD_VALUE),		new AspectList().add(FLOWER, 5).add(Aspect.PLANT, 1), register);
+		registerAspect(new ItemStack(ModuleItems.PETAL_RAW,  1, OreDictionary.WILDCARD_VALUE),		new AspectList().add(FLOWER, 3).add(Aspect.PLANT, 1), register);
+		registerAspect(new ItemStack(ModuleItems.PETAL_DRY,  1, OreDictionary.WILDCARD_VALUE),		new AspectList().add(FLOWER, 3), register);
+		registerAspect(new ItemStack(ModuleItems.PETAL_SALTY,  1, OreDictionary.WILDCARD_VALUE),	new AspectList().add(FLOWER, 3).add(Aspect.PLANT, 1).add(Aspect.CRAFT, 1), register);
+		registerAspect(new ItemStack(ModuleItems.PETAL_SUGARED,  1, OreDictionary.WILDCARD_VALUE),	new AspectList().add(FLOWER, 3).add(Aspect.PLANT, 1).add(Aspect.LIFE, 1), register);
+		for (Block stack : ModuleItems.STACK_FLOWER)
 		{
-			registerAspect(new ItemStack(stack, 1, 3), new AspectList().add(FLOWER, 10), register);
+			registerAspect(new ItemStack(stack, 1, 3),	new AspectList().add(FLOWER, 10), register);
 		}
-		registerAspect(ModuleBlocks.STACK_DEAD, new AspectList().add(Aspect.DEATH, 5).add(Aspect.PLANT, 1), register);
+		registerAspect(ModuleItems.STACK_DEAD,			new AspectList().add(Aspect.DEATH, 5).add(Aspect.PLANT, 1), register);
 		//Hemp
-		registerAspect(ModuleItems.SEED_HEMP, new AspectList().add(Aspect.PLANT, 5), register);
-		registerAspect(ModuleItems.HEMP_YARN, new AspectList().add(Aspect.PLANT, 1).add(Aspect.CRAFT, 1), register);
+		registerAspect(ModuleItems.SEED_HEMP,			new AspectList().add(Aspect.PLANT, 5), register);
+		registerAspect(ModuleItems.HEMP_YARN,			new AspectList().add(Aspect.PLANT, 3).add(Aspect.CRAFT, 1), register);
 		//Thaum
-		registerAddAspect(INGOT_TWINKLE, new AspectList(new ItemStack(Items.IRON_INGOT)).add(FAIRY, 5), register);
+		registerAspect(INGOT_TWINKLE,					new AspectList(new ItemStack(Items.IRON_INGOT)).add(FAIRY, 5), register);
 	}
 	
 	@SubscribeEvent
@@ -81,10 +76,16 @@ public class ModuleFloralia extends Module{
 	{
 		List<IRecipe> recipes = new ArrayList<IRecipe>();
 
-		recipes.add(ModuleRecipes.compressRecipe(	null,	INGOT_TWINKLE,							new ItemStack(NUGGET_TWINKLE), 9));
+		recipes.add(ModuleRecipes.compressRecipe(	null,	INGOT_TWINKLE,							new ItemStack(NUGGET_TWINKLE), true));
 		recipes.add(ModuleRecipes.shapelessRecipe(	null,	new ItemStack(INGOT_TWINKLE, 9, 0),		BLOCK_TWINKLE));
 		recipes.add(ModuleRecipes.shapelessRecipe(	null,	new ItemStack(NUGGET_TWINKLE, 9, 0),	INGOT_TWINKLE));
-		recipes.add(ModuleRecipes.compressRecipe(	null,	BLOCK_TWINKLE,							new ItemStack(INGOT_TWINKLE), 9));
+		recipes.add(ModuleRecipes.compressRecipe(	null,	BLOCK_TWINKLE,							new ItemStack(INGOT_TWINKLE), true));
+		
+		String path = "ingot_twinkle_fake";
+		for (int i = 0; i < 4; i++)
+		{
+			ThaumcraftApi.addFakeCraftingRecipe(getResourceLocation(path), recipes.get(i));
+		}
 		
 		registerRecipes(event.getRegistry(), recipes);
 	}
@@ -98,12 +99,12 @@ public class ModuleFloralia extends Module{
 	
 	private void registerCrucibeRecipes()
 	{
-		registerCrucibeRecipe("ingot_twinkle", "INGOT_TWINKLE", new ItemStack(INGOT_TWINKLE), new ItemStack(Items.IRON_INGOT), new AspectList().add(FAIRY, 1).add(Aspect.MAGIC, 1));
+		registerCrucibeRecipe("ingot_twinkle", "INGOT_TWINKLE", new ItemStack(INGOT_TWINKLE), new ItemStack(Items.IRON_INGOT), new AspectList().add(FAIRY, 5).add(Aspect.MAGIC, 5));
 	}
 	
 	private void registerResearches()
 	{
-		ResearchCategories.registerCategory("FLORALIA", null, new AspectList(), getResourceLocation("textures/items/cut_flower_rose.png"), new ResourceLocation("thaumcraft", "textures/gui/gui_researchback_1.png"));
+		ResearchCategories.registerCategory("FLORALIA", null, new AspectList(), getResourceLocation("textures/items/cut_flower_rose.png"), getResourceLocation("textures/gui/gui_floralia_back_1.jpg"), new ResourceLocation(Thaumcraft.MODID, "textures/gui/gui_research_back_over.png"));
 		ThaumcraftApi.registerResearchLocation(getResourceLocation("research/floralia"));
 	}
 	

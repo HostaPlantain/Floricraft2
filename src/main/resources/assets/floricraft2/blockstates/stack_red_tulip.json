@@ -1,20 +1,20 @@
 {
     "variants": {
-        "facing=south,variant=stage1": { "model": "floricraft2:stack_red_tulip_raw", "y": 90 },
-        "facing=west,variant=stage1":  { "model": "floricraft2:stack_red_tulip_raw", "y": 180 },
-        "facing=north,variant=stage1": { "model": "floricraft2:stack_red_tulip_raw", "y": 270 },
-        "facing=east,variant=stage1":  { "model": "floricraft2:stack_red_tulip_raw" },
-        "facing=south,variant=stage2": { "model": "floricraft2:stack_red_tulip_raw", "y": 90 },
-        "facing=west,variant=stage2":  { "model": "floricraft2:stack_red_tulip_raw", "y": 180 },
-        "facing=north,variant=stage2": { "model": "floricraft2:stack_red_tulip_raw", "y": 270 },
-        "facing=east,variant=stage2":  { "model": "floricraft2:stack_red_tulip_raw" },
-        "facing=south,variant=stage3": { "model": "floricraft2:stack_red_tulip_raw", "y": 90 },
-        "facing=west,variant=stage3":  { "model": "floricraft2:stack_red_tulip_raw", "y": 180 },
-        "facing=north,variant=stage3": { "model": "floricraft2:stack_red_tulip_raw", "y": 270 },
-        "facing=east,variant=stage3":  { "model": "floricraft2:stack_red_tulip_raw" },
-        "facing=south,variant=stage4": { "model": "floricraft2:stack_red_tulip_dry", "y": 90 },
-        "facing=west,variant=stage4":  { "model": "floricraft2:stack_red_tulip_dry", "y": 180 },
-        "facing=north,variant=stage4": { "model": "floricraft2:stack_red_tulip_dry", "y": 270 },
-        "facing=east,variant=stage4":  { "model": "floricraft2:stack_red_tulip_dry" }
+        "drying=stage1,facing=south": { "model": "floricraft2:stack_red_tulip_raw", "y": 90 },
+        "drying=stage1,facing=west":  { "model": "floricraft2:stack_red_tulip_raw", "y": 180 },
+        "drying=stage1,facing=north": { "model": "floricraft2:stack_red_tulip_raw", "y": 270 },
+        "drying=stage1,facing=east":  { "model": "floricraft2:stack_red_tulip_raw" },
+        "drying=stage2,facing=south": { "model": "floricraft2:stack_red_tulip_raw", "y": 90 },
+        "drying=stage2,facing=west":  { "model": "floricraft2:stack_red_tulip_raw", "y": 180 },
+        "drying=stage2,facing=north": { "model": "floricraft2:stack_red_tulip_raw", "y": 270 },
+        "drying=stage2,facing=east":  { "model": "floricraft2:stack_red_tulip_raw" },
+        "drying=stage3,facing=south": { "model": "floricraft2:stack_red_tulip_raw", "y": 90 },
+        "drying=stage3,facing=west":  { "model": "floricraft2:stack_red_tulip_raw", "y": 180 },
+        "drying=stage3,facing=north": { "model": "floricraft2:stack_red_tulip_raw", "y": 270 },
+        "drying=stage3,facing=east":  { "model": "floricraft2:stack_red_tulip_raw" },
+        "drying=stage4,facing=south": { "model": "floricraft2:stack_red_tulip_dry", "y": 90 },
+        "drying=stage4,facing=west":  { "model": "floricraft2:stack_red_tulip_dry", "y": 180 },
+        "drying=stage4,facing=north": { "model": "floricraft2:stack_red_tulip_dry", "y": 270 },
+        "drying=stage4,facing=east":  { "model": "floricraft2:stack_red_tulip_dry" }
     }
 }

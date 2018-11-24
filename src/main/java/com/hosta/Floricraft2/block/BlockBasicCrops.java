@@ -2,6 +2,8 @@ package com.hosta.Floricraft2.block;
 
 import java.util.Random;
 
+import com.hosta.Floricraft2.module.ModuleItems;
+
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
@@ -10,16 +12,11 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.EnumPlantType;
 
 public class BlockBasicCrops extends BlockCrops {
-
-	private final Item SEED;
-	private final Item CROP;
 	
-	public BlockBasicCrops(String unlocalizedName, Item seed, Item crop)
+	public BlockBasicCrops(String unlocalizedName)
 	{
 		super();
 		this.setUnlocalizedName(unlocalizedName);
-		this.SEED = seed;
-		this.CROP = crop;
 	}
 	
 	@Override
@@ -31,13 +28,13 @@ public class BlockBasicCrops extends BlockCrops {
 	@Override
 	protected Item getSeed()
 	{
-		return this.SEED;
+		return this == ModuleItems.CROP_HEMP ? ModuleItems.SEED_HEMP : super.getSeed();
 	}
 	
 	@Override
 	protected Item getCrop()
 	{
-		return this.CROP;
+		return this == ModuleItems.CROP_HEMP ? ModuleItems.HEMP_YARN : super.getCrop();
 	}
 	
 	@Override

@@ -11,10 +11,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 public class CommonProxy {
 
-	public void registerEvents()
-	{
-		
-	}
+	public void registerEvents() { }
 
 	public void spawnParticleFloric(World world, Vec3d pos, int meta, boolean genByBlock, int number)
 	{
@@ -30,4 +27,6 @@ public class CommonProxy {
 		NetworkRegistry.TargetPoint point = new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.x, pos.y, pos.z, 32);
 		ModuleOthers.NETWORK_PARTICLE.sendToAllAround(packet, point);
 	}
+
+	public void registerTiCBook() { }
 }

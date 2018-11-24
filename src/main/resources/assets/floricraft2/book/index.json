@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Floricraft2",
+    "data": "sections/floricraft2.json",
+    "icon": {
+      "item": {
+        "id": "floricraft2:stack_rose",
+        "damage": 0
+      }
+    }
+  }
+]

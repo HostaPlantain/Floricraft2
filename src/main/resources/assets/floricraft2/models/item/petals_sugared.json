@@ -2,6 +2,6 @@
     "parent": "item/generated",
     "textures": {
         "layer0": "#petal",
-        "layer1": "floricraft2:items/sugared_overlay"
+        "layer1": "floricraft2:items/overlay_sugared"
     }
 }

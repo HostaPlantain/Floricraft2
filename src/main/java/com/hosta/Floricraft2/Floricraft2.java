@@ -3,7 +3,6 @@ package com.hosta.Floricraft2;
 import com.hosta.Floricraft2.config.Config;
 import com.hosta.Floricraft2.mod.ModedInit;
 import com.hosta.Floricraft2.module.Module;
-import com.hosta.Floricraft2.module.ModuleBlocks;
 import com.hosta.Floricraft2.module.ModuleItems;
 import com.hosta.Floricraft2.module.ModuleOthers;
 import com.hosta.Floricraft2.module.ModuleRecipes;
@@ -25,7 +24,7 @@ public class Floricraft2 {
 	@SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
 	public static CommonProxy proxy;
 	
-	private static final Module[] MODULES = new Module[] {new ModuleBlocks(), new ModuleItems(), new ModuleOthers(), new ModuleRecipes()};
+	private static final Module[] MODULES = new Module[] {new ModuleOthers(), new ModuleItems(), new ModuleRecipes()};
 	static
 	{
 		ModedInit.load();

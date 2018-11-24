@@ -39,27 +39,27 @@ public class ModuleRecipes extends Module {
 			//Cut Flower
 			recipes.add(shapelessRecipe("cut_flower",				new ItemStack(ModuleItems.CUT_FLOWER, 1, i),		flowers[i], new ItemStack(ModuleItems.PRUNER, 1, OreDictionary.WILDCARD_VALUE)));
 			//Petal
-			recipes.add(shapedRecipe(	"stack_flower",				new ItemStack(ModuleBlocks.STACK_FLOWER[i], 1, 0),	"fff", "fff", "tft", 'f', new ItemStack(ModuleItems.CUT_FLOWER, 1, i), 't', ModuleItems.HEMP_TWINE));
+			recipes.add(shapedRecipe(	"stack_flower",				new ItemStack(ModuleItems.STACK_FLOWER[i], 1, 0),	"fff", "fff", "tft", 'f', new ItemStack(ModuleItems.CUT_FLOWER, 1, i), 't', ModuleItems.HEMP_TWINE));
 			recipes.add(shapelessRecipe("petal_raw_from_stack",		new ItemStack(ModuleItems.PETAL_RAW, 2, i),			new ItemStack(ModuleItems.CUT_FLOWER, 1, i)));
 			recipes.add(shapelessRecipe("petal_raw_from_petals",	new ItemStack(ModuleItems.PETAL_RAW, 9, i),			new ItemStack(ModuleItems.PETALS_RAW, 1, i)));
-			recipes.add(compressRecipe(	"petals_raw",				new ItemStack(ModuleItems.PETALS_RAW, 1, i),		new ItemStack(ModuleItems.PETAL_RAW, 1, i),		9));
-			recipes.add(shapelessRecipe("petal_dry_from_stack",		new ItemStack(ModuleItems.PETAL_DRY, 4, i),			new ItemStack(ModuleBlocks.STACK_FLOWER[i], 1, 3)));
+			recipes.add(compressRecipe(	"petals_raw",				new ItemStack(ModuleItems.PETALS_RAW, 1, i),		new ItemStack(ModuleItems.PETAL_RAW, 1, i),		true));
+			recipes.add(shapelessRecipe("petal_dry_from_stack",		new ItemStack(ModuleItems.PETAL_DRY, 4, i),			new ItemStack(ModuleItems.STACK_FLOWER[i], 1, 3)));
 			recipes.add(shapelessRecipe("petal_dry_from_petals",	new ItemStack(ModuleItems.PETAL_DRY, 9, i),			new ItemStack(ModuleItems.PETALS_DRY, 1, i)));
-			recipes.add(compressRecipe(	"petals_dry",				new ItemStack(ModuleItems.PETALS_DRY, 1, i),		new ItemStack(ModuleItems.PETAL_DRY, 1, i),		9));
+			recipes.add(compressRecipe(	"petals_dry",				new ItemStack(ModuleItems.PETALS_DRY, 1, i),		new ItemStack(ModuleItems.PETAL_DRY, 1, i),		true));
 			recipes.add(shapelessRecipe("petal_salty_from_raw",		new ItemStack(ModuleItems.PETAL_SALTY, 1, i),		new ItemStack(ModuleItems.PETAL_RAW, 1, i), "dustSalt", "dustSalt"));
 			recipes.add(shapelessRecipe("petal_salty_from_petals",	new ItemStack(ModuleItems.PETAL_SALTY, 9, i),		new ItemStack(ModuleItems.PETALS_SALTY, 1, i)));
-			recipes.add(compressRecipe(	"petals_salty",				new ItemStack(ModuleItems.PETALS_SALTY, 1, i), 		new ItemStack(ModuleItems.PETAL_SALTY, 1, i),	9));
+			recipes.add(compressRecipe(	"petals_salty",				new ItemStack(ModuleItems.PETALS_SALTY, 1, i), 		new ItemStack(ModuleItems.PETAL_SALTY, 1, i),	true));
 			recipes.add(shapelessRecipe("petal_sugared_from_raw",	new ItemStack(ModuleItems.PETAL_SUGARED, 1, i),		new ItemStack(ModuleItems.PETAL_RAW, 1, i), "dustSugar", "dustSugar"));
 			recipes.add(shapelessRecipe("petal_sugared_from_petals",new ItemStack(ModuleItems.PETAL_SUGARED, 9, i),		new ItemStack(ModuleItems.PETALS_SUGARED, 1, i)));
-			recipes.add(compressRecipe(	"petals_sugared",			new ItemStack(ModuleItems.PETALS_SUGARED, 1, i),	new ItemStack(ModuleItems.PETAL_SUGARED, 1, i),	9));
+			recipes.add(compressRecipe(	"petals_sugared",			new ItemStack(ModuleItems.PETALS_SUGARED, 1, i),	new ItemStack(ModuleItems.PETAL_SUGARED, 1, i),	true));
 		}
 		//Salt
-		recipes.add(shapelessRecipe(null,			new ItemStack(ModuleItems.DUST_SALT, 4, 0),			ModuleBlocks.BLOCK_SALT));
-		recipes.add(shapedRecipe(	null,			ModuleBlocks.BLOCK_SALT,							"dd", "dd", 'd', ModuleItems.DUST_SALT));
+		recipes.add(shapelessRecipe(null,			new ItemStack(ModuleItems.DUST_SALT, 4, 0),			ModuleItems.BLOCK_SALT));
+		recipes.add(shapedRecipe(	null,			ModuleItems.BLOCK_SALT,							"dd", "dd", 'd', ModuleItems.DUST_SALT));
 		//Hemp
-		recipes.add(shapelessRecipe(null,			Items.STRING,										"fiberHemp"));
-		recipes.add(shapelessRecipe(null,			ModuleItems.HEMP_TWINE,								"fiberHemp", "fiberHemp", "fiberHemp"));
-		recipes.add(shapedRecipe(	null,			ModuleItems.HEMP_CLOTH,								"tt", "tt", 't', ModuleItems.HEMP_TWINE));
+		recipes.add(shapelessRecipe(null,			Items.STRING,										"fiberHemp", "fiberHemp", "fiberHemp"));
+		recipes.add(shapelessRecipe(null,			ModuleItems.HEMP_TWINE,								"fiberHemp", "fiberHemp"));
+		recipes.add(shapedRecipe(	null,			ModuleItems.HEMP_CLOTH,								"tt", "tt", "tt", 't', ModuleItems.HEMP_TWINE));
 		//Tool
 		recipes.add(shapedRecipe(	"pruner",		ModuleItems.PRUNER,									"i ", "i ", " i", 'i', Items.IRON_INGOT));
 		recipes.add(shapedRecipe(	"pruner",		ModuleItems.PRUNER,									"i  ", " ii", 'i', Items.IRON_INGOT));
@@ -90,15 +90,19 @@ public class ModuleRecipes extends Module {
 		return new ShapelessOreRecipe(getResourceLocation(group), result, recipe);
 	}
 
-	public static IRecipe compressRecipe(String group, Item result, ItemStack item, int amount)	{return compressRecipe(group, new ItemStack(result), item, amount);}
-	public static IRecipe compressRecipe(String group, Block result, ItemStack item, int amount)	{return compressRecipe(group, new ItemStack(result), item, amount);}
-	public static IRecipe compressRecipe(String group, ItemStack result, ItemStack item, int amount)
+	public static IRecipe compressRecipe(String group, Item result, ItemStack item, boolean isNine)	{return compressRecipe(group, new ItemStack(result), item, isNine);}
+	public static IRecipe compressRecipe(String group, Block result, ItemStack item, boolean isNine)	{return compressRecipe(group, new ItemStack(result), item, isNine);}
+	public static IRecipe compressRecipe(String group, ItemStack result, ItemStack item, boolean isNine)
 	{
-		Object[] recipe = new ItemStack[amount];
-		for (int i = 0; i < amount; i++)
+		Object[] recipe;
+		if (isNine)
 		{
-			recipe[i] = item;
+			recipe = new Object[] {"iii", "iii", "iii", 'i', item};
 		}
-		return new ShapelessOreRecipe(getResourceLocation(group), result, recipe);
+		else
+		{
+			recipe = new Object[] {"ii", "ii", 'i', item};			
+		}
+		return shapedRecipe(group, result, recipe);
 	}
 }

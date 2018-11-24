@@ -1,0 +1,18 @@
+{
+  "modifier": "floric",
+  "text": [
+    {
+      "text": "Let's decorate your tools with colorful Raw Petals! Fitful breeze will surely bring you a smell of healing."
+    }
+  ],
+  "effects": [
+    "Applies floric to the wielder",
+    "Generates flower particles",
+    "Multiple levels"
+  ],
+  "demoTool": [
+    "tconstruct:broadsword",
+    "tconstruct:cleaver",
+    "floricraft2:throwing_rose"
+  ]
+}

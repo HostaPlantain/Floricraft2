@@ -1,9 +1,9 @@
 
 itemGroup.floricraft2=Floricraft2
 
-#############
-### Items ###
-#############
+###############
+### Flowers ###
+###############
 
 item.cut_flower.dandelion.name=Cut Dandelion
 item.cut_flower.poppy.name=Cut Poppy
@@ -20,6 +20,39 @@ item.cut_flower.lilac.name=Cut Lilac
 item.cut_flower.rose.name=Cut Rose
 item.cut_flower.peony.name=Cut Peony
 item.cut_flower.sakura.name=Cut Sakura
+
+tile.stack_dandelion.raw.name=Raw Dandelion Stack
+tile.stack_dandelion.dry.name=Dry Dandelion Stack
+tile.stack_poppy.raw.name=Raw Poppy Stack
+tile.stack_poppy.dry.name=Dry Poppy Stack
+tile.stack_blue_orchid.raw.name=Raw Blue Orchid Stack
+tile.stack_blue_orchid.dry.name=Dry Blue Orchid Stack
+tile.stack_allium.raw.name=Raw Allium Stack
+tile.stack_allium.dry.name=Dry Allium Stack
+tile.stack_azure_bluet.raw.name=Raw Azure Bluet Stack
+tile.stack_azure_bluet.dry.name=Dry Azure Bluet Stack
+tile.stack_red_tulip.raw.name=Raw Red Tulip Stack
+tile.stack_red_tulip.dry.name=Dry Red Tulip Stack
+tile.stack_orange_tulip.raw.name=Raw Orange Tulip Stack
+tile.stack_orange_tulip.dry.name=Dry Orange Tulip Stack
+tile.stack_white_tulip.raw.name=Raw White Tulip Stack
+tile.stack_white_tulip.dry.name=Dry White Tulip Stack
+tile.stack_pink_tulip.raw.name=Raw Pink Tulip Stack
+tile.stack_pink_tulip.dry.name=Dry Pink Tulip Stack
+tile.stack_oxeye_daisy.raw.name=Raw Oxeye Daisy Stack
+tile.stack_oxeye_daisy.dry.name=Dry Oxeye Daisy Stack
+tile.stack_sunflower.raw.name=Raw Sunflower Stack
+tile.stack_sunflower.dry.name=Dry Sunflower Stack
+tile.stack_lilac.raw.name=Raw Lilac Stack
+tile.stack_lilac.dry.name=Dry Lilac Stack
+tile.stack_rose.raw.name=Raw Rose Stack
+tile.stack_rose.dry.name=Dry Rose Stack
+tile.stack_peony.raw.name=Raw Peony Stack
+tile.stack_peony.dry.name=Dry Peony Stack
+tile.stack_sakura.raw.name=Raw Sakura Stack
+tile.stack_sakura.dry.name=Dry Sakura Stack
+
+tile.stack_dead.name=Dead Stack
 
 item.petal_raw.dandelion.name=Raw Dandelion Petal
 item.petal_raw.poppy.name=Raw Poppy Petal
@@ -149,9 +182,19 @@ item.petals_sugared.rose.name=Crystallized Rose Petals
 item.petals_sugared.peony.name=Crystallized Peony Petals
 item.petals_sugared.sakura.name=Crystallized Sakura Petals
 
+#####################
+### Item & Blocks ###
+#####################
+
+item.dust_salt.name=Salt
+tile.ore_salt.name=Salt Ore
+tile.block_salt.name=Salt Block
+
+tile.crop_hemp.name=Hemp
 item.seed_hemp.name=Hemp Seed
 item.hemp_yarn.name=Hemp Yarn
 item.hemp_twine.name=Hemp Twine
+item.hemp_spool.name=Hemp Twine Spool
 item.hemp_cloth.name=Hemp Cloth
 
 item.sachet_sac.name=Sachet Sac
@@ -163,45 +206,6 @@ item.sachet_anti_spider.name=Anti-Spider Sachet
 item.sachet_anti_ender.name=Anti-Ender Sachet
 
 item.pruner.name=Pruner
-
-##############
-### Blocks ###
-##############
-
-tile.stack_dandelion.raw.name=Raw Dandelion Stack
-tile.stack_dandelion.dry.name=Dry Dandelion Stack
-tile.stack_poppy.raw.name=Raw Poppy Stack
-tile.stack_poppy.dry.name=Dry Poppy Stack
-tile.stack_blue_orchid.raw.name=Raw Blue Orchid Stack
-tile.stack_blue_orchid.dry.name=Dry Blue Orchid Stack
-tile.stack_allium.raw.name=Raw Allium Stack
-tile.stack_allium.dry.name=Dry Allium Stack
-tile.stack_azure_bluet.raw.name=Raw Azure Bluet Stack
-tile.stack_azure_bluet.dry.name=Dry Azure Bluet Stack
-tile.stack_red_tulip.raw.name=Raw Red Tulip Stack
-tile.stack_red_tulip.dry.name=Dry Red Tulip Stack
-tile.stack_orange_tulip.raw.name=Raw Orange Tulip Stack
-tile.stack_orange_tulip.dry.name=Dry Orange Tulip Stack
-tile.stack_white_tulip.raw.name=Raw White Tulip Stack
-tile.stack_white_tulip.dry.name=Dry White Tulip Stack
-tile.stack_pink_tulip.raw.name=Raw Pink Tulip Stack
-tile.stack_pink_tulip.dry.name=Dry Pink Tulip Stack
-tile.stack_oxeye_daisy.raw.name=Raw Oxeye Daisy Stack
-tile.stack_oxeye_daisy.dry.name=Dry Oxeye Daisy Stack
-tile.stack_sunflower.raw.name=Raw Sunflower Stack
-tile.stack_sunflower.dry.name=Dry Sunflower Stack
-tile.stack_lilac.raw.name=Raw Lilac Stack
-tile.stack_lilac.dry.name=Dry Lilac Stack
-tile.stack_rose.raw.name=Raw Rose Stack
-tile.stack_rose.dry.name=Dry Rose Stack
-tile.stack_peony.raw.name=Raw Peony Stack
-tile.stack_peony.dry.name=Dry Peony Stack
-tile.stack_sakura.raw.name=Raw Sakura Stack
-tile.stack_sakura.dry.name=Dry Sakura Stack
-
-tile.stack_dead.name=Dead Stack
-
-tile.crop_hemp.name=Hemp
 
 ###############
 ### Potions ###
@@ -221,7 +225,7 @@ effect.anti_ender=Anti-Ender
 ####################
 
 enchantment.floric=Floric
-enchantment.floricraft2.enchantment.floric.desc=Applies floric to the wielder, and generates flower particles when attacking
+enchantment.floricraft2.floric.desc=Applies floric to the wielder, and generates flower particles when attacking
 
 ###############
 ### Baubles ###
@@ -233,6 +237,19 @@ item.charm_sachet_anti_skeleton.name=Anti-Skeleton Sachet Charm
 item.charm_sachet_anti_creeper.name=Anti-Creeper Sachet Charm
 item.charm_sachet_anti_spider.name=Anti-Spider Sachet Charm
 item.charm_sachet_anti_ender.name=Anti-Ender Sachet Charm
+
+################
+### Floralia ###
+################
+
+item.ingot_twinkle.name=Twinkle Ingot
+item.nugget_twinkle.name=Twinkle Nugget
+tile.block_twinkle.name=Twinkle Block
+
+tc.aspect.flos=Flower
+tc.aspect.fata=Destiny, Fairy
+
+tc.research_category.FLORALIA=Floralia
 
 ######################
 ### Floriconstract ###

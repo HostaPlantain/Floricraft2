@@ -20,7 +20,7 @@ public class EnchantmentFloric extends EnchantmentBasic {
 	@Override
 	public int getMinEnchantability(int enchantmentLevel)
 	{
-        return enchantmentLevel * 25;
+        return enchantmentLevel * 15 + 5;
 	}
 	
 	@Override
