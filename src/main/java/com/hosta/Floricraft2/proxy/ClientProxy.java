@@ -2,7 +2,6 @@ package com.hosta.Floricraft2.proxy;
 
 import com.hosta.Floricraft2.client.particle.ParticleBasic;
 import com.hosta.Floricraft2.client.particle.ParticleFloric;
-import com.hosta.Floricraft2.mod.TiC.ModuleFloriconstract;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.math.Vec3d;
@@ -26,11 +25,5 @@ public class ClientProxy extends CommonProxy{
 			ParticleBasic particle = new ParticleFloric(world != null ? world : mc.world, pos, meta, genByBlock);
 		    mc.effectRenderer.addEffect(particle);
 		}
-	}
-	
-	@Override
-	public void registerTiCBook()
-	{
-		ModuleFloriconstract.registerBookPage();
 	}
 }

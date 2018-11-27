@@ -13,7 +13,7 @@
       "stages": [
         {
           "text": "research.ingot_twinkle.text.stage.1",
-          "recipes": ["floricraft2:ingot_twinkle", "floricraft2:ingot_twinkle_fake"]
+          "recipes": ["floricraft2:ingot_twinkle", "floricraft2:nugget_twinkle_fake", "floricraft2:block_twinkle_fake"]
         }
       ]
     }

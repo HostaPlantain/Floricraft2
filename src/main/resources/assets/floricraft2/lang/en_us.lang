@@ -186,6 +186,10 @@ item.petals_sugared.sakura.name=Crystallized Sakura Petals
 ### Item & Blocks ###
 #####################
 
+item.ingot_twinkle.name=Twinkle Ingot
+item.nugget_twinkle.name=Twinkle Nugget
+tile.block_twinkle.name=Twinkle Block
+
 item.dust_salt.name=Salt
 tile.ore_salt.name=Salt Ore
 tile.block_salt.name=Salt Block
@@ -242,10 +246,6 @@ item.charm_sachet_anti_ender.name=Anti-Ender Sachet Charm
 ### Floralia ###
 ################
 
-item.ingot_twinkle.name=Twinkle Ingot
-item.nugget_twinkle.name=Twinkle Nugget
-tile.block_twinkle.name=Twinkle Block
-
 tc.aspect.flos=Flower
 tc.aspect.fata=Destiny, Fairy
 
@@ -255,7 +255,16 @@ tc.research_category.FLORALIA=Floralia
 ### Floriconstract ###
 ######################
 
+fluid.molten_twinkle=Twinkling Molten Metal
+
+material.twinkle.name=Twinkle
+
 item.part_petal.name=Petal
+
 item.throwing_rose.name=Throwing Rose
 item.throwing_rose.desc=The Throwing Rose is a short ranged throwing weapon. It has low damage but drawing causes multishot.\nCan be thrown from the off-hand.
+
 modifier.floric.name=Floric
+modifier.floric.desc=§oBreeze brings you a smell of healing.§r\nApplies floric effect to the wielder and generates flower particles!
+modifier.twinkle.name=Twinkling
+modifier.twinkle.desc=§oTwinkle, twinkle, little star, How I wonder what you are!§r\nFairy's blessing for you.

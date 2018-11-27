@@ -34,6 +34,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ModuleOthers extends Module {
 	
 	public static final String[] ANTI_MOBS = new String[]{"zombie", "skeleton", "creeper", "spider", "ender"};
+	//Color
+	public static final int COLOR_FLORIC = 0xFFDAFF;
+	public static final int COLOR_TWINKLE = 0xFFEDFF;
 	
 	//Tab
 	public static final CreativeTabs TAB_FLORICRAFT = new CreativeTabs("floricraft2")
@@ -43,7 +46,7 @@ public class ModuleOthers extends Module {
     };
 	
 	//Potion
-	public static final Potion POTION_FLORIC = new EffectActive("effect.floric", 0xFFDAFF, false).setIconIndex(0, 0);
+	public static final Potion POTION_FLORIC = new EffectActive("effect.floric", COLOR_FLORIC, false).setIconIndex(0, 0);
 	public static final Potion POTION_HILLSTEP = new EffectActive("effect.hillstep", 0xEEFFDA, false).setIconIndex(0, 0);
 	public static final Potion[] POTION_ANTIS = new Potion[ANTI_MOBS.length];
 	static

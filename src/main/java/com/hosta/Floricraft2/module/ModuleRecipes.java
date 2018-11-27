@@ -53,9 +53,14 @@ public class ModuleRecipes extends Module {
 			recipes.add(shapelessRecipe("petal_sugared_from_petals",new ItemStack(ModuleItems.PETAL_SUGARED, 9, i),		new ItemStack(ModuleItems.PETALS_SUGARED, 1, i)));
 			recipes.add(compressRecipe(	"petals_sugared",			new ItemStack(ModuleItems.PETALS_SUGARED, 1, i),	new ItemStack(ModuleItems.PETAL_SUGARED, 1, i),	true));
 		}
+		//Ingot
+		recipes.add(compressRecipe(	null,			ModuleItems.INGOT_TWINKLE,							new ItemStack(ModuleItems.NUGGET_TWINKLE), true));
+		recipes.add(shapelessRecipe(null,			new ItemStack(ModuleItems.INGOT_TWINKLE, 9, 0),		ModuleItems.BLOCK_TWINKLE));
+		recipes.add(shapelessRecipe(null,			new ItemStack(ModuleItems.NUGGET_TWINKLE, 9, 0),	ModuleItems.INGOT_TWINKLE));
+		recipes.add(compressRecipe(	null,			ModuleItems.BLOCK_TWINKLE,							new ItemStack(ModuleItems.INGOT_TWINKLE), true));
 		//Salt
 		recipes.add(shapelessRecipe(null,			new ItemStack(ModuleItems.DUST_SALT, 4, 0),			ModuleItems.BLOCK_SALT));
-		recipes.add(shapedRecipe(	null,			ModuleItems.BLOCK_SALT,							"dd", "dd", 'd', ModuleItems.DUST_SALT));
+		recipes.add(shapedRecipe(	null,			ModuleItems.BLOCK_SALT,								"dd", "dd", 'd', ModuleItems.DUST_SALT));
 		//Hemp
 		recipes.add(shapelessRecipe(null,			Items.STRING,										"fiberHemp", "fiberHemp", "fiberHemp"));
 		recipes.add(shapelessRecipe(null,			ModuleItems.HEMP_TWINE,								"fiberHemp", "fiberHemp"));

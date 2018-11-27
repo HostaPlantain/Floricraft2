@@ -3,6 +3,7 @@ package com.hosta.Floricraft2.module;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.hosta.Floricraft2.block.BlockBasic;
 import com.hosta.Floricraft2.block.BlockBasicCrops;
 import com.hosta.Floricraft2.block.BlockBasicFalling;
 import com.hosta.Floricraft2.block.BlockBasicOre;
@@ -16,6 +17,7 @@ import com.hosta.Floricraft2.item.tool.ToolPruner;
 import com.hosta.Floricraft2.item.tool.ToolSachet;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -70,6 +72,10 @@ public class ModuleItems extends Module {
 		}
 	}*/
 	//Ore
+	//Ingot
+	public static final Item INGOT_TWINKLE = new ItemBasic("ingot_twinkle");
+	public static final Item NUGGET_TWINKLE = new ItemBasic("nugget_twinkle");
+	public static final Block BLOCK_TWINKLE = new BlockBasic("block_twinkle", Material.IRON);
 	//Salt
 	public static final Item DUST_SALT = new ItemBasic("dust_salt");
 	public static final Block ORE_SALT = new BlockBasicOre("ore_salt").setHardness(1.5F).setResistance(10.0F);
@@ -121,6 +127,28 @@ public class ModuleItems extends Module {
 	//public static final Item CHESTPLATE_APRON;
 	//Weapon
 	
+	//Block
+	//Silage
+	//public static final Block SILAGE;
+	//Plant
+	//Flower
+	//public static final Block FLOWER;
+	//Tree
+	//public static final Block LEAVES;
+	//public static final Block LOG;
+	//public static final Block SAPLING;
+	//TileEntity
+	//Potpourri
+	//public static final Block POTPOURRI;
+	//Doll
+	//public static final Block DOLL_IRON;
+	//public static final Block DOLL_PLAYER;
+	//Wether
+	//public static final Block WEATHER_COCK;
+	//Planter
+	//public static final Block PLANTER_POT;
+	//public static final Block PLANTER_BED;
+	
 	private static final List<Item> ITEMS = new ArrayList<Item>();
 	private static final List<Block> BLOCKS = new ArrayList<Block>();
 	
@@ -139,7 +167,10 @@ public class ModuleItems extends Module {
 		ITEMS.add(PETALS_RAW);
 		ITEMS.add(PETALS_DRY);
 		ITEMS.add(PETALS_SALTY);
-		ITEMS.add(PETALS_SUGARED);		
+		ITEMS.add(PETALS_SUGARED);
+		ITEMS.add(INGOT_TWINKLE);
+		ITEMS.add(NUGGET_TWINKLE);
+		BLOCKS.add(BLOCK_TWINKLE);
 		ITEMS.add(DUST_SALT);
 		BLOCKS.add(ORE_SALT);
 		BLOCKS.add(BLOCK_SALT);
@@ -180,6 +211,10 @@ public class ModuleItems extends Module {
 		{
 			OreDictionary.registerOre("petalsDry", new ItemStack(PETALS_DRY, 1, i));
 		}
+		//Ingot
+		OreDictionary.registerOre("ingotTwinkle", INGOT_TWINKLE);
+		OreDictionary.registerOre("nuggetTwinkle", NUGGET_TWINKLE);
+		OreDictionary.registerOre("blockTwinkle", BLOCK_TWINKLE);
 		//Salt
 		OreDictionary.registerOre("dustSalt", DUST_SALT);
 		OreDictionary.registerOre("itemSalt", DUST_SALT);

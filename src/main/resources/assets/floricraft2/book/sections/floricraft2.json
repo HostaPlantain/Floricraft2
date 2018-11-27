@@ -12,5 +12,8 @@
   {
   	"type": "modifier",
     "data": "modifiers/floric.json"
+  },
+  {
+    "type": "blank"
   }
 ]

@@ -3,14 +3,11 @@ package com.hosta.Floricraft2.mod.Thaum;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.hosta.Floricraft2.block.BlockBasic;
-import com.hosta.Floricraft2.item.ItemBasic;
 import com.hosta.Floricraft2.module.Module;
 import com.hosta.Floricraft2.module.ModuleItems;
-import com.hosta.Floricraft2.module.ModuleRecipes;
+import com.hosta.Floricraft2.module.ModuleOthers;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -19,6 +16,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
@@ -33,21 +31,15 @@ import thaumcraft.api.research.ResearchCategories;
 
 public class ModuleFloralia extends Module{
 	
-	public static final Item INGOT_TWINKLE = new ItemBasic("ingot_twinkle");
-	public static final Item NUGGET_TWINKLE = new ItemBasic("nugget_twinkle");
-	public static final Block BLOCK_TWINKLE = new BlockBasic("block_twinkle", Material.IRON);
-	
 	private static final List<Item> ITEMS = new ArrayList<Item>();
 	private static final List<Block> BLOCKS = new ArrayList<Block>();
 	static
 	{
-		ITEMS.add(INGOT_TWINKLE);
-		ITEMS.add(NUGGET_TWINKLE);
-		BLOCKS.add(BLOCK_TWINKLE);
+		
 	}
 	
 	public static final Aspect FLOWER = new Aspect("flos", 0xFFADAD, new Aspect[] {Aspect.PLANT, Aspect.AIR}, getResourceLocation("textures/aspects/"+"flos"+".png"), 1);
-	public static final Aspect FAIRY = new Aspect("fata", 0xFFDAFF, new Aspect[] {Aspect.MAGIC, Aspect.FLIGHT}, getResourceLocation("textures/aspects/"+"nympha"+".png"), 1);
+	public static final Aspect FAIRY = new Aspect("fata", ModuleOthers.COLOR_FLORIC, new Aspect[] {Aspect.MAGIC, Aspect.FLIGHT}, getResourceLocation("textures/aspects/"+"nympha"+".png"), 1);
 
 	@SubscribeEvent
 	public void registerAspects(AspectRegistryEvent event)
@@ -68,7 +60,7 @@ public class ModuleFloralia extends Module{
 		registerAspect(ModuleItems.SEED_HEMP,			new AspectList().add(Aspect.PLANT, 5), register);
 		registerAspect(ModuleItems.HEMP_YARN,			new AspectList().add(Aspect.PLANT, 3).add(Aspect.CRAFT, 1), register);
 		//Thaum
-		registerAspect(INGOT_TWINKLE,					new AspectList(new ItemStack(Items.IRON_INGOT)).add(FAIRY, 5), register);
+		registerAspect(ModuleItems.INGOT_TWINKLE,		new AspectList(new ItemStack(Items.IRON_INGOT)).add(FAIRY, 5), register);
 	}
 	
 	@SubscribeEvent
@@ -76,17 +68,6 @@ public class ModuleFloralia extends Module{
 	{
 		List<IRecipe> recipes = new ArrayList<IRecipe>();
 
-		recipes.add(ModuleRecipes.compressRecipe(	null,	INGOT_TWINKLE,							new ItemStack(NUGGET_TWINKLE), true));
-		recipes.add(ModuleRecipes.shapelessRecipe(	null,	new ItemStack(INGOT_TWINKLE, 9, 0),		BLOCK_TWINKLE));
-		recipes.add(ModuleRecipes.shapelessRecipe(	null,	new ItemStack(NUGGET_TWINKLE, 9, 0),	INGOT_TWINKLE));
-		recipes.add(ModuleRecipes.compressRecipe(	null,	BLOCK_TWINKLE,							new ItemStack(INGOT_TWINKLE), true));
-		
-		String path = "ingot_twinkle_fake";
-		for (int i = 0; i < 4; i++)
-		{
-			ThaumcraftApi.addFakeCraftingRecipe(getResourceLocation(path), recipes.get(i));
-		}
-		
 		registerRecipes(event.getRegistry(), recipes);
 	}
 	
@@ -94,12 +75,25 @@ public class ModuleFloralia extends Module{
 	public void init()
 	{
 		registerCrucibeRecipes();
+		registerFakeRecipes();
 		registerResearches();
 	}
 	
 	private void registerCrucibeRecipes()
 	{
-		registerCrucibeRecipe("ingot_twinkle", "INGOT_TWINKLE", new ItemStack(INGOT_TWINKLE), new ItemStack(Items.IRON_INGOT), new AspectList().add(FAIRY, 5).add(Aspect.MAGIC, 5));
+		registerCrucibeRecipe("ingot_twinkle", "INGOT_TWINKLE", new ItemStack(ModuleItems.INGOT_TWINKLE), new ItemStack(Items.IRON_INGOT), new AspectList().add(FAIRY, 5).add(Aspect.MAGIC, 5));
+	}
+	
+	private void registerFakeRecipes()
+	{
+		for (IRecipe recipe : GameRegistry.findRegistry(IRecipe.class).getValues())
+		{
+			Item output = recipe.getRecipeOutput().getItem();
+			if (output == ModuleItems.NUGGET_TWINKLE || output == Item.getItemFromBlock(ModuleItems.BLOCK_TWINKLE))
+			{
+				ThaumcraftApi.addFakeCraftingRecipe(getResourceLocation(output.getUnlocalizedName().substring(5) + "_fake"), recipe);
+			}
+		}
 	}
 	
 	private void registerResearches()

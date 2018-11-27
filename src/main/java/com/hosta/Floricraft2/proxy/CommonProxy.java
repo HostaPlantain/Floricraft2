@@ -27,6 +27,4 @@ public class CommonProxy {
 		NetworkRegistry.TargetPoint point = new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.x, pos.y, pos.z, 32);
 		ModuleOthers.NETWORK_PARTICLE.sendToAllAround(packet, point);
 	}
-
-	public void registerTiCBook() { }
 }
