@@ -63,12 +63,12 @@ public class ModuleFloralia extends Module{
 		registerAspect(ModuleItems.INGOT_TWINKLE,		new AspectList(new ItemStack(Items.IRON_INGOT)).add(FAIRY, 5), register);
 	}
 	
-	@SubscribeEvent
-	public void registerRecipes(Register<IRecipe> event)
+	@Override
+	public List<IRecipe> registerRecipes()
 	{
 		List<IRecipe> recipes = new ArrayList<IRecipe>();
 
-		registerRecipes(event.getRegistry(), recipes);
+		return recipes;
 	}
 	
 	@Override

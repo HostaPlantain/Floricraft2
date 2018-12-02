@@ -8,6 +8,7 @@ import com.hosta.Floricraft2.mod.Thaum.ModuleFloralia;
 import com.hosta.Floricraft2.mod.TiC.ModuleFloriconstract;
 import com.hosta.Floricraft2.module.Module;
 
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.fml.common.Loader;
 
 public class ModedInit {
@@ -48,5 +49,17 @@ public class ModedInit {
 	public static void postInit()
 	{
 		MODDED_MODULE.forEach(module -> module.postInit());
+	}
+	
+	public static void registerRecipes(List<IRecipe> recipes)
+	{
+		for (Module module : MODDED_MODULE)
+		{
+			List modRecipes = module.registerRecipes();
+			if (modRecipes != null)
+			{
+				recipes.addAll(modRecipes);
+			}
+		} 
 	}
 }

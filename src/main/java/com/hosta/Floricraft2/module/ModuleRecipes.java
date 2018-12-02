@@ -3,6 +3,9 @@ package com.hosta.Floricraft2.module;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.hosta.Floricraft2.item.crafting.RecipeNaming;
+import com.hosta.Floricraft2.mod.ModedInit;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -77,6 +80,10 @@ public class ModuleRecipes extends Module {
 		recipes.add(shapedRecipe(	"sachet_anti",	new ItemStack(ModuleItems.SACHET_ANTIS[j++], 1, 0),	"ppp", "ppp", "tst", 'p', Items.GUNPOWDER, 's', new ItemStack(ModuleItems.SACHET_FLOWER, 1, OreDictionary.WILDCARD_VALUE), 't', ModuleItems.HEMP_TWINE));
 		recipes.add(shapedRecipe(	"sachet_anti",	new ItemStack(ModuleItems.SACHET_ANTIS[j++], 1, 0),	"ppp", "ppp", "tst", 'p', Items.SPIDER_EYE, 's', new ItemStack(ModuleItems.SACHET_FLOWER, 1, OreDictionary.WILDCARD_VALUE), 't', ModuleItems.HEMP_TWINE));
 		recipes.add(shapedRecipe(	"sachet_anti",	new ItemStack(ModuleItems.SACHET_ANTIS[j++], 1, 0),	"ppp", "ppp", "tst", 'p', Items.ENDER_PEARL, 's', new ItemStack(ModuleItems.SACHET_FLOWER, 1, OreDictionary.WILDCARD_VALUE), 't', ModuleItems.HEMP_TWINE));
+		
+		ModedInit.registerRecipes(recipes);
+		
+		recipes.add(new RecipeNaming(null));
 		
 		registerRecipes(event.getRegistry(), recipes);
 	}

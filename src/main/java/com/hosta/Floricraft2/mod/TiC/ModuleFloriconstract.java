@@ -144,14 +144,16 @@ public class ModuleFloriconstract extends Module{
 		TinkerRegistry.integrate(materialIn);
 	}
 	
-	@SubscribeEvent
-	public void registerRecipes(Register<IRecipe> event)
+	@Override
+	public List<IRecipe> registerRecipes()
 	{
 		for (Block stack : ModuleItems.STACK_FLOWER)
 		{
 			registerDryingRecipes(new ItemStack(stack, 1, 0), new ItemStack(stack, 1, 3), 300);
 		}
 		TinkerRegistry.registerToolForgeCrafting(throwingRose);
+		
+		return null;
 	}
 	
 	@SubscribeEvent

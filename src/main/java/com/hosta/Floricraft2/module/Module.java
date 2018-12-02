@@ -1,5 +1,6 @@
 package com.hosta.Floricraft2.module;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.hosta.Floricraft2.Floricraft2;
@@ -37,6 +38,11 @@ public class Module {
 	}
 	public void init()	{}	
 	public void postInit()	{}
+
+	public List<IRecipe> registerRecipes()
+	{
+		return null;
+	}
 	
 	protected static void registerItems (IForgeRegistry<Item> register, List<Item> items)
 	{
@@ -97,13 +103,24 @@ public class Module {
 		biome.setRegistryName(getResourceLocation(name));
 		register(registry, biome);
 	}
-
+	
 	protected static void registerRecipes(IForgeRegistry<IRecipe> registry, List<IRecipe> recipes)
 	{
-		int count = 0;
+		HashMap<Item, Integer> items = new HashMap<Item, Integer>();
+		int uncommon = 0;
 		for (IRecipe recipe : recipes)
 		{
-			registerRecipe(registry, recipe, recipe.getRecipeOutput().getUnlocalizedName().substring(5) + "_" + count++);
+			if (!recipe.getRecipeOutput().isEmpty())
+			{
+				Item output = recipe.getRecipeOutput().getItem();
+				int i = !items.containsKey(output) ? 0 : items.get(output) + 1;
+				registerRecipe(registry, recipe, output.getUnlocalizedName().substring(5) + "_" + i);
+				items.put(output, i);
+			}
+			else
+			{
+				registerRecipe(registry, recipe, "uncommon_recipe_" + uncommon++);
+			}
 		}
 	}
 	private static void registerRecipe(IForgeRegistry<IRecipe> registry, IRecipe recipe, String id)

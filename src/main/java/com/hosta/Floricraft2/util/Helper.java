@@ -3,6 +3,7 @@ package com.hosta.Floricraft2.util;
 import java.util.Random;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
@@ -22,5 +23,30 @@ public class Helper {
 	public static Random getRand(IBlockAccess world)
 	{
 		return world instanceof World ? ((World)world).rand : new Random();
+	}
+	
+	public static String getCode(EnumDyeColor color)
+	{
+		switch (color)
+		{
+			case BLACK:		return "˜0";
+			case BLUE:		return "˜1";
+			case GREEN:		return "˜2";
+			case CYAN:		return "˜3";
+			case RED:		return "˜4";
+			case PURPLE:	return "˜5";
+			case ORANGE:	return "˜6";
+			case BROWN:		return "˜6";
+			case SILVER:	return "˜7";
+			case GRAY:		return "˜8";
+			case LIGHT_BLUE:return "˜9";
+			case LIME:		return "˜a";
+			case MAGENTA:	return "˜b";
+			//case :		return "˜c";
+			case PINK:		return "˜d";
+			case YELLOW:	return "˜e";
+			case WHITE:		return "˜f";
+			default:		return "˜f";
+		}
 	}
 }

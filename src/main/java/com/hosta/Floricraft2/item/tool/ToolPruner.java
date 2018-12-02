@@ -10,6 +10,7 @@ public class ToolPruner extends ItemShears{
 	public ToolPruner(String unlocalizedName)
 	{
 		this.setUnlocalizedName(unlocalizedName).setCreativeTab(ModuleOthers.TAB_FLORICRAFT);
+		this.canRepair = false;
 	}
 	
 	@Override

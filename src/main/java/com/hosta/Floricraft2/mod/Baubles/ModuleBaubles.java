@@ -43,8 +43,8 @@ public class ModuleBaubles extends Module {
 		}
 	}
 
-	@SubscribeEvent
-	public void registerRecipes(Register<IRecipe> event)
+	@Override
+	public List<IRecipe> registerRecipes()
 	{
 		List<IRecipe> recipes = new ArrayList<IRecipe>();
 		
@@ -53,8 +53,8 @@ public class ModuleBaubles extends Module {
 		{
 			recipes.add(charmRecipe(CHARM_SACHET_ANTIS[i], ModuleItems.SACHET_ANTIS[i]));
 		}
-		
-		registerRecipes(event.getRegistry(), recipes);
+
+		return recipes;
 	}
 	
 	private static IRecipe charmRecipe(Item charm, Item sachet)
