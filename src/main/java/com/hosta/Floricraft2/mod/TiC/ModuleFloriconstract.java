@@ -1,22 +1,19 @@
 package com.hosta.Floricraft2.mod.TiC;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.hosta.Floricraft2.block.BlockBasicFluid;
 import com.hosta.Floricraft2.mod.TiC.client.RenderThrowingRose;
 import com.hosta.Floricraft2.mod.TiC.modifier.ModifierFloric;
 import com.hosta.Floricraft2.mod.TiC.modifier.TraitTwinkle;
 import com.hosta.Floricraft2.mod.TiC.ranged.EntityThrowingRose;
 import com.hosta.Floricraft2.mod.TiC.ranged.ThrowingRose;
-import com.hosta.Floricraft2.module.Module;
-import com.hosta.Floricraft2.module.ModuleItems;
+import com.hosta.Floricraft2.module.IModule;
+import com.hosta.Floricraft2.module.ModuleFlowering;
 import com.hosta.Floricraft2.module.ModuleOthers;
+import com.hosta.Floricraft2.util.RegisterHelper;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -26,7 +23,6 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
@@ -53,7 +49,7 @@ import slimeknights.tconstruct.library.traits.ITrait;
 import slimeknights.tconstruct.tools.TinkerTools;
 
 @Pulse(id = "Floriconstract", description = "All the Floric Constract in one handy package")
-public class ModuleFloriconstract extends Module{
+public class ModuleFloriconstract implements IModule{
 
 	//Part
 	public static ToolPart partPetal;
@@ -69,52 +65,40 @@ public class ModuleFloriconstract extends Module{
 	//Material
 	public static Material materialTwinkle;
 	
-	public Module registerPulse()
+	public IModule registerPulse()
 	{
 		TConstruct.pulseManager.registerPulse(this);
 		return this;
 	}
 	
 	@Override
-	public void preInit() {	}
-
-	@SubscribeEvent
-	public void registerBlocks(Register<Block> event)
-	{
-		this.registerFluids();
-		
-		List<Block> blocks = new ArrayList<Block>();
-		moltenTwinkle = new BlockBasicFluid("molten_twinkle", FLUID_TWINKLE, net.minecraft.block.material.Material.LAVA);
-		blocks.add(moltenTwinkle);
-		
-		registerBlocks(event.getRegistry(), blocks);
-	}
-
-	private void registerFluids()
+	public void registerBlocks()
 	{
 		FluidRegistry.registerFluid(FLUID_TWINKLE);
+		moltenTwinkle = new BlockBasicFluid("molten_twinkle", FLUID_TWINKLE, net.minecraft.block.material.Material.LAVA);
+		register(moltenTwinkle);
 	}
 
 	@SubscribeEvent
 	public void registerItems(Register<Item> event)
 	{
-		//Items
-		List<Item> items = new ArrayList<Item>();		
 		//Parts
 		partPetal = new ToolPart(Material.VALUE_Ingot);
 		partPetal.setUnlocalizedName("part_petal");
-		items.add(partPetal);
-		//Tools
-		throwingRose = new ThrowingRose();
-		throwingRose.setUnlocalizedName("throwing_rose");
-		items.add(throwingRose);		
-		registerItems(event.getRegistry(), items);
-		
+		partPetal.setRegistryName(RegisterHelper.getResourceLocation(partPetal.getUnlocalizedName().substring(5)));
+		event.getRegistry().register(partPetal);
+
 		//Stencil for parts
 		ItemStack stencil = new ItemStack(TinkerTools.pattern);
         Pattern.setTagForPart(stencil, partPetal);
         TinkerRegistry.registerStencilTableCrafting(stencil);
-
+        
+		//Tools
+		throwingRose = new ThrowingRose();
+		throwingRose.setUnlocalizedName("throwing_rose");
+		throwingRose.setRegistryName(RegisterHelper.getResourceLocation(throwingRose.getUnlocalizedName().substring(5)));
+		event.getRegistry().register(throwingRose);
+		
         //Modifiers
         this.registerModifiers();
         
@@ -125,8 +109,8 @@ public class ModuleFloriconstract extends Module{
 	private void registerModifiers()
 	{
 		modFloric = new ModifierFloric("floric", ModuleOthers.COLOR_FLORIC, 3, 72);
-		modFloric.addItem(new ItemStack(ModuleItems.PETAL_RAW, 1, OreDictionary.WILDCARD_VALUE), 1, 1);
-		modFloric.addItem(new ItemStack(ModuleItems.PETALS_RAW, 1, OreDictionary.WILDCARD_VALUE), 1, 9);
+		modFloric.addItem(new ItemStack(ModuleFlowering.PETAL_RAW, 1, OreDictionary.WILDCARD_VALUE), 1, 1);
+		modFloric.addItem(new ItemStack(ModuleFlowering.PETALS_RAW, 1, OreDictionary.WILDCARD_VALUE), 1, 9);
 		
 		modTwinkle = new TraitTwinkle("twinkle", ModuleOthers.COLOR_TWINKLE);
 	}
@@ -145,21 +129,19 @@ public class ModuleFloriconstract extends Module{
 	}
 	
 	@Override
-	public List<IRecipe> registerRecipes()
+	public void registerRecipes()
 	{
-		for (Block stack : ModuleItems.STACK_FLOWER)
+		for (Block stack : ModuleFlowering.STACK_FLOWER)
 		{
 			registerDryingRecipes(new ItemStack(stack, 1, 0), new ItemStack(stack, 1, 3), 300);
 		}
 		TinkerRegistry.registerToolForgeCrafting(throwingRose);
-		
-		return null;
 	}
 	
-	@SubscribeEvent
-	public void registerEntities(Register<EntityEntry> event)
+	@Override
+	public void registerEntities()
 	{
-		registerEntity(EntityThrowingRose.class, "throwing_rose", ModuleOthers.THROWING_ROSE);
+		RegisterHelper.registerEntity(EntityThrowingRose.class, "throwing_rose", ModuleOthers.THROWING_ROSE);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -170,18 +152,13 @@ public class ModuleFloriconstract extends Module{
 		ModelRegisterUtil.registerPartModel(partPetal);
 		ModelRegisterUtil.registerToolModel(throwingRose);
 		
-		//blocks
-		List<Block> blocks = new ArrayList<Block>();
-		blocks.add(moltenTwinkle);
-		registerItemBlockRenders(blocks);
-		
 		//Entity
 	    RenderingRegistry.registerEntityRenderingHandler(EntityThrowingRose.class, RenderThrowingRose::new);
 
 	    //Modifier
 	    for (IModifier mod : TinkerRegistry.getAllModifiers())
 	    {
-	    	ModelRegisterUtil.registerModifierModel(mod, getResourceLocation("models/item/modifiers/" + mod.getIdentifier()));
+	    	ModelRegisterUtil.registerModifierModel(mod, RegisterHelper.getResourceLocation("models/item/modifiers/" + mod.getIdentifier()));
 	    }
 	    
 	    //GUI Tool Forge

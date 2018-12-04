@@ -1,24 +1,19 @@
 package com.hosta.Floricraft2.mod.Thaum;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.hosta.Floricraft2.module.Module;
-import com.hosta.Floricraft2.module.ModuleItems;
+import com.hosta.Floricraft2.module.IModule;
+import com.hosta.Floricraft2.module.ModuleCrops;
+import com.hosta.Floricraft2.module.ModuleFlowering;
+import com.hosta.Floricraft2.module.ModuleMaterials;
 import com.hosta.Floricraft2.module.ModuleOthers;
+import com.hosta.Floricraft2.util.RegisterHelper;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.event.RegistryEvent.Register;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import thaumcraft.Thaumcraft;
 import thaumcraft.api.ThaumcraftApi;
@@ -29,46 +24,37 @@ import thaumcraft.api.aspects.AspectRegistryEvent;
 import thaumcraft.api.crafting.CrucibleRecipe;
 import thaumcraft.api.research.ResearchCategories;
 
-public class ModuleFloralia extends Module{
+public class ModuleFloralia implements IModule{
 	
-	private static final List<Item> ITEMS = new ArrayList<Item>();
-	private static final List<Block> BLOCKS = new ArrayList<Block>();
-	static
+	public static final Aspect FLOWER = new Aspect("flos", 0xFFADAD, new Aspect[] {Aspect.PLANT, Aspect.AIR}, RegisterHelper.getResourceLocation("textures/aspects/"+"flos"+".png"), 1);
+	public static final Aspect FAIRY = new Aspect("fata", ModuleOthers.COLOR_FLORIC, new Aspect[] {Aspect.MAGIC, Aspect.FLIGHT}, RegisterHelper.getResourceLocation("textures/aspects/"+"nympha"+".png"), 1);
+
+	@Override
+	public void preInit()
 	{
-		
+		MinecraftForge.EVENT_BUS.register(this);
 	}
 	
-	public static final Aspect FLOWER = new Aspect("flos", 0xFFADAD, new Aspect[] {Aspect.PLANT, Aspect.AIR}, getResourceLocation("textures/aspects/"+"flos"+".png"), 1);
-	public static final Aspect FAIRY = new Aspect("fata", ModuleOthers.COLOR_FLORIC, new Aspect[] {Aspect.MAGIC, Aspect.FLIGHT}, getResourceLocation("textures/aspects/"+"nympha"+".png"), 1);
-
 	@SubscribeEvent
 	public void registerAspects(AspectRegistryEvent event)
 	{
 		AspectEventProxy register = event.register;
 		//Flower
-		registerAspect(new ItemStack(ModuleItems.CUT_FLOWER,  1, OreDictionary.WILDCARD_VALUE),		new AspectList().add(FLOWER, 5).add(Aspect.PLANT, 1), register);
-		registerAspect(new ItemStack(ModuleItems.PETAL_RAW,  1, OreDictionary.WILDCARD_VALUE),		new AspectList().add(FLOWER, 3).add(Aspect.PLANT, 1), register);
-		registerAspect(new ItemStack(ModuleItems.PETAL_DRY,  1, OreDictionary.WILDCARD_VALUE),		new AspectList().add(FLOWER, 3), register);
-		registerAspect(new ItemStack(ModuleItems.PETAL_SALTY,  1, OreDictionary.WILDCARD_VALUE),	new AspectList().add(FLOWER, 3).add(Aspect.PLANT, 1).add(Aspect.CRAFT, 1), register);
-		registerAspect(new ItemStack(ModuleItems.PETAL_SUGARED,  1, OreDictionary.WILDCARD_VALUE),	new AspectList().add(FLOWER, 3).add(Aspect.PLANT, 1).add(Aspect.LIFE, 1), register);
-		for (Block stack : ModuleItems.STACK_FLOWER)
+		registerAspect(new ItemStack(ModuleFlowering.CUT_FLOWER,  1, OreDictionary.WILDCARD_VALUE),		new AspectList().add(FLOWER, 5).add(Aspect.PLANT, 1), register);
+		registerAspect(new ItemStack(ModuleFlowering.PETAL_RAW,  1, OreDictionary.WILDCARD_VALUE),		new AspectList().add(FLOWER, 3).add(Aspect.PLANT, 1), register);
+		registerAspect(new ItemStack(ModuleFlowering.PETAL_DRY,  1, OreDictionary.WILDCARD_VALUE),		new AspectList().add(FLOWER, 3), register);
+		registerAspect(new ItemStack(ModuleFlowering.PETAL_SALTY,  1, OreDictionary.WILDCARD_VALUE),	new AspectList().add(FLOWER, 3).add(Aspect.PLANT, 1).add(Aspect.CRAFT, 1), register);
+		registerAspect(new ItemStack(ModuleFlowering.PETAL_SUGARED,  1, OreDictionary.WILDCARD_VALUE),	new AspectList().add(FLOWER, 3).add(Aspect.PLANT, 1).add(Aspect.LIFE, 1), register);
+		for (Block stack : ModuleFlowering.STACK_FLOWER)
 		{
 			registerAspect(new ItemStack(stack, 1, 3),	new AspectList().add(FLOWER, 10), register);
 		}
-		registerAspect(ModuleItems.STACK_DEAD,			new AspectList().add(Aspect.DEATH, 5).add(Aspect.PLANT, 1), register);
+		registerAspect(ModuleFlowering.STACK_DEAD,			new AspectList().add(Aspect.DEATH, 5).add(Aspect.PLANT, 1), register);
 		//Hemp
-		registerAspect(ModuleItems.SEED_HEMP,			new AspectList().add(Aspect.PLANT, 5), register);
-		registerAspect(ModuleItems.HEMP_YARN,			new AspectList().add(Aspect.PLANT, 3).add(Aspect.CRAFT, 1), register);
+		registerAspect(ModuleCrops.SEED_HEMP,			new AspectList().add(Aspect.PLANT, 5), register);
+		registerAspect(ModuleCrops.HEMP_YARN,			new AspectList().add(Aspect.PLANT, 3).add(Aspect.CRAFT, 1), register);
 		//Thaum
-		registerAspect(ModuleItems.INGOT_TWINKLE,		new AspectList(new ItemStack(Items.IRON_INGOT)).add(FAIRY, 5), register);
-	}
-	
-	@Override
-	public List<IRecipe> registerRecipes()
-	{
-		List<IRecipe> recipes = new ArrayList<IRecipe>();
-
-		return recipes;
+		registerAspect(ModuleMaterials.INGOT_TWINKLE,		new AspectList(new ItemStack(Items.IRON_INGOT)).add(FAIRY, 5), register);
 	}
 	
 	@Override
@@ -81,25 +67,25 @@ public class ModuleFloralia extends Module{
 	
 	private void registerCrucibeRecipes()
 	{
-		registerCrucibeRecipe("ingot_twinkle", "INGOT_TWINKLE", new ItemStack(ModuleItems.INGOT_TWINKLE), new ItemStack(Items.IRON_INGOT), new AspectList().add(FAIRY, 5).add(Aspect.MAGIC, 5));
+		registerCrucibeRecipe("ingot_twinkle", "INGOT_TWINKLE", new ItemStack(ModuleMaterials.INGOT_TWINKLE), new ItemStack(Items.IRON_INGOT), new AspectList().add(FAIRY, 5).add(Aspect.MAGIC, 5));
 	}
 	
 	private void registerFakeRecipes()
 	{
-		for (IRecipe recipe : GameRegistry.findRegistry(IRecipe.class).getValues())
+		/**for (IRecipe recipe : GameRegistry.findRegistry(IRecipe.class).getValues())
 		{
 			Item output = recipe.getRecipeOutput().getItem();
-			if (output == ModuleItems.NUGGET_TWINKLE || output == Item.getItemFromBlock(ModuleItems.BLOCK_TWINKLE))
+			if (output == ModuleMaterials.NUGGET_TWINKLE || output == Item.getItemFromBlock(ModuleMaterials.BLOCK_TWINKLE))
 			{
-				ThaumcraftApi.addFakeCraftingRecipe(getResourceLocation(output.getUnlocalizedName().substring(5) + "_fake"), recipe);
+				ThaumcraftApi.addFakeCraftingRecipe(RegisterHelper.getResourceLocation(output.getUnlocalizedName().substring(5) + "_fake"), recipe);
 			}
-		}
+		}**/
 	}
 	
 	private void registerResearches()
 	{
-		ResearchCategories.registerCategory("FLORALIA", null, new AspectList(), getResourceLocation("textures/items/cut_flower_rose.png"), getResourceLocation("textures/gui/gui_floralia_back_1.jpg"), new ResourceLocation(Thaumcraft.MODID, "textures/gui/gui_research_back_over.png"));
-		ThaumcraftApi.registerResearchLocation(getResourceLocation("research/floralia"));
+		ResearchCategories.registerCategory("FLORALIA", null, new AspectList(), RegisterHelper.getResourceLocation("textures/items/cut_flower_rose.png"), RegisterHelper.getResourceLocation("textures/gui/gui_floralia_back_1.jpg"), new ResourceLocation(Thaumcraft.MODID, "textures/gui/gui_research_back_over.png"));
+		ThaumcraftApi.registerResearchLocation(RegisterHelper.getResourceLocation("research/floralia"));
 	}
 	
 	private static void registerAspect(Item item, AspectList aspects, AspectEventProxy register)	{registerAspect(new ItemStack(item), aspects, register);}
@@ -120,34 +106,6 @@ public class ModuleFloralia extends Module{
 	
 	private void registerCrucibeRecipe(String path, String key, ItemStack result, ItemStack recipe, AspectList aspects)
 	{
-		ThaumcraftApi.addCrucibleRecipe(getResourceLocation(path), new CrucibleRecipe(key, result, recipe, aspects));
-	}
-	
-	@SubscribeEvent
-	public void registerItems(Register<Item> event)
-	{
-		registerItems(event.getRegistry(), ITEMS);
-		registerItemBlocks(event.getRegistry(), BLOCKS);
-	}
-
-	@SubscribeEvent
-	public void registerBlocks(Register<Block> event)
-	{
-		registerBlocks(event.getRegistry(), BLOCKS);
-	}
-	
-	@SideOnly(Side.CLIENT)
-	@SubscribeEvent
-	public void registerModels(ModelRegistryEvent event)
-	{
-		registerItemRenders(ITEMS);
-		registerItemBlockRenders(BLOCKS);
-	}
-	
-	@Override
-	public void postInit()
-	{
-		ITEMS.clear();
-		BLOCKS.clear();
+		ThaumcraftApi.addCrucibleRecipe(RegisterHelper.getResourceLocation(path), new CrucibleRecipe(key, result, recipe, aspects));
 	}
 }

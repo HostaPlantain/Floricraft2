@@ -2,7 +2,7 @@ package com.hosta.Floricraft2.potion;
 
 import java.util.List;
 
-import com.hosta.Floricraft2.module.ModuleOthers;
+import com.hosta.Floricraft2.module.ModuleFragrances;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
@@ -54,7 +54,7 @@ public class EffectAntiMob<T extends EntityLiving> extends EffectBasic {
 						entity.targetTasks.disableControlFlag(8);
 						entity.setAttackTarget((EntityLivingBase)null);
 					}
-					entity.addPotionEffect(new PotionEffect(ModuleOthers.POTION_NO_TARGET, 60, 0, false, false));
+					entity.addPotionEffect(new PotionEffect(ModuleFragrances.POTION_NO_TARGET, 60, 0, false, false));
 				}
 			}
 		}

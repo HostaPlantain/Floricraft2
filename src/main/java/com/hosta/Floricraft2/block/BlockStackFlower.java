@@ -4,7 +4,7 @@ import java.util.Random;
 
 import com.hosta.Floricraft2.Floricraft2;
 import com.hosta.Floricraft2.item.IMetaName;
-import com.hosta.Floricraft2.module.ModuleItems;
+import com.hosta.Floricraft2.module.ModuleFlowering;
 
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
@@ -108,7 +108,7 @@ public class BlockStackFlower extends BlockStack implements IMetaName{
     			}
     			else
     			{
-    				worldIn.setBlockState(pos, ModuleItems.STACK_DEAD.getDefaultState().withProperty(FACING, state.getValue(FACING)));
+    				worldIn.setBlockState(pos, ModuleFlowering.STACK_DEAD.getDefaultState().withProperty(FACING, state.getValue(FACING)));
     			}
         	}
         }

@@ -1,7 +1,7 @@
 package com.hosta.Floricraft2.enchantment;
 
 import com.hosta.Floricraft2.Floricraft2;
-import com.hosta.Floricraft2.module.ModuleOthers;
+import com.hosta.Floricraft2.module.ModuleFragrances;
 
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.Entity;
@@ -41,6 +41,6 @@ public class EnchantmentFloric extends EnchantmentBasic {
 		Vec3d pos = target.getPositionEyes(1.0F);
 		Floricraft2.proxy.spawnParticleFloric(target.world, pos, 12, false, 4);
 		
-		user.addPotionEffect(new PotionEffect(ModuleOthers.POTION_FLORIC, 50, level - 1, false, false));
+		user.addPotionEffect(new PotionEffect(ModuleFragrances.POTION_FLORIC, 50, level - 1, false, false));
 	}
 }

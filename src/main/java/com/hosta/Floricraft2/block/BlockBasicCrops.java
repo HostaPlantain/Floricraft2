@@ -2,7 +2,7 @@ package com.hosta.Floricraft2.block;
 
 import java.util.Random;
 
-import com.hosta.Floricraft2.module.ModuleItems;
+import com.hosta.Floricraft2.module.ModuleCrops;
 
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.state.IBlockState;
@@ -28,13 +28,13 @@ public class BlockBasicCrops extends BlockCrops {
 	@Override
 	protected Item getSeed()
 	{
-		return this == ModuleItems.CROP_HEMP ? ModuleItems.SEED_HEMP : super.getSeed();
+		return this == ModuleCrops.CROP_HEMP ? ModuleCrops.SEED_HEMP : super.getSeed();
 	}
 	
 	@Override
 	protected Item getCrop()
 	{
-		return this == ModuleItems.CROP_HEMP ? ModuleItems.HEMP_YARN : super.getCrop();
+		return this == ModuleCrops.CROP_HEMP ? ModuleCrops.HEMP_YARN : super.getCrop();
 	}
 	
 	@Override

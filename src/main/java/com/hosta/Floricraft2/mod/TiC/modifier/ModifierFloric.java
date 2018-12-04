@@ -1,7 +1,7 @@
 package com.hosta.Floricraft2.mod.TiC.modifier;
 
 import com.hosta.Floricraft2.Floricraft2;
-import com.hosta.Floricraft2.module.ModuleOthers;
+import com.hosta.Floricraft2.module.ModuleFragrances;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
@@ -29,7 +29,7 @@ public class ModifierFloric extends ModifierTrait {
 			
 			NBTTagCompound tag = TinkerUtil.getModifierTag(tool, identifier);
 			ModifierNBT data = ModifierNBT.readTag(tag);
-	    	player.addPotionEffect(new PotionEffect(ModuleOthers.POTION_FLORIC, wasCritical ? 200 : 100, data.level - 1, false, false));
+	    	player.addPotionEffect(new PotionEffect(ModuleFragrances.POTION_FLORIC, wasCritical ? 200 : 100, data.level - 1, false, false));
 		}
 	}
 }

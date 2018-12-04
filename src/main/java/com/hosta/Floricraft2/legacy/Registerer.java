@@ -93,6 +93,6 @@ public class Registerer {
 
 	public static void register(Class<? extends Entity> entity, String name, int id)
 	{
-		EntityRegistry.registerModEntity(new ResourceLocation(Reference.MOD_ID, name), entity, name, id, Floricraft2.instance, 80, 3, true);
+		EntityRegistry.registerModEntity(new ResourceLocation(Reference.MOD_ID, name), entity, name, id, Floricraft2.BASE, 80, 3, true);
 	}
 }

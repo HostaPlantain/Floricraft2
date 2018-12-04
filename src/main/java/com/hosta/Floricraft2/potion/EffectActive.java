@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import com.hosta.Floricraft2.module.ModuleOthers;
+import com.hosta.Floricraft2.module.ModuleFragrances;
 import com.hosta.Floricraft2.util.Helper;
 
 import net.minecraft.entity.EntityLiving;
@@ -28,7 +28,7 @@ public class EffectActive extends EffectBasic {
 	@Override
 	public void performEffect(EntityLivingBase entityLivingBaseIn, int amplifier)
     {
-		if (this == ModuleOthers.POTION_FLORIC && !entityLivingBaseIn.world.isRemote)
+		if (this == ModuleFragrances.POTION_FLORIC && !entityLivingBaseIn.world.isRemote)
 		{
 			int i = 256 >> amplifier;
 			if (i <= 0) {i = 1;}
@@ -59,11 +59,11 @@ public class EffectActive extends EffectBasic {
 				}
 			}
 		}
-		else if (this == ModuleOthers.POTION_HILLSTEP)
+		else if (this == ModuleFragrances.POTION_HILLSTEP)
 		{
 			entityLivingBaseIn.stepHeight = 1;
 		}
-		else if (this == ModuleOthers.POTION_NO_TARGET && entityLivingBaseIn instanceof EntityLiving)
+		else if (this == ModuleFragrances.POTION_NO_TARGET && entityLivingBaseIn instanceof EntityLiving)
 		{
 			EntityLiving living = (EntityLiving)entityLivingBaseIn;
 			if (living.getActivePotionEffect(this).getDuration() < 30)

@@ -1,83 +1,52 @@
 package com.hosta.Floricraft2.mod.Baubles;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.hosta.Floricraft2.mod.Baubles.item.CharmSachet;
-import com.hosta.Floricraft2.module.Module;
-import com.hosta.Floricraft2.module.ModuleItems;
-import com.hosta.Floricraft2.module.ModuleOthers;
-import com.hosta.Floricraft2.module.ModuleRecipes;
+import com.hosta.Floricraft2.module.IModule;
+import com.hosta.Floricraft2.module.ModuleCrops;
+import com.hosta.Floricraft2.module.ModuleFragrances;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.event.RegistryEvent.Register;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class ModuleBaubles extends Module {
+public class ModuleBaubles implements IModule {
 
 	//Amulet Sachet
-	public static final Item CHARM_SACHET_FLOWER = new CharmSachet("charm_sachet_flower", ModuleOthers.POTION_FLORIC);
-	public static final Item[] CHARM_SACHET_ANTIS = new Item[ModuleItems.SACHET_ANTIS.length];
+	public static final Item CHARM_SACHET_FLOWER = new CharmSachet("charm_sachet_flower", ModuleFragrances.POTION_FLORIC);
+	public static final Item[] CHARM_SACHET_ANTIS = new Item[ModuleFragrances.SACHET_ANTIS.length];
 	static
 	{
 		String sachetAnti = "charm_sachet_anti_";
 		for (int i = 0; i < CHARM_SACHET_ANTIS.length; i++)
 		{
-			CHARM_SACHET_ANTIS[i] = new CharmSachet(sachetAnti + ModuleOthers.ANTI_MOBS[i], ModuleOthers.POTION_ANTIS[i]);
+			CHARM_SACHET_ANTIS[i] = new CharmSachet(sachetAnti + ModuleFragrances.ANTI_MOBS[i], ModuleFragrances.POTION_ANTIS[i]);
 		}
 	}
 	
-	private static final List<Item> ITEMS = new ArrayList<Item>();
-	static
+	@Override
+	public void registerItems()
 	{
-		ITEMS.add(CHARM_SACHET_FLOWER);
-		for (Item sachet : CHARM_SACHET_ANTIS)
-		{
-			ITEMS.add(sachet);
-		}
+		register(CHARM_SACHET_FLOWER);
+		register(CHARM_SACHET_ANTIS);
 	}
 
 	@Override
-	public List<IRecipe> registerRecipes()
+	public void registerRecipes()
 	{
-		List<IRecipe> recipes = new ArrayList<IRecipe>();
+		register
+		(
+			shapedRecipe("charm_sachet", new ItemStack(CHARM_SACHET_FLOWER, 1, 0), " t ", "t t", " s ", 't', ModuleCrops.HEMP_TWINE, 's', new ItemStack(ModuleFragrances.SACHET_FLOWER, 1, OreDictionary.WILDCARD_VALUE)),
+			shapelessRecipe(null, new ItemStack(CHARM_SACHET_FLOWER, 1, 0), new ItemStack(CHARM_SACHET_FLOWER, 1, OreDictionary.WILDCARD_VALUE), "petalsDry")
+		);
 		
-		recipes.add(charmRecipe(CHARM_SACHET_FLOWER, ModuleItems.SACHET_FLOWER));
 		for (int i = 0; i < CHARM_SACHET_ANTIS.length; i++)
 		{
-			recipes.add(charmRecipe(CHARM_SACHET_ANTIS[i], ModuleItems.SACHET_ANTIS[i]));
-		}
-
-		return recipes;
-	}
-	
-	private static IRecipe charmRecipe(Item charm, Item sachet)
-	{
-		return ModuleRecipes.shapedRecipe("charm_sachet", new ItemStack(charm, 1, 0), " t ", "t t", " s ", 't', ModuleItems.HEMP_TWINE, 's', new ItemStack(sachet, 1, OreDictionary.WILDCARD_VALUE));
-	}
-	
-	@SubscribeEvent
-	public void registerItems(Register<Item> event)
-	{
-		registerItems(event.getRegistry(), ITEMS);
-	}
-	
-	@SideOnly(Side.CLIENT)
-	@SubscribeEvent
-	public void registerModels(ModelRegistryEvent event)
-	{
-		registerItemRenders(ITEMS);
-	}
-	
-	@Override
-	public void postInit()
-	{
-		ITEMS.clear();
+			register
+			(
+				shapedRecipe("charm_sachet", new ItemStack(CHARM_SACHET_ANTIS[i], 1, 0), " t ", "t t", " s ", 't', ModuleCrops.HEMP_TWINE, 's', new ItemStack(ModuleFragrances.SACHET_ANTIS[i], 1, OreDictionary.WILDCARD_VALUE)),
+				shapelessRecipe("charm_sachet", new ItemStack(CHARM_SACHET_ANTIS[i], 1, 0), new ItemStack(CHARM_SACHET_FLOWER, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(ModuleFragrances.VIAL_ANTIS, 1, i)),
+				shapelessRecipe(null, new ItemStack(CHARM_SACHET_ANTIS[i], 1, 0), new ItemStack(CHARM_SACHET_ANTIS[i], 1, OreDictionary.WILDCARD_VALUE), "petalsDry")
+			);
+		}	
 	}
 }

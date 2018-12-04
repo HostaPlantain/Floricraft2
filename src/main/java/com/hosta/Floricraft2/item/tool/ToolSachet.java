@@ -1,7 +1,6 @@
 package com.hosta.Floricraft2.item.tool;
 
-import com.hosta.Floricraft2.module.ModuleItems;
-import com.hosta.Floricraft2.module.ModuleOthers;
+import com.hosta.Floricraft2.module.ModuleFragrances;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -35,7 +34,7 @@ public class ToolSachet extends ToolBasic {
 	
 	protected void addEffect(EntityPlayer player) 
     {
-		this.addEffect(player, ModuleOthers.POTION_FLORIC, 400, 0);
+		this.addEffect(player, ModuleFragrances.POTION_FLORIC, 400, 0);
 		if (POTION != null)
 		{
 			this.addEffect(player, POTION, 400, 0);
@@ -66,7 +65,7 @@ public class ToolSachet extends ToolBasic {
 		{
 			player.renderBrokenItemStack(stack);
 
-			ItemStack sachetSac = new ItemStack(ModuleItems.SACHET_SAC);
+			ItemStack sachetSac = new ItemStack(ModuleFragrances.SACHET_SAC);
 			sachetSac.setTagCompound(stack.getTagCompound());
 			
 			if (player.inventory.getStackInSlot(itemSlot) == stack)

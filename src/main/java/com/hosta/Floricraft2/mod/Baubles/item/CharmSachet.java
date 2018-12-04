@@ -1,7 +1,7 @@
 package com.hosta.Floricraft2.mod.Baubles.item;
 
 import com.hosta.Floricraft2.item.tool.ToolSachet;
-import com.hosta.Floricraft2.module.ModuleItems;
+import com.hosta.Floricraft2.module.ModuleFragrances;
 
 import baubles.api.BaubleType;
 import baubles.api.BaublesApi;
@@ -55,7 +55,7 @@ public class CharmSachet extends ToolSachet implements IBauble{
 		{
 			player.renderBrokenItemStack(stack);
 
-			ItemStack sachetSac = new ItemStack(ModuleItems.SACHET_SAC);
+			ItemStack sachetSac = new ItemStack(ModuleFragrances.SACHET_SAC);
 			sachetSac.setTagCompound(stack.getTagCompound());
 			
 			if (BaublesApi.getBaubles(player).getStackInSlot(itemSlot) == stack)

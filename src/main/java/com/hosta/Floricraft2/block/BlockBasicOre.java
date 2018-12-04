@@ -2,7 +2,7 @@ package com.hosta.Floricraft2.block;
 
 import java.util.Random;
 
-import com.hosta.Floricraft2.module.ModuleItems;
+import com.hosta.Floricraft2.module.ModuleMaterials;
 import com.hosta.Floricraft2.util.Helper;
 
 import net.minecraft.block.material.Material;
@@ -58,7 +58,7 @@ public class BlockBasicOre extends BlockBasic {
 		int i = 0;
 		Random rand = Helper.getRand(world);
         
-		if (this == ModuleItems.ORE_SALT)
+		if (this == ModuleMaterials.ORE_SALT)
 		{
 			i += MathHelper.getInt(rand, 0, 2);
 		}
