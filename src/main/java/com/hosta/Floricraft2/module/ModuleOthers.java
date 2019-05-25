@@ -17,45 +17,49 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ModuleOthers implements IModule {
-	
-	//Color
-	public static final int COLOR_FLORIC = 0xFFDAFF;
-	public static final int COLOR_TWINKLE = 0xFFEDFF;
 
-	//Tab
-	public static final CreativeTabs TAB_FLORICRAFT = new CreativeTabs("floricraft2")
-    {
-        @SideOnly(Side.CLIENT)
-        public ItemStack getTabIconItem() {return new ItemStack(ModuleFlowering.CUT_FLOWER, 1, 12);}
-    };
-	
-	//Enchantment
-	public static final Enchantment ENCHANT_FLORIC = new EnchantmentFloric("floric", Enchantment.Rarity.VERY_RARE, EnumEnchantmentType.WEAPON, new EntityEquipmentSlot[] {EntityEquipmentSlot.MAINHAND});
-	
-	//Biome
-	//public static final Biome BIOME_ROSE_LAND;
-	//public static final Biome BIOME_TULIP_LAND;
-	
-	//Network
-	public static final SimpleNetworkWrapper NETWORK_PARTICLE = NetworkRegistry.INSTANCE.newSimpleChannel(Reference.MOD_ID_SHORT + "." + "part");
-		
-	//Entity
-	public static final int THROWING_ROSE = 0;
-	
-	//Advancement
-	
+	// Color
+	public static final int						COLOR_FLORIC		= 0xFFDAFF;
+	public static final int						COLOR_TWINKLE		= 0xFFEDFF;
+
+	// Tab
+	public static final CreativeTabs			TAB_FLORICRAFT		= new CreativeTabs("floricraft2")
+																	{
+
+																		@SideOnly(Side.CLIENT)
+																		public ItemStack getTabIconItem()
+																		{
+																			return new ItemStack(ModuleFlowering.CUT_FLOWER, 1, 12);
+																		}
+																	};
+
+	// Enchantment
+	public static final Enchantment				ENCHANT_FLORIC		= new EnchantmentFloric("floric", Enchantment.Rarity.VERY_RARE, EnumEnchantmentType.WEAPON, new EntityEquipmentSlot[] { EntityEquipmentSlot.MAINHAND });
+
+	// Biome
+	// public static final Biome BIOME_ROSE_LAND;
+	// public static final Biome BIOME_TULIP_LAND;
+
+	// Network
+	public static final SimpleNetworkWrapper	NETWORK_PARTICLE	= NetworkRegistry.INSTANCE.newSimpleChannel(Reference.MOD_ID_SHORT + "." + "part");
+
+	// Entity
+	public static final int						THROWING_ROSE		= 0;
+
+	// Advancement
+
 	@Override
 	public void preInit()
 	{
 		NETWORK_PARTICLE.registerMessage(PacketNBTParticleHandler.class, PacketNBTParticle.class, 0, Side.CLIENT);
 	}
-	
+
 	@Override
 	public void registerEnchantments()
 	{
 		register(ENCHANT_FLORIC);
 	}
-	
+
 	@Override
 	public void registerRecipes()
 	{

@@ -12,31 +12,31 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.EnumPlantType;
 
 public class BlockBasicCrops extends BlockCrops {
-	
+
 	public BlockBasicCrops(String unlocalizedName)
 	{
 		super();
 		this.setUnlocalizedName(unlocalizedName);
 	}
-	
+
 	@Override
 	public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos)
 	{
 		return EnumPlantType.Crop;
 	}
-	
+
 	@Override
 	protected Item getSeed()
 	{
 		return this == ModuleCrops.CROP_HEMP ? ModuleCrops.SEED_HEMP : super.getSeed();
 	}
-	
+
 	@Override
 	protected Item getCrop()
 	{
 		return this == ModuleCrops.CROP_HEMP ? ModuleCrops.HEMP_YARN : super.getCrop();
 	}
-	
+
 	@Override
 	public int quantityDropped(IBlockState state, int fortune, Random random)
 	{

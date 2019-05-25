@@ -15,13 +15,13 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public class Floricraft2 {
 
 	@Mod.Instance(Reference.MOD_ID)
-    public static Floricraft2 fc;
-	
+	public static Floricraft2		fc;
+
 	@SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
-	public static CommonProxy proxy;
-	
-	public static ModuleFloricraft2 BASE = new ModuleFloricraft2();
-	
+	public static CommonProxy		proxy;
+
+	public static ModuleFloricraft2	BASE	= new ModuleFloricraft2();
+
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
@@ -29,13 +29,13 @@ public class Floricraft2 {
 		BASE.preinit();
 		proxy.registerEvents();
 	}
-		
+
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
 		BASE.Init();
 	}
-	
+
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{

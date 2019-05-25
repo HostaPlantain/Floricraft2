@@ -10,19 +10,25 @@ import net.minecraftforge.fml.common.Loader;
 
 public class ModedInit {
 
-	public static boolean isBaublesLoaded;
-	//public static boolean isBotaniaLoaded;
-	public static boolean isThaumLoaded;
-	public static boolean isTiCLoaded;
-	//public static boolean isJEILoaded;
-	
+	public static boolean	isBaublesLoaded;
+	// public static boolean isBotaniaLoaded;
+	public static boolean	isThaumLoaded;
+	public static boolean	isTiCLoaded;
+	// public static boolean isJEILoaded;
+
 	public static void load(ModuleFloricraft2 base)
 	{
 		isBaublesLoaded = Loader.isModLoaded("baubles");
-		if (isBaublesLoaded) {base.register((IModule)new ModuleBaubles());}
-		
+		if (isBaublesLoaded)
+		{
+			base.register((IModule) new ModuleBaubles());
+		}
+
 		isThaumLoaded = Loader.isModLoaded("thaumcraft");
-		if (isThaumLoaded) {base.register((IModule)new ModuleFloralia());}
+		if (isThaumLoaded)
+		{
+			base.register((IModule) new ModuleFloralia());
+		}
 
 		isTiCLoaded = Loader.isModLoaded("tconstruct");
 		if (isTiCLoaded)

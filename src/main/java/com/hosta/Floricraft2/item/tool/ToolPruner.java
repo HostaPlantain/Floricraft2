@@ -5,20 +5,20 @@ import com.hosta.Floricraft2.module.ModuleOthers;
 import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
 
-public class ToolPruner extends ItemShears{
-	
+public class ToolPruner extends ItemShears {
+
 	public ToolPruner(String unlocalizedName)
 	{
 		this.setUnlocalizedName(unlocalizedName).setCreativeTab(ModuleOthers.TAB_FLORICRAFT);
 		this.canRepair = false;
 	}
-	
+
 	@Override
 	public boolean hasContainerItem(ItemStack stack)
 	{
 		return true;
 	}
-	
+
 	@Override
 	public ItemStack getContainerItem(ItemStack itemStack)
 	{

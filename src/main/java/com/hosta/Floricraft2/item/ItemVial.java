@@ -26,13 +26,13 @@ public class ItemVial extends ItemGlassBottle {
 		super();
 		this.setUnlocalizedName(name).setCreativeTab(ModuleOthers.TAB_FLORICRAFT);
 	}
-	
+
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
 	{
 		ItemStack itemstack = playerIn.getHeldItem(handIn);
 		RayTraceResult trace = this.rayTrace(worldIn, playerIn, true);
-		
+
 		if (trace == null)
 		{
 			return new ActionResult<ItemStack>(EnumActionResult.PASS, itemstack);
@@ -41,7 +41,7 @@ public class ItemVial extends ItemGlassBottle {
 		{
 			BlockPos blockpos = trace.getBlockPos();
 			if (worldIn.getBlockState(blockpos).getMaterial() == Material.WATER)
-        	{
+			{
 				if (!worldIn.isDaytime() && worldIn.getCurrentMoonPhaseFactor() >= 0.9f && blockpos == worldIn.getTopSolidOrLiquidBlock(blockpos))
 				{
 					for (EntityItem entity : worldIn.getEntitiesWithinAABB(EntityItem.class, new AxisAlignedBB(blockpos)))
@@ -58,18 +58,18 @@ public class ItemVial extends ItemGlassBottle {
 							{
 								worldIn.removeEntity(entity);
 							}
-							
+
 							worldIn.playSound(playerIn, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.NEUTRAL, 1.0F, 1.0F);
 							return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, this.turnBottleIntoItem(itemstack, playerIn, new ItemStack(ModuleFragrances.VIAL_MOON)));
 						}
 					}
 				}
-				
+
 				worldIn.playSound(playerIn, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.NEUTRAL, 1.0F, 1.0F);
 				return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, this.turnBottleIntoItem(itemstack, playerIn, new ItemStack(ModuleFragrances.VIAL_WATER)));
 			}
 		}
-		
+
 		return new ActionResult<ItemStack>(EnumActionResult.PASS, itemstack);
 	}
 }

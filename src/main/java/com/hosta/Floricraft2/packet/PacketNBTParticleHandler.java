@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class PacketNBTParticleHandler implements IMessageHandler<PacketNBTParticle, PacketNBTParticle>{
+public class PacketNBTParticleHandler implements IMessageHandler<PacketNBTParticle, PacketNBTParticle> {
 
 	@SideOnly(Side.CLIENT)
 	@Override
@@ -18,7 +18,7 @@ public class PacketNBTParticleHandler implements IMessageHandler<PacketNBTPartic
 		NBTTagCompound nbt = message.nbt;
 		Vec3d pos = new Vec3d(nbt.getDouble("x"), nbt.getDouble("y"), nbt.getDouble("z"));
 		Floricraft2.proxy.spawnParticleFloric(null, pos, nbt.getInteger("meta"), nbt.getBoolean("genByBlock"), nbt.getInteger("number"));
-		
+
 		return null;
 	}
 }

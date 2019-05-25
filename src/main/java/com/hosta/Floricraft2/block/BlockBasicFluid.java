@@ -5,8 +5,8 @@ import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fluids.Fluid;
 
 public class BlockBasicFluid extends BlockFluidClassic {
-	
-	public BlockBasicFluid (String name, Fluid fluid, Material material)
+
+	public BlockBasicFluid(String name, Fluid fluid, Material material)
 	{
 		super(fluid, material);
 		this.setUnlocalizedName(name);

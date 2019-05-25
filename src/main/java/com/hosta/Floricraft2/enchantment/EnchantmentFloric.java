@@ -20,27 +20,27 @@ public class EnchantmentFloric extends EnchantmentBasic {
 	@Override
 	public int getMinEnchantability(int enchantmentLevel)
 	{
-        return enchantmentLevel * 15 + 5;
+		return enchantmentLevel * 15 + 5;
 	}
-	
+
 	@Override
 	public int getMaxEnchantability(int enchantmentLevel)
 	{
-        return this.getMinEnchantability(enchantmentLevel) + 50;
+		return this.getMinEnchantability(enchantmentLevel) + 50;
 	}
-	
+
 	@Override
 	public int getMaxLevel()
 	{
 		return 3;
 	}
-	
+
 	@Override
 	public void onEntityDamaged(EntityLivingBase user, Entity target, int level)
 	{
 		Vec3d pos = target.getPositionEyes(1.0F);
 		Floricraft2.proxy.spawnParticleFloric(target.world, pos, 12, false, 4);
-		
+
 		user.addPotionEffect(new PotionEffect(ModuleFragrances.POTION_FLORIC, 50, level - 1, false, false));
 	}
 }

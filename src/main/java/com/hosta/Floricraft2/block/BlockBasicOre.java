@@ -15,8 +15,12 @@ import net.minecraft.world.IBlockAccess;
 public class BlockBasicOre extends BlockBasic {
 
 	private final Item ITEM_DROP;
-	
-	public BlockBasicOre(String name)	{this(name, null);}
+
+	public BlockBasicOre(String name)
+	{
+		this(name, null);
+	}
+
 	public BlockBasicOre(String name, Item drop)
 	{
 		super(name, Material.ROCK);
@@ -29,7 +33,7 @@ public class BlockBasicOre extends BlockBasic {
 	{
 		return ITEM_DROP;
 	}
-	
+
 	@Override
 	public int quantityDroppedWithBonus(int fortune, Random random)
 	{
@@ -40,7 +44,7 @@ public class BlockBasicOre extends BlockBasic {
 		}
 		return this.quantityDropped(random) * i;
 	}
-	
+
 	@Override
 	public int quantityDropped(Random random)
 	{
@@ -51,18 +55,18 @@ public class BlockBasicOre extends BlockBasic {
 		}
 		return i;
 	}
-	
+
 	@Override
 	public int getExpDrop(IBlockState state, IBlockAccess world, BlockPos pos, int fortune)
 	{
 		int i = 0;
 		Random rand = Helper.getRand(world);
-        
+
 		if (this == ModuleMaterials.ORE_SALT)
 		{
 			i += MathHelper.getInt(rand, 0, 2);
 		}
-		
+
 		return i;
 	}
 }

@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 public class CommonProxy {
 
-	public void registerEvents() { }
+	public void registerEvents() {}
 
 	public void spawnParticleFloric(World world, Vec3d pos, int meta, boolean genByBlock, int number)
 	{

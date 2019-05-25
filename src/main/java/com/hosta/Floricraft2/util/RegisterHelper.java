@@ -21,6 +21,8 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.brewing.BrewingRecipe;
+import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -34,27 +36,36 @@ public class RegisterHelper {
 	{
 		blocks.forEach(block -> registerBlock(registry, block));
 	}
-	
+
 	public static void registerItems(IForgeRegistry<Item> register, List<Item> items)
 	{
 		items.forEach(item -> registerItem(register, item));
 	}
-	
+
 	public static void registerItemBlocks(IForgeRegistry<Item> register, List<Block> blocks)
 	{
 		for (Block block : blocks)
 		{
-			if (block instanceof IMetaName)	{registerItem(register, new ItemBlockMeta(block));}
-			else if (block instanceof BlockBasicCrops || block instanceof BlockBasicFluid)	{	}
-			else	{registerItem(register, new ItemBlock(block));}
+			if (block instanceof IMetaName)
+			{
+				registerItem(register, new ItemBlockMeta(block));
+			}
+			else if (block instanceof BlockBasicCrops || block instanceof BlockBasicFluid)
+			{
+				
+			}
+			else
+			{
+				registerItem(register, new ItemBlock(block));
+			}
 		}
 	}
-	
+
 	public static void registerPotions(IForgeRegistry<Potion> registry, List<Potion> potions)
 	{
 		potions.forEach(potion -> registerPotion(registry, potion));
 	}
-	
+
 	public static void registerEnchantments(IForgeRegistry<Enchantment> registry, List<Enchantment> enchantments)
 	{
 		enchantments.forEach(enchantment -> registerEnchantment(registry, enchantment));
@@ -64,13 +75,13 @@ public class RegisterHelper {
 	{
 		EntityRegistry.registerModEntity(getResourceLocation(entityName), entityClass, entityName, id, Floricraft2.fc, 64, 1, false);
 	}
-	
-	/**WIP*/
+
+	/** WIP */
 	public static void registerEntities(IForgeRegistry<EntityEntry> registry, List<EntityEntry> entities)
 	{
 		entities.forEach(entity -> registerEntity(registry, entity));
 	}
-	
+
 	public static void registerRecipes(IForgeRegistry<IRecipe> registry, List<IRecipe> recipes)
 	{
 		HashMap<Item, Integer> items = new HashMap<Item, Integer>();
@@ -91,12 +102,17 @@ public class RegisterHelper {
 		}
 	}
 
+	public static void registerBrewingRecipe(List<BrewingRecipe> recipes)
+	{
+		recipes.forEach(recipe -> BrewingRecipeRegistry.addRecipe(recipe));
+	}
+
 	@SideOnly(Side.CLIENT)
 	public static void registerItemRenders(List<Item> items)
 	{
 		items.forEach(item -> registerItemRender(item));
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	public static void registerItemBlockRenders(List<Block> blocks)
 	{
@@ -105,17 +121,17 @@ public class RegisterHelper {
 
 	public static ResourceLocation getResourceLocation(String path)
 	{
-		return path == null ? (ResourceLocation)null : new ResourceLocation(Reference.MOD_ID, path);
+		return path == null ? (ResourceLocation) null : new ResourceLocation(Reference.MOD_ID, path);
 	}
-	
-	//-----Private Use Only-----//
-	
+
+	// -----Private Use Only-----//
+
 	private static void registerBlock(IForgeRegistry<Block> registry, Block block)
 	{
 		block.setRegistryName(getResourceLocation(block.getUnlocalizedName().substring(5)));
 		register(registry, block);
 	}
-	
+
 	private static void registerItem(IForgeRegistry<Item> registry, Item item)
 	{
 		item.setRegistryName(getResourceLocation(item.getUnlocalizedName().substring(5)));
@@ -139,7 +155,7 @@ public class RegisterHelper {
 		entity.setRegistryName(getResourceLocation(entity.getName()));
 		register(registry, entity);
 	}
-	
+
 	private static void registerRecipe(IForgeRegistry<IRecipe> registry, IRecipe recipe, String id)
 	{
 		recipe.setRegistryName(getResourceLocation(id));
@@ -149,8 +165,11 @@ public class RegisterHelper {
 	@SideOnly(Side.CLIENT)
 	private static void registerItemRender(Item item)
 	{
-		if (item == null || item == Items.AIR) {return;}
-		
+		if (item == null || item == Items.AIR)
+		{
+			return;
+		}
+
 		if (item instanceof IMetaName)
 		{
 			IMetaName iMeta = (IMetaName) item;
@@ -164,26 +183,20 @@ public class RegisterHelper {
 			ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(Reference.MOD_ID + ":" + item.getUnlocalizedName().substring(5), "inventory"));
 		}
 	}
-	
+
 	private static <V extends IForgeRegistryEntry<V>> void register(IForgeRegistry<V> registry, V object)
 	{
 		registry.register(object);
 	}
-	
-	
+
 	/**
-	static void registerWithTileEntity(Block block, Class<? extends TileEntity> tileEntityClass)
-	{
-		GameRegistry.registerTileEntity(tileEntityClass, block.getUnlocalizedName());
-	}
-	protected static void registerBiome(IForgeRegistry<Biome> registry, Biome biome, String name)
-	{
-		biome.setRegistryName(getResourceLocation(name));
-		register(registry, biome);
-	}
-	protected static void registerBrewingRecipe(ItemStack input, ItemStack ingredient, ItemStack output)
-	{
-		BrewingRecipeRegistry.addRecipe(input, ingredient, output);
-	}
-	**/
+	 * static void registerWithTileEntity(Block block, Class<? extends TileEntity>
+	 * tileEntityClass) { GameRegistry.registerTileEntity(tileEntityClass,
+	 * block.getUnlocalizedName()); } protected static void
+	 * registerBiome(IForgeRegistry<Biome> registry, Biome biome, String name) {
+	 * biome.setRegistryName(getResourceLocation(name)); register(registry, biome);
+	 * } protected static void registerBrewingRecipe(ItemStack input, ItemStack
+	 * ingredient, ItemStack output) { BrewingRecipeRegistry.addRecipe(input,
+	 * ingredient, output); }
+	 **/
 }

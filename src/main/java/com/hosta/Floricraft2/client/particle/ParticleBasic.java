@@ -12,8 +12,8 @@ public class ParticleBasic extends Particle {
 	{
 		super(worldIn, posXIn, posYIn, posZIn);
 	}
-	
-    public ParticleBasic(World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn)
+
+	public ParticleBasic(World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn)
 	{
 		super(worldIn, xCoordIn, yCoordIn, zCoordIn, xSpeedIn, ySpeedIn, zSpeedIn);
 	}

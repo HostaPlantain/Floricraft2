@@ -9,7 +9,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 public class ItemBasicSeeds extends ItemSeeds {
 
-	public ItemBasicSeeds(String unlocalizedName,Block crops, Block soil)
+	public ItemBasicSeeds(String unlocalizedName, Block crops, Block soil)
 	{
 		super(crops, soil);
 		this.setUnlocalizedName(unlocalizedName).setCreativeTab(ModuleOthers.TAB_FLORICRAFT);

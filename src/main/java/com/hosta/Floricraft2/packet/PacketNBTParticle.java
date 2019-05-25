@@ -4,10 +4,7 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class PacketNBTParticle extends PacketNBT {
 
-	public PacketNBTParticle() { }
+	public PacketNBTParticle() {}
 
-    public PacketNBTParticle(NBTTagCompound nbt)
-    {
-    	super(nbt);
-    }
+	public PacketNBTParticle(NBTTagCompound nbt) {super(nbt);}
 }

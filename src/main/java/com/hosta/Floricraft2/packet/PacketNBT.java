@@ -7,11 +7,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
-public class PacketNBT implements IMessage{
+public class PacketNBT implements IMessage {
 
 	public NBTTagCompound nbt;
 
-	public PacketNBT() { }
+	public PacketNBT() {}
 
 	public PacketNBT(NBTTagCompound nbt)
 	{

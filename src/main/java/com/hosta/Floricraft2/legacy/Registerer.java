@@ -19,13 +19,13 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class Registerer {
-	
-	//Register
+
+	// Register
 	public static void register(Item item)
 	{
 		Registerer.registerGameRegistry(item, new ResourceLocation(Reference.MOD_ID, item.getUnlocalizedName().substring(5)));
 	}
-	
+
 	public static void register(Block block)
 	{
 		Registerer.registerGameRegistry(block);
@@ -49,7 +49,7 @@ public class Registerer {
 		Registerer.registerWithMeta(block);
 		GameRegistry.registerTileEntity(tileEntityClass, block.getUnlocalizedName());
 	}
-	
+
 	public static void registerBlockWithOutItem(Block block)
 	{
 		Registerer.registerGameRegistry(block);
@@ -66,7 +66,7 @@ public class Registerer {
 		item.setRegistryName(name);
 		ForgeRegistries.ITEMS.register(item);
 	}
-	
+
 	public static void register(Potion potion)
 	{
 		potion.setRegistryName(new ResourceLocation(Reference.MOD_ID, potion.getName()));

@@ -14,7 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.world.World;
 
-public class CharmSachet extends ToolSachet implements IBauble{
+public class CharmSachet extends ToolSachet implements IBauble {
 
 	public CharmSachet(String unlocalizedName, Potion potion)
 	{
@@ -22,25 +22,25 @@ public class CharmSachet extends ToolSachet implements IBauble{
 	}
 
 	@Override
-	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) { }
-	
+	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {}
+
 	@Override
 	public BaubleType getBaubleType(ItemStack itemstack)
 	{
 		return BaubleType.CHARM;
 	}
-	
+
 	@Override
 	public void onWornTick(ItemStack itemstack, EntityLivingBase playerIn)
 	{
 		if (playerIn instanceof EntityPlayer)
 		{
-			EntityPlayer player = (EntityPlayer)playerIn;
+			EntityPlayer player = (EntityPlayer) playerIn;
 			super.addEffect(player);
 			this.damageItem(itemstack, player, this.getBaubleType(itemstack).getValidSlots()[0]);
 		}
 	}
-	
+
 	@Override
 	protected void damageItem(ItemStack stack, EntityPlayer player, int itemSlot)
 	{
@@ -57,7 +57,7 @@ public class CharmSachet extends ToolSachet implements IBauble{
 
 			ItemStack sachetSac = new ItemStack(ModuleFragrances.SACHET_SAC);
 			sachetSac.setTagCompound(stack.getTagCompound());
-			
+
 			if (BaublesApi.getBaubles(player).getStackInSlot(itemSlot) == stack)
 			{
 				BaublesApi.getBaubles(player).removeStackFromSlot(itemSlot);

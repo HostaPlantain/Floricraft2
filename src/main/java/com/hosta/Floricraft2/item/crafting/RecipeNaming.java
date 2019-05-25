@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.oredict.DyeUtils;
 
 public class RecipeNaming extends RecipeBasic {
-	
+
 	public RecipeNaming(ResourceLocation group)
 	{
 		super(group);
@@ -32,7 +32,7 @@ public class RecipeNaming extends RecipeBasic {
 	public boolean matches(@Nonnull InventoryCrafting inv, @Nonnull World worldIn)
 	{
 		List<ItemStack> inputs = new ArrayList<ItemStack>();
-		
+
 		for (int i = 0; i < inv.getSizeInventory(); i++)
 		{
 			ItemStack itemstack = inv.getStackInSlot(i);
@@ -41,21 +41,21 @@ public class RecipeNaming extends RecipeBasic {
 				inputs.add(itemstack);
 			}
 		}
-		
+
 		if (inputs.size() > 3)
 		{
 			return false;
 		}
-		
-		return !this.getResult(inputs).isEmpty();	
+
+		return !this.getResult(inputs).isEmpty();
 	}
-	
+
 	@Override
 	@Nonnull
 	public ItemStack getCraftingResult(InventoryCrafting inv)
 	{
 		List<ItemStack> inputs = new ArrayList<ItemStack>();
-		
+
 		for (int i = 0; i < inv.getSizeInventory(); i++)
 		{
 			ItemStack itemstack = inv.getStackInSlot(i);
@@ -64,16 +64,16 @@ public class RecipeNaming extends RecipeBasic {
 				inputs.add(itemstack);
 			}
 		}
-		
+
 		return this.getResult(inputs);
 	}
-	
+
 	private ItemStack getResult(List<ItemStack> inputs)
 	{
 		String name = null;
 		EnumDyeColor color = EnumDyeColor.WHITE;
 		ItemStack output = ItemStack.EMPTY;
-		
+
 		for (ItemStack itemIn : inputs)
 		{
 			if (itemIn.getItem() == Items.NAME_TAG & itemIn.hasDisplayName())
@@ -94,7 +94,7 @@ public class RecipeNaming extends RecipeBasic {
 				output.setCount(1);
 			}
 		}
-		
+
 		if (!output.isEmpty() && name != null)
 		{
 			return output.setStackDisplayName(Helper.getCode(color) + name);
@@ -104,7 +104,7 @@ public class RecipeNaming extends RecipeBasic {
 			return ItemStack.EMPTY;
 		}
 	}
-	
+
 	@Override
 	public boolean isDynamic()
 	{

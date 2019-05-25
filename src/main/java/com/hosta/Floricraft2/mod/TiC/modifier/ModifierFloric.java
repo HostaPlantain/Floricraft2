@@ -18,7 +18,7 @@ public class ModifierFloric extends ModifierTrait {
 	{
 		super(identifier, color, maxLevel, countPerLevel);
 	}
-	
+
 	@Override
 	public void afterHit(ItemStack tool, EntityLivingBase player, EntityLivingBase target, float damageDealt, boolean wasCritical, boolean wasHit)
 	{
@@ -26,10 +26,10 @@ public class ModifierFloric extends ModifierTrait {
 		{
 			Vec3d pos = target.getPositionEyes(1.0F);
 			Floricraft2.proxy.spawnParticleFloric(target.world, pos, 12, false, 8);
-			
+
 			NBTTagCompound tag = TinkerUtil.getModifierTag(tool, identifier);
 			ModifierNBT data = ModifierNBT.readTag(tag);
-	    	player.addPotionEffect(new PotionEffect(ModuleFragrances.POTION_FLORIC, wasCritical ? 200 : 100, data.level - 1, false, false));
+			player.addPotionEffect(new PotionEffect(ModuleFragrances.POTION_FLORIC, wasCritical ? 200 : 100, data.level - 1, false, false));
 		}
 	}
 }

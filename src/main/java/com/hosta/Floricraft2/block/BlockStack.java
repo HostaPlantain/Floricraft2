@@ -16,10 +16,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockStack  extends BlockBasicHorizontal{
-	
-	protected static final AxisAlignedBB STACK_AABB[] =new AxisAlignedBB[] {new AxisAlignedBB(0.2D, 0.1D, 0.9375D, 0.8D, 0.9D, 1.0D), new AxisAlignedBB(0.0D, 0.1D, 0.2D, 0.0625D, 0.9D, 0.8D), new AxisAlignedBB(0.2D, 0.1D, 0.0D, 0.8D, 0.9D, 0.0625D), new AxisAlignedBB(0.9375D, 0.1D, 0.2D, 1.0D, 0.9D, 0.8D)};
-	
+public class BlockStack extends BlockBasicHorizontal {
+
+	protected static final AxisAlignedBB STACK_AABB[] = new AxisAlignedBB[] {
+			new AxisAlignedBB(0.2D, 0.1D, 0.9375D, 0.8D, 0.9D, 1.0D),
+			new AxisAlignedBB(0.0D, 0.1D, 0.2D, 0.0625D, 0.9D, 0.8D),
+			new AxisAlignedBB(0.2D, 0.1D, 0.0D, 0.8D, 0.9D, 0.0625D),
+			new AxisAlignedBB(0.9375D, 0.1D, 0.2D, 1.0D, 0.9D, 0.8D) };
+
 	public BlockStack(String name)
 	{
 		super(name, Material.LEAVES);
@@ -28,89 +32,89 @@ public class BlockStack  extends BlockBasicHorizontal{
 		this.setSoundType(SoundType.PLANT);
 	}
 
-    @Override
-    public boolean isOpaqueCube(IBlockState state)
-    {
-    	return false;
-    }
-    
-    @Override
-    public boolean isFullCube(IBlockState state)
-    {
-    	return false;
-    }
-    
-    @Override
-    public BlockRenderLayer getBlockLayer()
-    {
-    	return BlockRenderLayer.CUTOUT;
-    }
+	@Override
+	public boolean isOpaqueCube(IBlockState state)
+	{
+		return false;
+	}
 
-    @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
-    {
-        switch (state.getValue(FACING))
-        {
-        	case SOUTH:
-        	default:
-            	return STACK_AABB[0];
-        	case WEST:
-            	return STACK_AABB[1];
-            case NORTH:
-            	return STACK_AABB[2];
-            case EAST:
-            	return STACK_AABB[3];
-        }
-    }
+	@Override
+	public boolean isFullCube(IBlockState state)
+	{
+		return false;
+	}
 
-    @Nullable
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
-    {
-        return NULL_AABB;
-    }
+	@Override
+	public BlockRenderLayer getBlockLayer()
+	{
+		return BlockRenderLayer.CUTOUT;
+	}
 
-    @Override
-    protected BlockStateContainer createBlockState()
-    {
-        return new BlockStateContainer(this, new IProperty[] {FACING});
-    }
-    
-    @Override
-    public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side)
-    {
-    	if (side.getAxis().isHorizontal())
-    	{
-    		return this.canAttachStackOn(worldIn.getBlockState(pos.offset(side.getOpposite())));
-    	}
-    	else
-        {
-    		return false;
-        }
-    }
-    
-    @Override
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
-    {
-    	this.checkAndDropBlock(worldIn, pos, state);
-    }
-    
-    protected void checkAndDropBlock(World worldIn, BlockPos pos, IBlockState state)
-    {
-        if (!this.canBlockStay(worldIn, pos, state))
-        {
-            this.dropBlockAsItem(worldIn, pos, state, 0);
-            worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
-        }
-    }
-    
-    protected boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
-    {
-    	IBlockState stateOn = worldIn.getBlockState(pos.offset(state.getValue(FACING)));
-    	return this.canAttachStackOn(stateOn);
-    }
+	@Override
+	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+	{
+		switch (state.getValue(FACING))
+		{
+			case SOUTH:
+			default:
+				return STACK_AABB[0];
+			case WEST:
+				return STACK_AABB[1];
+			case NORTH:
+				return STACK_AABB[2];
+			case EAST:
+				return STACK_AABB[3];
+		}
+	}
 
-    protected boolean canAttachStackOn(IBlockState state)
-    {
-        return state.isFullCube() && state.getMaterial().blocksMovement();
-    }
+	@Nullable
+	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
+	{
+		return NULL_AABB;
+	}
+
+	@Override
+	protected BlockStateContainer createBlockState()
+	{
+		return new BlockStateContainer(this, new IProperty[] { FACING });
+	}
+
+	@Override
+	public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side)
+	{
+		if (side.getAxis().isHorizontal())
+		{
+			return this.canAttachStackOn(worldIn.getBlockState(pos.offset(side.getOpposite())));
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	@Override
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
+	{
+		this.checkAndDropBlock(worldIn, pos, state);
+	}
+
+	protected void checkAndDropBlock(World worldIn, BlockPos pos, IBlockState state)
+	{
+		if (!this.canBlockStay(worldIn, pos, state))
+		{
+			this.dropBlockAsItem(worldIn, pos, state, 0);
+			worldIn.setBlockState(pos, Blocks.AIR.getDefaultState(), 3);
+		}
+	}
+
+	protected boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
+	{
+		IBlockState stateOn = worldIn.getBlockState(pos.offset(state.getValue(FACING)));
+		return this.canAttachStackOn(stateOn);
+	}
+
+	protected boolean canAttachStackOn(IBlockState state)
+	{
+		return state.isFullCube() && state.getMaterial().blocksMovement();
+	}
 }

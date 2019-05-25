@@ -11,17 +11,17 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemBasicMeta extends ItemBasic implements IMetaName {
 
 	private final String[] SUB_ID;
-	
+
 	public ItemBasicMeta(String name, String[] subName)
 	{
 		super(name);
 		this.SUB_ID = subName;
-        this.setMaxDamage(0);
+		this.setMaxDamage(0);
 		this.setHasSubtypes(true);
 	}
-	
+
 	@Override
-    @SideOnly(Side.CLIENT)
+	@SideOnly(Side.CLIENT)
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items)
 	{
 		if (tab == ModuleOthers.TAB_FLORICRAFT)
@@ -32,12 +32,12 @@ public class ItemBasicMeta extends ItemBasic implements IMetaName {
 			}
 		}
 	}
-	
+
 	@Override
 	public String getUnlocalizedName(ItemStack stack)
 	{
 		int i = stack.getMetadata() % this.countSubItems();
-        return super.getUnlocalizedName() + "." + this.getSubName(i);
+		return super.getUnlocalizedName() + "." + this.getSubName(i);
 	}
 
 	@Override

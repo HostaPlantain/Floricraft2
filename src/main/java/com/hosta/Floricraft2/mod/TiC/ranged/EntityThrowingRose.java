@@ -20,7 +20,7 @@ public class EntityThrowingRose extends EntityProjectileBase {
 
 	public EntityThrowingRose(World world, double d, double d1, double d2)
 	{
-	    super(world, d, d1, d2);
+		super(world, d, d1, d2);
 	}
 
 	public EntityThrowingRose(World world, EntityPlayer player, float speed, float inaccuracy, ItemStack stack, ItemStack launchingStack)
@@ -32,43 +32,43 @@ public class EntityThrowingRose extends EntityProjectileBase {
 	{
 		this(world);
 
-	    this.shootingEntity = player;
-	    pickupStatus = player.isCreative() ? PickupStatus.CREATIVE_ONLY : PickupStatus.ALLOWED;
+		this.shootingEntity = player;
+		pickupStatus = player.isCreative() ? PickupStatus.CREATIVE_ONLY : PickupStatus.ALLOWED;
 
-	    this.setLocationAndAngles(player.posX, player.posY + player.getEyeHeight(), player.posZ, player.rotationYaw + yaw, player.rotationPitch);
-	    this.setPosition(this.posX, this.posY, this.posZ);
-	    
-	    Matrix mat = new Matrix(-MathHelper.sin(Matrix.radian(yaw)), 0, MathHelper.cos(Matrix.radian(yaw)));
-	    mat.rotate(Matrix.radian(player.rotationYaw), Matrix.radian(player.rotationPitch));
-	    
-	    this.motionX = mat.x;
-	    this.motionZ = mat.z;
-	    this.motionY = mat.y;
-	    this.shoot(this.motionX, this.motionY, this.motionZ, speed, inaccuracy);
+		this.setLocationAndAngles(player.posX, player.posY + player.getEyeHeight(), player.posZ, player.rotationYaw + yaw, player.rotationPitch);
+		this.setPosition(this.posX, this.posY, this.posZ);
 
-        this.rotationYaw = -player.rotationYaw;
-        this.prevRotationYaw = this.rotationYaw;
-	    
-	    tinkerProjectile.setItemStack(stack);
-	    tinkerProjectile.setLaunchingStack(launchingStack);
-	    tinkerProjectile.setPower(1f);
+		Matrix mat = new Matrix(-MathHelper.sin(Matrix.radian(yaw)), 0, MathHelper.cos(Matrix.radian(yaw)));
+		mat.rotate(Matrix.radian(player.rotationYaw), Matrix.radian(player.rotationPitch));
 
-	    for(IProjectileTrait trait : tinkerProjectile.getProjectileTraits())
-	    {
-	      trait.onLaunch(this, world, player);
-	    }
+		this.motionX = mat.x;
+		this.motionZ = mat.z;
+		this.motionY = mat.y;
+		this.shoot(this.motionX, this.motionY, this.motionZ, speed, inaccuracy);
+
+		this.rotationYaw = -player.rotationYaw;
+		this.prevRotationYaw = this.rotationYaw;
+
+		tinkerProjectile.setItemStack(stack);
+		tinkerProjectile.setLaunchingStack(launchingStack);
+		tinkerProjectile.setPower(1f);
+
+		for (IProjectileTrait trait : tinkerProjectile.getProjectileTraits())
+		{
+			trait.onLaunch(this, world, player);
+		}
 	}
 
 	@Override
 	protected void init()
 	{
 		setSize(0.3f, 0.1f);
-	    this.bounceOnNoDamage = false;
+		this.bounceOnNoDamage = false;
 	}
-	
+
 	@Override
-	protected void playHitEntitySound()	{ }
-	
+	protected void playHitEntitySound() {}
+
 	@Override
 	protected void playHitBlockSound(float speed, IBlockState state)
 	{
