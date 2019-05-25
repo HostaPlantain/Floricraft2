@@ -7,7 +7,7 @@ import com.hosta.Floricraft2.mod.TiC.modifier.TraitTwinkle;
 import com.hosta.Floricraft2.mod.TiC.ranged.EntityThrowingRose;
 import com.hosta.Floricraft2.mod.TiC.ranged.ThrowingRose;
 import com.hosta.Floricraft2.module.IModule;
-import com.hosta.Floricraft2.module.ModuleFlowering;
+import com.hosta.Floricraft2.module.ModuleFlower;
 import com.hosta.Floricraft2.module.ModuleOthers;
 import com.hosta.Floricraft2.util.RegisterHelper;
 
@@ -109,8 +109,8 @@ public class ModuleFloriconstract implements IModule {
 	private void registerModifiers()
 	{
 		modFloric = new ModifierFloric("floric", ModuleOthers.COLOR_FLORIC, 3, 72);
-		modFloric.addItem(new ItemStack(ModuleFlowering.PETAL_RAW, 1, OreDictionary.WILDCARD_VALUE), 1, 1);
-		modFloric.addItem(new ItemStack(ModuleFlowering.PETALS_RAW, 1, OreDictionary.WILDCARD_VALUE), 1, 9);
+		modFloric.addItem(new ItemStack(ModuleFlower.PETAL_RAW, 1, OreDictionary.WILDCARD_VALUE), 1, 1);
+		modFloric.addItem(new ItemStack(ModuleFlower.PETALS_RAW, 1, OreDictionary.WILDCARD_VALUE), 1, 9);
 
 		modTwinkle = new TraitTwinkle("twinkle", ModuleOthers.COLOR_TWINKLE);
 	}
@@ -130,7 +130,7 @@ public class ModuleFloriconstract implements IModule {
 	@Override
 	public void registerRecipes()
 	{
-		for (Block stack : ModuleFlowering.STACK_FLOWER)
+		for (Block stack : ModuleFlower.STACK_FLOWER)
 		{
 			registerDryingRecipes(new ItemStack(stack, 1, 0), new ItemStack(stack, 1, 3), 300);
 		}

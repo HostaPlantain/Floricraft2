@@ -13,22 +13,24 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class ModuleFlowering implements IModule {
+public class ModuleFlower implements IModule {
 
 	public static final String[]	FLOWERS;
 	static 
 	{
 		String[] defaultFlowers = new String[] { "dandelion", "poppy", "blue_orchid", "allium", "azure_bluet", "red_tulip", "orange_tulip", "white_tulip", "pink_tulip", "oxeye_daisy", "sunflower", "lilac", "rose", "peony" };
 		String[] addedFlowers = Config.getAddedFlowers();
+
 		FLOWERS = new String[defaultFlowers.length + addedFlowers.length];
 		System.arraycopy(defaultFlowers, 0, FLOWERS, 0, defaultFlowers.length);
 		System.arraycopy(addedFlowers, 0, FLOWERS, defaultFlowers.length, addedFlowers.length);
 	}
 
 	// Cut Flower
-	public static final Item		CUT_FLOWER		= new ItemBasicMeta("cut_flower", FLOWERS);
+	public static final Item	CUT_FLOWER		= new ItemBasicMeta("cut_flower", FLOWERS);
+	
 	// Stack Flower
-	public static final Block[]		STACK_FLOWER	= new Block[FLOWERS.length];
+	public static final Block[]	STACK_FLOWER	= new Block[FLOWERS.length];
 	static
 	{
 		for (int i = 0; i < STACK_FLOWER.length; i++)
@@ -37,6 +39,7 @@ public class ModuleFlowering implements IModule {
 		}
 	}
 	public static final Block	STACK_DEAD		= new BlockStackDead("stack_dead");
+	
 	// Petal
 	public static final Item	PETAL_RAW		= new ItemBasicMeta("petal_raw", FLOWERS);
 	public static final Item	PETAL_DRY		= new ItemBasicMeta("petal_dry", FLOWERS);
@@ -46,6 +49,7 @@ public class ModuleFlowering implements IModule {
 	public static final Item	PETALS_DRY		= new ItemBasicMeta("petals_dry", FLOWERS);
 	public static final Item	PETALS_SALTY	= new ItemBasicMeta("petals_salty", FLOWERS);
 	public static final Item	PETALS_SUGARED	= new ItemFoodSugared("petals_sugared", FLOWERS, 2, 1.0F);
+	
 	// Torch
 	/*
 	 * public static final Block[] TORCH_FLORIC = new Block[ModuleItems.ALL.length];

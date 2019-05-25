@@ -1,6 +1,6 @@
 package com.hosta.Floricraft2.client.particle;
 
-import com.hosta.Floricraft2.module.ModuleFlowering;
+import com.hosta.Floricraft2.module.ModuleFlower;
 import com.hosta.Floricraft2.world.Wind;
 
 import net.minecraft.block.BlockLiquid;
@@ -33,7 +33,7 @@ public class ParticleFloric extends ParticleBasic {
 
 	public ParticleFloric(World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, int meta, boolean genByBlock)
 	{
-		this(worldIn, xCoordIn, yCoordIn, zCoordIn, Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getParticleIcon(ModuleFlowering.PETAL_RAW, meta), genByBlock);
+		this(worldIn, xCoordIn, yCoordIn, zCoordIn, Minecraft.getMinecraft().getRenderItem().getItemModelMesher().getParticleIcon(ModuleFlower.PETAL_RAW, meta), genByBlock);
 	}
 
 	public ParticleFloric(World worldIn, Vec3d pos, int meta, boolean genByBlock)

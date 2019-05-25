@@ -3,6 +3,8 @@ package com.hosta.Floricraft2.util;
 import java.util.HashMap;
 import java.util.List;
 
+import org.jline.utils.Log;
+
 import com.hosta.Floricraft2.Floricraft2;
 import com.hosta.Floricraft2.Reference;
 import com.hosta.Floricraft2.block.BlockBasicCrops;
@@ -31,6 +33,11 @@ import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
 public class RegisterHelper {
+
+	public static void warn(Object entry)
+	{
+		Log.warn("Too late! Registering has been faled!", entry);
+	}
 
 	public static void registerBlocks(IForgeRegistry<Block> registry, List<Block> blocks)
 	{

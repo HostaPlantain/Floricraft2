@@ -28,7 +28,7 @@ public class ModuleOthers implements IModule {
 			@SideOnly(Side.CLIENT)
 			public ItemStack getTabIconItem()
 			{
-				return new ItemStack(ModuleFlowering.CUT_FLOWER, 1, 12);
+				return new ItemStack(ModuleFlower.CUT_FLOWER, 1, 12);
 			}
 		};
 

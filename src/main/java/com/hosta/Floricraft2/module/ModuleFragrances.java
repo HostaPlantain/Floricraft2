@@ -67,6 +67,9 @@ public class ModuleFragrances implements IModule {
 		}
 	}
 
+	// Potpourri
+	// public static final Block POTPOURRI;
+
 	@Override
 	public void registerItems()
 	{
@@ -94,7 +97,7 @@ public class ModuleFragrances implements IModule {
 
 		register
 		(
-				brewingRecipe(new ItemStack(VIAL_WATER), new ItemStack(ModuleFlowering.PETALS_RAW, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(VIAL_FLOWER))
+				brewingRecipe(new ItemStack(VIAL_WATER), new ItemStack(ModuleFlower.PETALS_RAW, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(VIAL_FLOWER))
 		);
 
 		Item[] anti = new Item[] { Items.ROTTEN_FLESH, Items.BONE, Items.GUNPOWDER, Items.SPIDER_EYE, Items.ENDER_PEARL };

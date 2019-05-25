@@ -12,9 +12,11 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class ModuleCrops implements IModule {
 
-	// Hemp
+	// Crop
 	public static final Block	CROP_HEMP	= new BlockBasicCrops("crop_hemp");
 	public static final Item	SEED_HEMP	= new ItemBasicSeeds("seed_hemp", CROP_HEMP, Blocks.FARMLAND);
+
+	// Hemp
 	public static final Item	HEMP_YARN	= new ItemBasic("hemp_yarn");
 	public static final Item	HEMP_TWINE	= new ItemBasic("hemp_twine");
 	public static final Item	HEMP_SPOOL	= new ItemBasic("hemp_spool");

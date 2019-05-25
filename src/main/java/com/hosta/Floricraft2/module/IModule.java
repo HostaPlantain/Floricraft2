@@ -37,32 +37,32 @@ public interface IModule {
 
 	public default void register(Block... entry)
 	{
-		Floricraft2.BASE.register(entry);
+		Floricraft2.register(entry);
 	}
 
 	public default void register(Item... entry)
 	{
-		Floricraft2.BASE.register(entry);
+		Floricraft2.register(entry);
 	}
 
 	public default void register(Potion... entry)
 	{
-		Floricraft2.BASE.register(entry);
+		Floricraft2.register(entry);
 	}
 
 	public default void register(Enchantment... entry)
 	{
-		Floricraft2.BASE.register(entry);
+		Floricraft2.register(entry);
 	}
 
 	public default void register(IRecipe... entry)
 	{
-		Floricraft2.BASE.register(entry);
+		Floricraft2.register(entry);
 	}
 
 	public default void register(BrewingRecipe... entry)
 	{
-		Floricraft2.BASE.register(entry);
+		Floricraft2.register(entry);
 	}
 
 	public default IRecipe shapedRecipe(String group, Item result, Object... recipe)
