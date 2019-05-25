@@ -48,6 +48,7 @@ public class ModuleCrops implements IModule {
 	{
 		register
 		(
+				// Hemp
 				shapelessRecipe(null, Items.STRING, "fiberHemp", "fiberHemp", "fiberHemp"),
 				shapelessRecipe(null, HEMP_TWINE, "fiberHemp", "fiberHemp"),
 				shapedRecipe(null, HEMP_SPOOL, " t ", "tst", " t ", 't', HEMP_TWINE, 's', Items.STICK),

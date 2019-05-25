@@ -2,6 +2,7 @@ package com.hosta.Floricraft2.module;
 
 import com.hosta.Floricraft2.block.BlockStackDead;
 import com.hosta.Floricraft2.block.BlockStackFlower;
+import com.hosta.Floricraft2.config.Config;
 import com.hosta.Floricraft2.item.ItemBasicMeta;
 import com.hosta.Floricraft2.item.food.ItemFoodSugared;
 
@@ -14,16 +15,15 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class ModuleFlowering implements IModule {
 
-	public static final String[]	FLOWERS			= new String[] { "dandelion", "poppy", "blue_orchid", "allium", "azure_bluet", "red_tulip", "orange_tulip", "white_tulip", "pink_tulip", "oxeye_daisy", "sunflower", "lilac", "rose", "peony", "sakura" };
-	// public static final String[] COLORS = new String[]{"black", "red", "green",
-	// "brown", "blue", "purple", "cyan", "light_gray", "gray", "pink", "lime",
-	// "yellow", "light_blue", "magenta", "orange", "white"};
-	/*
-	 * public static final String[] ALL = new String[FLOWERS.length +
-	 * COLORS.length]; static { System.arraycopy(FLOWERS, 0, ALL, 0,
-	 * FLOWERS.length); System.arraycopy(COLORS, 0, ALL, FLOWERS.length,
-	 * COLORS.length); }
-	 */
+	public static final String[]	FLOWERS;
+	static 
+	{
+		String[] defaultFlowers = new String[] { "dandelion", "poppy", "blue_orchid", "allium", "azure_bluet", "red_tulip", "orange_tulip", "white_tulip", "pink_tulip", "oxeye_daisy", "sunflower", "lilac", "rose", "peony" };
+		String[] addedFlowers = Config.getAddedFlowers();
+		FLOWERS = new String[defaultFlowers.length + addedFlowers.length];
+		System.arraycopy(defaultFlowers, 0, FLOWERS, 0, defaultFlowers.length);
+		System.arraycopy(addedFlowers, 0, FLOWERS, defaultFlowers.length, addedFlowers.length);
+	}
 
 	// Cut Flower
 	public static final Item		CUT_FLOWER		= new ItemBasicMeta("cut_flower", FLOWERS);

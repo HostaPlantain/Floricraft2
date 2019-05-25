@@ -20,12 +20,11 @@ public class Floricraft2 {
 	@SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
 	public static CommonProxy		proxy;
 
-	public static ModuleFloricraft2	BASE	= new ModuleFloricraft2();
+	public static final ModuleFloricraft2	BASE	= new ModuleFloricraft2();
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
-		Config.lord(event.getSuggestedConfigurationFile());
 		BASE.preinit();
 		proxy.registerEvents();
 	}

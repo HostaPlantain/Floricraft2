@@ -3,6 +3,7 @@ package com.hosta.Floricraft2.module;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.hosta.Floricraft2.config.Config;
 import com.hosta.Floricraft2.mod.ModedInit;
 import com.hosta.Floricraft2.util.RegisterHelper;
 
@@ -24,10 +25,16 @@ public class ModuleFloricraft2 {
 
 	private final List<IModule> MODULES = new ArrayList<IModule>();
 	{
+		Config.lord();
 		this.register
 		(
-				(IModule) new ModuleCrops(), (IModule) new ModuleFlowering(), (IModule) new ModuleFragrances(),
-				(IModule) new ModuleMaterials(), (IModule) new ModuleOthers(), (IModule) new ModuleTools()
+				(IModule) new ModuleCrops(),
+				(IModule) new ModuleFlowering(),
+				(IModule) new ModuleFragrances(),
+				(IModule) new ModuleMaterials(),
+				(IModule) new ModuleOthers(),
+				(IModule) new ModulePlants(),
+				(IModule) new ModuleTools()
 		);
 		ModedInit.load(this);
 	}

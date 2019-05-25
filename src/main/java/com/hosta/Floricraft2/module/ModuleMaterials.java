@@ -20,7 +20,7 @@ public class ModuleMaterials implements IModule {
 
 	// Salt
 	public static final Item	DUST_SALT		= new ItemBasic("dust_salt");
-	public static final Block	ORE_SALT		= new BlockBasicOre("ore_salt").setHardness(1.5F).setResistance(10.0F);
+	public static final Block	ORE_SALT		= new BlockBasicOre("ore_salt", DUST_SALT).setHardness(1.5F).setResistance(10.0F);
 	public static final Block	BLOCK_SALT		= new BlockBasicFalling("block_salt").setHardness(0.5F);
 
 	@Override
