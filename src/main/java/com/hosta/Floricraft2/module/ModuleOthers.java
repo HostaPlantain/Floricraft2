@@ -2,9 +2,9 @@ package com.hosta.Floricraft2.module;
 
 import com.hosta.Floricraft2.Reference;
 import com.hosta.Floricraft2.enchantment.EnchantmentFloric;
-import com.hosta.Floricraft2.item.crafting.RecipeNaming;
 import com.hosta.Floricraft2.packet.PacketNBTParticle;
 import com.hosta.Floricraft2.packet.PacketNBTParticleHandler;
+import com.hosta.Floricraft2.recipe.RecipeNaming;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
@@ -28,7 +28,7 @@ public class ModuleOthers implements IModule {
 			@SideOnly(Side.CLIENT)
 			public ItemStack getTabIconItem()
 			{
-				return new ItemStack(ModuleFlower.CUT_FLOWER, 1, 12);
+				return new ItemStack(ModuleFlowers.CUT_FLOWER, 1, 12);
 			}
 		};
 

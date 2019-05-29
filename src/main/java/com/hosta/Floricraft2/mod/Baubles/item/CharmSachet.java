@@ -1,6 +1,6 @@
 package com.hosta.Floricraft2.mod.Baubles.item;
 
-import com.hosta.Floricraft2.item.tool.ToolSachet;
+import com.hosta.Floricraft2.item.fragrance.ItemSachet;
 import com.hosta.Floricraft2.module.ModuleFragrances;
 
 import baubles.api.BaubleType;
@@ -14,7 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.world.World;
 
-public class CharmSachet extends ToolSachet implements IBauble {
+public class CharmSachet extends ItemSachet implements IBauble {
 
 	public CharmSachet(String unlocalizedName, Potion potion)
 	{

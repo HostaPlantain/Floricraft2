@@ -9,7 +9,7 @@ import com.hosta.Floricraft2.module.IModule;
 import com.hosta.Floricraft2.module.ModuleCrops;
 import com.hosta.Floricraft2.module.ModuleDolls;
 import com.hosta.Floricraft2.module.ModuleFarm;
-import com.hosta.Floricraft2.module.ModuleFlower;
+import com.hosta.Floricraft2.module.ModuleFlowers;
 import com.hosta.Floricraft2.module.ModuleFragrances;
 import com.hosta.Floricraft2.module.ModuleMaterials;
 import com.hosta.Floricraft2.module.ModuleOthers;
@@ -57,7 +57,7 @@ public class Floricraft2 {
 				(IModule) new ModuleCrops(),
 				(IModule) new ModuleDolls(),
 				(IModule) new ModuleFarm(),
-				(IModule) new ModuleFlower(),
+				(IModule) new ModuleFlowers(),
 				(IModule) new ModuleFragrances(),
 				(IModule) new ModuleMaterials(),
 				(IModule) new ModuleOthers(),

@@ -1,10 +1,10 @@
 package com.hosta.Floricraft2.module;
 
-import com.hosta.Floricraft2.block.BlockStackDead;
-import com.hosta.Floricraft2.block.BlockStackFlower;
+import com.hosta.Floricraft2.block.flower.BlockStackDead;
+import com.hosta.Floricraft2.block.flower.BlockStackFlower;
 import com.hosta.Floricraft2.config.Config;
 import com.hosta.Floricraft2.item.ItemBasicMeta;
-import com.hosta.Floricraft2.item.food.ItemFoodSugared;
+import com.hosta.Floricraft2.item.flower.ItemFoodSugared;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -13,7 +13,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class ModuleFlower implements IModule {
+public class ModuleFlowers implements IModule {
 
 	public static final String[]	FLOWERS;
 	static 

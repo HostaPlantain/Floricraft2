@@ -1,4 +1,4 @@
-package com.hosta.Floricraft2.item;
+package com.hosta.Floricraft2.item.fragrance;
 
 import com.hosta.Floricraft2.module.ModuleFragrances;
 import com.hosta.Floricraft2.module.ModuleOthers;

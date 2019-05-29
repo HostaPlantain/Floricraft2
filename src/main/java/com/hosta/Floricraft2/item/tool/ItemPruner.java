@@ -5,9 +5,9 @@ import com.hosta.Floricraft2.module.ModuleOthers;
 import net.minecraft.item.ItemShears;
 import net.minecraft.item.ItemStack;
 
-public class ToolPruner extends ItemShears {
+public class ItemPruner extends ItemShears {
 
-	public ToolPruner(String unlocalizedName)
+	public ItemPruner(String unlocalizedName)
 	{
 		this.setUnlocalizedName(unlocalizedName).setCreativeTab(ModuleOthers.TAB_FLORICRAFT);
 		this.canRepair = false;

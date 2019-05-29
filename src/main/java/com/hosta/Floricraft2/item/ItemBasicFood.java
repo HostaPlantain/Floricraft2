@@ -1,4 +1,4 @@
-package com.hosta.Floricraft2.item.food;
+package com.hosta.Floricraft2.item;
 
 import com.hosta.Floricraft2.module.ModuleOthers;
 

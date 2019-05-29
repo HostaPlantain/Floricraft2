@@ -1,6 +1,5 @@
-package com.hosta.Floricraft2.item.food;
+package com.hosta.Floricraft2.item;
 
-import com.hosta.Floricraft2.item.IMetaName;
 import com.hosta.Floricraft2.module.ModuleOthers;
 
 import net.minecraft.creativetab.CreativeTabs;

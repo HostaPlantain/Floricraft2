@@ -1,6 +1,6 @@
 package com.hosta.Floricraft2.module;
 
-import com.hosta.Floricraft2.item.tool.ToolPruner;
+import com.hosta.Floricraft2.item.tool.ItemPruner;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -18,7 +18,7 @@ public class ModuleTools implements IModule {
 	// Weapon
 	
 	// Tool
-	public static final Item PRUNER = new ToolPruner("pruner");
+	public static final Item PRUNER = new ItemPruner("pruner");
 
 	@Override
 	public void registerItems()

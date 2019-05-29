@@ -1,4 +1,4 @@
-package com.hosta.Floricraft2.block;
+package com.hosta.Floricraft2.block.flower;
 
 import java.util.Random;
 

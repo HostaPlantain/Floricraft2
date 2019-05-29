@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.hosta.Floricraft2.module.ModuleFragrances;
 
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAITasks;
@@ -12,7 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.AxisAlignedBB;
 
-public class EffectAntiMob<T extends EntityLiving> extends EffectBasic {
+public class EffectAntiMob<T extends EntityCreature> extends EffectBasic {
 
 	private final Class<T>[] ANTI_CALSS;
 
@@ -41,18 +41,16 @@ public class EffectAntiMob<T extends EntityLiving> extends EffectBasic {
 				List<T> list = player.world.<T>getEntitiesWithinAABB(c, bb);
 				for (T entity : list)
 				{
-					for (EntityAITasks.EntityAITaskEntry entry : entity.targetTasks.taskEntries)
-					{
-						if (entry.action instanceof EntityAINearestAttackableTarget && entry.action.getMutexBits() < 8)
-						{
-							entry.action.setMutexBits(entry.action.getMutexBits() + 8);
-						}
-					}
-
 					if (!entity.targetTasks.isControlFlagDisabled(8))
 					{
+						for (EntityAITasks.EntityAITaskEntry entry : entity.targetTasks.taskEntries)
+						{
+							if (entry.action instanceof EntityAINearestAttackableTarget && entry.action.getMutexBits() < 8)
+							{
+								entry.action.setMutexBits(entry.action.getMutexBits() | 8);
+							}
+						}
 						entity.targetTasks.disableControlFlag(8);
-						entity.setAttackTarget((EntityLivingBase) null);
 					}
 					entity.addPotionEffect(new PotionEffect(ModuleFragrances.POTION_NO_TARGET, 60, 0, false, false));
 				}

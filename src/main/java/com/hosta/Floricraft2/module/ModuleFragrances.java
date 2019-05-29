@@ -2,8 +2,8 @@ package com.hosta.Floricraft2.module;
 
 import com.hosta.Floricraft2.item.ItemBasic;
 import com.hosta.Floricraft2.item.ItemBasicMeta;
-import com.hosta.Floricraft2.item.ItemVial;
-import com.hosta.Floricraft2.item.tool.ToolSachet;
+import com.hosta.Floricraft2.item.fragrance.ItemVial;
+import com.hosta.Floricraft2.item.fragrance.ItemSachet;
 import com.hosta.Floricraft2.potion.EffectActive;
 import com.hosta.Floricraft2.potion.EffectAntiMob;
 
@@ -44,7 +44,7 @@ public class ModuleFragrances implements IModule {
 			POTION_ANTIS[j] = new EffectAntiMob(effectAnti + ANTI_MOBS[j], 0xADDAAD, antiClass[j]).setIconIndex(0, 0);
 		}
 	}
-	public static final Potion	POTION_NO_TARGET	= new EffectActive("effect.no_target", 0xFFDAFF, true).setIconIndex(0, 0);
+	public static final Potion	POTION_NO_TARGET	= new EffectActive("effect.no_target", ModuleOthers.COLOR_FLORIC, true).setIconIndex(0, 0);
 
 	// Vial
 	public static final Item	VIAL_EMPTY			= new ItemVial("vial_empty");
@@ -55,7 +55,7 @@ public class ModuleFragrances implements IModule {
 
 	// Sachet
 	public static final Item	SACHET_SAC			= new ItemBasic("sachet_sac");
-	public static final Item	SACHET_FLOWER		= new ToolSachet("sachet_flower", (Potion) null);
+	public static final Item	SACHET_FLOWER		= new ItemSachet("sachet_flower", (Potion) null);
 	// public static final Item SACHET_ENDEARING;
 	public static final Item[]	SACHET_ANTIS		= new Item[ANTI_MOBS.length];
 	static
@@ -63,7 +63,7 @@ public class ModuleFragrances implements IModule {
 		String sachetAnti = "sachet_anti_";
 		for (int i = 0; i < SACHET_ANTIS.length; i++)
 		{
-			SACHET_ANTIS[i] = new ToolSachet(sachetAnti + ANTI_MOBS[i], POTION_ANTIS[i]);
+			SACHET_ANTIS[i] = new ItemSachet(sachetAnti + ANTI_MOBS[i], POTION_ANTIS[i]);
 		}
 	}
 
@@ -97,7 +97,7 @@ public class ModuleFragrances implements IModule {
 
 		register
 		(
-				brewingRecipe(new ItemStack(VIAL_WATER), new ItemStack(ModuleFlower.PETALS_RAW, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(VIAL_FLOWER))
+				brewingRecipe(new ItemStack(VIAL_WATER), new ItemStack(ModuleFlowers.PETALS_RAW, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(VIAL_FLOWER))
 		);
 
 		Item[] anti = new Item[] { Items.ROTTEN_FLESH, Items.BONE, Items.GUNPOWDER, Items.SPIDER_EYE, Items.ENDER_PEARL };

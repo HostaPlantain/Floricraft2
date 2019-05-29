@@ -2,7 +2,7 @@ package com.hosta.Floricraft2.mod.Thaum;
 
 import com.hosta.Floricraft2.module.IModule;
 import com.hosta.Floricraft2.module.ModuleCrops;
-import com.hosta.Floricraft2.module.ModuleFlower;
+import com.hosta.Floricraft2.module.ModuleFlowers;
 import com.hosta.Floricraft2.module.ModuleMaterials;
 import com.hosta.Floricraft2.module.ModuleOthers;
 import com.hosta.Floricraft2.util.RegisterHelper;
@@ -40,16 +40,16 @@ public class ModuleFloralia implements IModule {
 	{
 		AspectEventProxy register = event.register;
 		// Flower
-		registerAspect(new ItemStack(ModuleFlower.CUT_FLOWER, 1, OreDictionary.WILDCARD_VALUE), new AspectList().add(FLOWER, 5).add(Aspect.PLANT, 1), register);
-		registerAspect(new ItemStack(ModuleFlower.PETAL_RAW, 1, OreDictionary.WILDCARD_VALUE), new AspectList().add(FLOWER, 3).add(Aspect.PLANT, 1), register);
-		registerAspect(new ItemStack(ModuleFlower.PETAL_DRY, 1, OreDictionary.WILDCARD_VALUE), new AspectList().add(FLOWER, 3), register);
-		registerAspect(new ItemStack(ModuleFlower.PETAL_SALTY, 1, OreDictionary.WILDCARD_VALUE), new AspectList().add(FLOWER, 3).add(Aspect.PLANT, 1).add(Aspect.CRAFT, 1), register);
-		registerAspect(new ItemStack(ModuleFlower.PETAL_SUGARED, 1, OreDictionary.WILDCARD_VALUE), new AspectList().add(FLOWER, 3).add(Aspect.PLANT, 1).add(Aspect.LIFE, 1), register);
-		for (Block stack : ModuleFlower.STACK_FLOWER)
+		registerAspect(new ItemStack(ModuleFlowers.CUT_FLOWER, 1, OreDictionary.WILDCARD_VALUE), new AspectList().add(FLOWER, 5).add(Aspect.PLANT, 1), register);
+		registerAspect(new ItemStack(ModuleFlowers.PETAL_RAW, 1, OreDictionary.WILDCARD_VALUE), new AspectList().add(FLOWER, 3).add(Aspect.PLANT, 1), register);
+		registerAspect(new ItemStack(ModuleFlowers.PETAL_DRY, 1, OreDictionary.WILDCARD_VALUE), new AspectList().add(FLOWER, 3), register);
+		registerAspect(new ItemStack(ModuleFlowers.PETAL_SALTY, 1, OreDictionary.WILDCARD_VALUE), new AspectList().add(FLOWER, 3).add(Aspect.PLANT, 1).add(Aspect.CRAFT, 1), register);
+		registerAspect(new ItemStack(ModuleFlowers.PETAL_SUGARED, 1, OreDictionary.WILDCARD_VALUE), new AspectList().add(FLOWER, 3).add(Aspect.PLANT, 1).add(Aspect.LIFE, 1), register);
+		for (Block stack : ModuleFlowers.STACK_FLOWER)
 		{
 			registerAspect(new ItemStack(stack, 1, 3), new AspectList().add(FLOWER, 10), register);
 		}
-		registerAspect(ModuleFlower.STACK_DEAD, new AspectList().add(Aspect.DEATH, 5).add(Aspect.PLANT, 1), register);
+		registerAspect(ModuleFlowers.STACK_DEAD, new AspectList().add(Aspect.DEATH, 5).add(Aspect.PLANT, 1), register);
 		// Hemp
 		registerAspect(ModuleCrops.SEED_HEMP, new AspectList().add(Aspect.PLANT, 5), register);
 		registerAspect(ModuleCrops.HEMP_YARN, new AspectList().add(Aspect.PLANT, 3).add(Aspect.CRAFT, 1), register);

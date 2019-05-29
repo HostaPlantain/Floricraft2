@@ -1,5 +1,6 @@
-package com.hosta.Floricraft2.item.tool;
+package com.hosta.Floricraft2.item.fragrance;
 
+import com.hosta.Floricraft2.item.ItemBasicTool;
 import com.hosta.Floricraft2.module.ModuleFragrances;
 
 import net.minecraft.entity.Entity;
@@ -10,11 +11,11 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-public class ToolSachet extends ToolBasic {
+public class ItemSachet extends ItemBasicTool {
 
 	final Potion POTION;
 
-	public ToolSachet(String unlocalizedName, Potion potion)
+	public ItemSachet(String unlocalizedName, Potion potion)
 	{
 		super(unlocalizedName, 7200);
 		this.POTION = potion;
@@ -60,7 +61,8 @@ public class ToolSachet extends ToolBasic {
 			{
 				stack.damageItem(1, player);
 			}
-		} else if (stack.getItemDamage() == this.getMaxDamage())
+		}
+		else if (stack.getItemDamage() == this.getMaxDamage())
 		{
 			player.renderBrokenItemStack(stack);
 
@@ -70,7 +72,8 @@ public class ToolSachet extends ToolBasic {
 			if (player.inventory.getStackInSlot(itemSlot) == stack)
 			{
 				player.inventory.setInventorySlotContents(itemSlot, sachetSac);
-			} else
+			}
+			else
 			{
 				NBTTagCompound nbt = new NBTTagCompound();
 				nbt.setTag("empty", sachetSac.writeToNBT(new NBTTagCompound()));

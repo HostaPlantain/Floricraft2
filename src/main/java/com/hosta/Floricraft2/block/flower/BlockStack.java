@@ -1,6 +1,8 @@
-package com.hosta.Floricraft2.block;
+package com.hosta.Floricraft2.block.flower;
 
 import javax.annotation.Nullable;
+
+import com.hosta.Floricraft2.block.BlockBasicHorizontal;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;

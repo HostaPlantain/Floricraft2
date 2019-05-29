@@ -1,6 +1,7 @@
-package com.hosta.Floricraft2.item.food;
+package com.hosta.Floricraft2.item.flower;
 
-import com.hosta.Floricraft2.module.ModuleFlower;
+import com.hosta.Floricraft2.item.ItemBasicFoodMeta;
+import com.hosta.Floricraft2.module.ModuleFlowers;
 import com.hosta.Floricraft2.module.ModuleFragrances;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,11 +25,11 @@ public class ItemFoodSugared extends ItemBasicFoodMeta {
 	@Override
 	protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player)
 	{
-		if (stack.getItem() == ModuleFlower.PETAL_SUGARED)
+		if (stack.getItem() == ModuleFlowers.PETAL_SUGARED)
 		{
 			player.addPotionEffect(new PotionEffect(ModuleFragrances.POTION_FLORIC, 200, 0, false, false));
 		}
-		else if (stack.getItem() == ModuleFlower.PETALS_SUGARED)
+		else if (stack.getItem() == ModuleFlowers.PETALS_SUGARED)
 		{
 			player.addPotionEffect(new PotionEffect(ModuleFragrances.POTION_FLORIC, 200, 3, false, false));
 		}

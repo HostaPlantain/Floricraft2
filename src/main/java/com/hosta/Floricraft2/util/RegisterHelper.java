@@ -9,11 +9,13 @@ import com.hosta.Floricraft2.Floricraft2;
 import com.hosta.Floricraft2.Reference;
 import com.hosta.Floricraft2.block.BlockBasicCrops;
 import com.hosta.Floricraft2.block.BlockBasicFluid;
+import com.hosta.Floricraft2.block.BlockEntityContainer;
 import com.hosta.Floricraft2.item.IMetaName;
 import com.hosta.Floricraft2.item.ItemBlockMeta;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Items;
@@ -21,12 +23,14 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.potion.Potion;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.brewing.BrewingRecipe;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
-import net.minecraftforge.fml.common.registry.EntityEntry;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -39,10 +43,43 @@ public class RegisterHelper {
 		Log.warn("Too late! Registering has been faled!", entry);
 	}
 
+	public static ResourceLocation getResourceLocation(String path)
+	{
+		return path == null ? (ResourceLocation) null : new ResourceLocation(Reference.MOD_ID, path);
+	}
+
+	private static <V extends IForgeRegistryEntry<V>> void register(IForgeRegistry<V> registry, V object)
+	{
+		registry.register(object);
+	}
+
+	// -----Block----- //
+
 	public static void registerBlocks(IForgeRegistry<Block> registry, List<Block> blocks)
 	{
-		blocks.forEach(block -> registerBlock(registry, block));
+		blocks.forEach(block ->
+		{
+			RegisterHelper.registerBlock(registry, block);
+
+			if (block instanceof BlockEntityContainer)
+			{
+				RegisterHelper.registerTileEntity((BlockEntityContainer) block);
+			}
+		});
 	}
+
+	private static void registerBlock(IForgeRegistry<Block> registry, Block block)
+	{
+		block.setRegistryName(RegisterHelper.getResourceLocation(block.getUnlocalizedName().substring(5)));
+		RegisterHelper.register(registry, block);
+	}
+
+	private static void registerTileEntity(BlockEntityContainer block)
+	{
+		GameRegistry.registerTileEntity(block.getTileEntityClass(), block.getUnlocalizedName());
+	}
+
+	// -----Item----- //
 
 	public static void registerItems(IForgeRegistry<Item> register, List<Item> items)
 	{
@@ -51,122 +88,54 @@ public class RegisterHelper {
 
 	public static void registerItemBlocks(IForgeRegistry<Item> register, List<Block> blocks)
 	{
-		for (Block block : blocks)
+		blocks.forEach(block ->
 		{
-			if (block instanceof IMetaName)
+			if (block instanceof BlockBasicCrops || block instanceof BlockBasicFluid)
 			{
-				registerItem(register, new ItemBlockMeta(block));
+
 			}
-			else if (block instanceof BlockBasicCrops || block instanceof BlockBasicFluid)
+			else if (block instanceof IMetaName)
 			{
-				
+				RegisterHelper.registerItem(register, new ItemBlockMeta(block));
 			}
 			else
 			{
-				registerItem(register, new ItemBlock(block));
+				RegisterHelper.registerItem(register, new ItemBlock(block));
 			}
-		}
+		});
 	}
 
-	public static void registerPotions(IForgeRegistry<Potion> registry, List<Potion> potions)
+	private static void registerItem(IForgeRegistry<Item> registry, Item item)
 	{
-		potions.forEach(potion -> registerPotion(registry, potion));
+		item.setRegistryName(RegisterHelper.getResourceLocation(item.getUnlocalizedName().substring(5)));
+		RegisterHelper.register(registry, item);
 	}
 
-	public static void registerEnchantments(IForgeRegistry<Enchantment> registry, List<Enchantment> enchantments)
-	{
-		enchantments.forEach(enchantment -> registerEnchantment(registry, enchantment));
-	}
-
-	public static void registerEntity(Class<? extends Entity> entityClass, String entityName, int id)
-	{
-		EntityRegistry.registerModEntity(getResourceLocation(entityName), entityClass, entityName, id, Floricraft2.fc, 64, 1, false);
-	}
-
-	/** WIP */
-	public static void registerEntities(IForgeRegistry<EntityEntry> registry, List<EntityEntry> entities)
-	{
-		entities.forEach(entity -> registerEntity(registry, entity));
-	}
-
-	public static void registerRecipes(IForgeRegistry<IRecipe> registry, List<IRecipe> recipes)
-	{
-		HashMap<Item, Integer> items = new HashMap<Item, Integer>();
-		int uncommon = 0;
-		for (IRecipe recipe : recipes)
-		{
-			if (!recipe.getRecipeOutput().isEmpty())
-			{
-				Item output = recipe.getRecipeOutput().getItem();
-				int i = !items.containsKey(output) ? 0 : items.get(output) + 1;
-				registerRecipe(registry, recipe, output.getUnlocalizedName().substring(5) + "_" + i);
-				items.put(output, i);
-			}
-			else
-			{
-				registerRecipe(registry, recipe, "uncommon_recipe_" + uncommon++);
-			}
-		}
-	}
-
-	public static void registerBrewingRecipe(List<BrewingRecipe> recipes)
-	{
-		recipes.forEach(recipe -> BrewingRecipeRegistry.addRecipe(recipe));
-	}
+	// -----Item Render----- //
 
 	@SideOnly(Side.CLIENT)
 	public static void registerItemRenders(List<Item> items)
 	{
-		items.forEach(item -> registerItemRender(item));
+		items.forEach(item -> RegisterHelper.registerItemRender(item));
 	}
 
 	@SideOnly(Side.CLIENT)
 	public static void registerItemBlockRenders(List<Block> blocks)
 	{
-		blocks.forEach(block -> registerItemRender(Item.getItemFromBlock(block)));
-	}
-
-	public static ResourceLocation getResourceLocation(String path)
-	{
-		return path == null ? (ResourceLocation) null : new ResourceLocation(Reference.MOD_ID, path);
-	}
-
-	// -----Private Use Only-----//
-
-	private static void registerBlock(IForgeRegistry<Block> registry, Block block)
-	{
-		block.setRegistryName(getResourceLocation(block.getUnlocalizedName().substring(5)));
-		register(registry, block);
-	}
-
-	private static void registerItem(IForgeRegistry<Item> registry, Item item)
-	{
-		item.setRegistryName(getResourceLocation(item.getUnlocalizedName().substring(5)));
-		register(registry, item);
-	}
-
-	private static void registerPotion(IForgeRegistry<Potion> registry, Potion potion)
-	{
-		potion.setRegistryName(getResourceLocation(potion.getName()));
-		register(registry, potion);
-	}
-
-	private static void registerEnchantment(IForgeRegistry<Enchantment> registry, Enchantment enchantment)
-	{
-		enchantment.setRegistryName(getResourceLocation(enchantment.getName()));
-		register(registry, enchantment);
-	}
-
-	private static void registerEntity(IForgeRegistry<EntityEntry> registry, EntityEntry entity)
-	{
-		entity.setRegistryName(getResourceLocation(entity.getName()));
-		register(registry, entity);
-	}
-
-	private static void registerRecipe(IForgeRegistry<IRecipe> registry, IRecipe recipe, String id)
-	{
-		recipe.setRegistryName(getResourceLocation(id));
-		register(registry, recipe);
+		blocks.forEach(block ->
+		{
+			registerItemRender(Item.getItemFromBlock(block));
+			
+			if (block instanceof BlockEntityContainer)
+			{
+				BlockEntityContainer blockContainer = (BlockEntityContainer) block;
+				TileEntitySpecialRenderer renderer = blockContainer.getCustomRenderer();
+				if (renderer != null)
+				{
+					RegisterHelper.registerRender(blockContainer.getTileEntityClass(), renderer);
+				}
+			}
+		});
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -191,19 +160,100 @@ public class RegisterHelper {
 		}
 	}
 
-	private static <V extends IForgeRegistryEntry<V>> void register(IForgeRegistry<V> registry, V object)
+	@SideOnly(Side.CLIENT)
+	private static <T extends TileEntity> void registerRender(Class<T> tileEntity, TileEntitySpecialRenderer<T> renderer)
 	{
-		registry.register(object);
+		ClientRegistry.bindTileEntitySpecialRenderer(tileEntity, renderer);
 	}
 
-	/**
-	 * static void registerWithTileEntity(Block block, Class<? extends TileEntity>
-	 * tileEntityClass) { GameRegistry.registerTileEntity(tileEntityClass,
-	 * block.getUnlocalizedName()); } protected static void
-	 * registerBiome(IForgeRegistry<Biome> registry, Biome biome, String name) {
-	 * biome.setRegistryName(getResourceLocation(name)); register(registry, biome);
-	 * } protected static void registerBrewingRecipe(ItemStack input, ItemStack
-	 * ingredient, ItemStack output) { BrewingRecipeRegistry.addRecipe(input,
-	 * ingredient, output); }
-	 **/
+	// -----Recipe----- //
+
+	public static void registerRecipes(IForgeRegistry<IRecipe> registry, List<IRecipe> recipes)
+	{
+		HashMap<Item, Integer> items = new HashMap<Item, Integer>();
+		int uncommon = 0;
+		for (IRecipe recipe : recipes)
+		{
+			if (!recipe.getRecipeOutput().isEmpty())
+			{
+				Item output = recipe.getRecipeOutput().getItem();
+				int i = !items.containsKey(output) ? 0 : items.get(output) + 1;
+				items.put(output, i);
+
+				RegisterHelper.registerRecipe(registry, recipe, output.getUnlocalizedName().substring(5) + "_" + i);
+			}
+			else
+			{
+				RegisterHelper.registerRecipe(registry, recipe, "uncommon_recipe_" + uncommon++);
+			}
+		}
+	}
+
+	private static void registerRecipe(IForgeRegistry<IRecipe> registry, IRecipe recipe, String id)
+	{
+		recipe.setRegistryName(RegisterHelper.getResourceLocation(id));
+		RegisterHelper.register(registry, recipe);
+	}
+
+	public static void registerBrewingRecipe(List<BrewingRecipe> recipes)
+	{
+		recipes.forEach(recipe -> BrewingRecipeRegistry.addRecipe(recipe));
+	}
+
+	// -----Potion----- //
+
+	public static void registerPotions(IForgeRegistry<Potion> registry, List<Potion> potions)
+	{
+		potions.forEach(potion -> RegisterHelper.registerPotion(registry, potion));
+	}
+
+	private static void registerPotion(IForgeRegistry<Potion> registry, Potion potion)
+	{
+		potion.setRegistryName(RegisterHelper.getResourceLocation(potion.getName()));
+		RegisterHelper.register(registry, potion);
+	}
+
+	// -----Enchantment----- //
+
+	public static void registerEnchantments(IForgeRegistry<Enchantment> registry, List<Enchantment> enchantments)
+	{
+		enchantments.forEach(enchantment -> RegisterHelper.registerEnchantment(registry, enchantment));
+	}
+
+	private static void registerEnchantment(IForgeRegistry<Enchantment> registry, Enchantment enchantment)
+	{
+		enchantment.setRegistryName(RegisterHelper.getResourceLocation(enchantment.getName()));
+		RegisterHelper.register(registry, enchantment);
+	}
+
+	// -----Entity----- //
+
+	public static void registerEntity(Class<? extends Entity> entityClass, String entityName, int id)
+	{
+		EntityRegistry.registerModEntity(RegisterHelper.getResourceLocation(entityName), entityClass, entityName, id, Floricraft2.fc, 64, 1, false);
+	}
+
+	// -----WIP----- //
+
+	// public static void registerEntities(IForgeRegistry<EntityEntry> registry, List<EntityEntry> entities)
+	// {
+	// entities.forEach(entity -> registerEntity(registry, entity));
+	// }
+
+	// private static void registerEntity(IForgeRegistry<EntityEntry> registry, EntityEntry entity)
+	// {
+	// entity.setRegistryName(RegisterHelper.getResourceLocation(entity.getName()));
+	// RegisterHelper.register(registry, entity);
+	// }
+
+	// protected static void registerBiome(IForgeRegistry<Biome> registry, Biome biome, String name)
+	// {
+	// biome.setRegistryName(getResourceLocation(name));
+	// RegisterHelper.register(registry, biome);
+	// }
+
+	// protected static void registerBrewingRecipe(ItemStack input, ItemStack ingredient, ItemStack output)
+	// {
+	// BrewingRecipeRegistry.addRecipe(input, ingredient, output);
+	// }
 }

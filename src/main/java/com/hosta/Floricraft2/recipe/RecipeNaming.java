@@ -1,4 +1,4 @@
-package com.hosta.Floricraft2.item.crafting;
+package com.hosta.Floricraft2.recipe;
 
 import java.util.ArrayList;
 import java.util.List;

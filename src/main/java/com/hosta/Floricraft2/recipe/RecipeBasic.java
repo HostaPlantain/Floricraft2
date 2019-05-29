@@ -1,4 +1,4 @@
-package com.hosta.Floricraft2.item.crafting;
+package com.hosta.Floricraft2.recipe;
 
 import javax.annotation.Nonnull;
 
