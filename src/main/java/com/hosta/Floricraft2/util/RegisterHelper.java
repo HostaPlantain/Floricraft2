@@ -78,7 +78,7 @@ public class RegisterHelper {
 
 	private static void registerTileEntity(BlockEntityContainer block)
 	{
-		GameRegistry.registerTileEntity(block.getTileEntityClass(), block.getUnlocalizedName());
+		GameRegistry.registerTileEntity(block.getTileEntityClass(), RegisterHelper.getResourceLocation(block.getUnlocalizedName().substring(5)));
 	}
 
 	// -----Item----- //

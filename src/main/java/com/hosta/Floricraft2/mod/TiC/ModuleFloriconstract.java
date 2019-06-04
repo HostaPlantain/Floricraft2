@@ -1,5 +1,8 @@
 package com.hosta.Floricraft2.mod.TiC;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.hosta.Floricraft2.block.BlockBasicFluid;
 import com.hosta.Floricraft2.mod.TiC.client.RenderThrowingRose;
 import com.hosta.Floricraft2.mod.TiC.modifier.ModifierFloric;
@@ -16,7 +19,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -43,11 +45,13 @@ import slimeknights.tconstruct.library.materials.HeadMaterialStats;
 import slimeknights.tconstruct.library.materials.Material;
 import slimeknights.tconstruct.library.modifiers.IModifier;
 import slimeknights.tconstruct.library.modifiers.Modifier;
+import slimeknights.tconstruct.library.modifiers.ModifierTrait;
 import slimeknights.tconstruct.library.tools.Pattern;
 import slimeknights.tconstruct.library.tools.ToolCore;
 import slimeknights.tconstruct.library.tools.ToolPart;
+import slimeknights.tconstruct.library.traits.AbstractTrait;
 import slimeknights.tconstruct.library.traits.ITrait;
-import slimeknights.tconstruct.shared.FluidsClientProxy.FluidStateMapper;
+import slimeknights.tconstruct.tools.TinkerMaterials;
 import slimeknights.tconstruct.tools.TinkerTools;
 
 @Pulse(id = "Floriconstract", description = "All the Floric Constract in one handy package")
@@ -161,9 +165,22 @@ public class ModuleFloriconstract implements IModule {
 		RenderingRegistry.registerEntityRenderingHandler(EntityThrowingRose.class, RenderThrowingRose::new);
 
 		// Modifier
+		List<Material> list = new ArrayList<Material>();
+		list.add(TinkerMaterials.wood);
+		list.add(TinkerMaterials.manyullyn);
+		list.add(TinkerMaterials.manyullyn);
+		list.add(TinkerMaterials.feather);
+		ItemStack stack = throwingRose.buildItem(list);
 		for (IModifier mod : TinkerRegistry.getAllModifiers())
 		{
-			ModelRegisterUtil.registerModifierModel(mod, RegisterHelper.getResourceLocation("models/item/modifiers/" + mod.getIdentifier()));
+			try
+			{
+				if ((mod instanceof ModifierTrait || !(mod instanceof AbstractTrait)) && mod.canApply(stack.copy(), stack))
+				{
+					ModelRegisterUtil.registerModifierModel(mod, RegisterHelper.getResourceLocation("models/item/modifiers/" + mod.getIdentifier()));
+				}
+			}
+			catch (Exception e)	{	}
 		}
 
 		// GUI Tool Forge
