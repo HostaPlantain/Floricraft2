@@ -1,0 +1,20 @@
+{
+    "variants": {
+        "rotation=0": { "model": "floricraft2:doll" },
+        "rotation=1": { "model": "floricraft2:doll" },
+        "rotation=2": { "model": "floricraft2:doll" },
+        "rotation=3": { "model": "floricraft2:doll" },
+        "rotation=4": { "model": "floricraft2:doll" },
+        "rotation=5": { "model": "floricraft2:doll" },
+        "rotation=6": { "model": "floricraft2:doll" },
+        "rotation=7": { "model": "floricraft2:doll" },
+        "rotation=8": { "model": "floricraft2:doll" },
+        "rotation=9": { "model": "floricraft2:doll" },
+        "rotation=10": { "model": "floricraft2:doll" },
+        "rotation=11": { "model": "floricraft2:doll" },
+        "rotation=12": { "model": "floricraft2:doll" },
+        "rotation=13": { "model": "floricraft2:doll" },
+        "rotation=14": { "model": "floricraft2:doll" },
+        "rotation=15": { "model": "floricraft2:doll" }
+    }
+}

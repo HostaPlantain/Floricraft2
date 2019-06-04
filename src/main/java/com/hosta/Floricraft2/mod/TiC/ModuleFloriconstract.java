@@ -15,8 +15,8 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -35,6 +35,7 @@ import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.TinkerRegistryClient;
 import slimeknights.tconstruct.library.book.TinkerBook;
 import slimeknights.tconstruct.library.client.ToolBuildGuiInfo;
+import slimeknights.tconstruct.library.fluid.FluidMolten;
 import slimeknights.tconstruct.library.materials.BowMaterialStats;
 import slimeknights.tconstruct.library.materials.ExtraMaterialStats;
 import slimeknights.tconstruct.library.materials.HandleMaterialStats;
@@ -46,6 +47,7 @@ import slimeknights.tconstruct.library.tools.Pattern;
 import slimeknights.tconstruct.library.tools.ToolCore;
 import slimeknights.tconstruct.library.tools.ToolPart;
 import slimeknights.tconstruct.library.traits.ITrait;
+import slimeknights.tconstruct.shared.FluidsClientProxy.FluidStateMapper;
 import slimeknights.tconstruct.tools.TinkerTools;
 
 @Pulse(id = "Floriconstract", description = "All the Floric Constract in one handy package")
@@ -56,8 +58,7 @@ public class ModuleFloriconstract implements IModule {
 	// Tool
 	public static ToolCore		throwingRose;
 	// Fluid
-	private static final String	PATH_MOLTEN		= "tconstruct:blocks/fluids/molten_metal";
-	public static final Fluid	FLUID_TWINKLE	= new Fluid("molten_twinkle", new ResourceLocation(PATH_MOLTEN), new ResourceLocation(PATH_MOLTEN + "_flow"), ModuleOthers.COLOR_TWINKLE);
+	public static final Fluid	FLUID_TWINKLE	= new FluidMolten("twinkle", ModuleOthers.COLOR_TWINKLE);
 	public static Block			moltenTwinkle;
 	// Modifier
 	public static Modifier		modFloric;
@@ -72,9 +73,14 @@ public class ModuleFloriconstract implements IModule {
 	}
 
 	@Override
-	public void registerBlocks()
+	public void preInit()
 	{
 		FluidRegistry.registerFluid(FLUID_TWINKLE);
+	}
+
+	@Override
+	public void registerBlocks()
+	{
 		moltenTwinkle = new BlockBasicFluid("molten_twinkle", FLUID_TWINKLE, net.minecraft.block.material.Material.LAVA);
 		register(moltenTwinkle);
 	}

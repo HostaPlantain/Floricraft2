@@ -1,5 +1,5 @@
 {
-    "parent": "block/crop",
+    "parent": "floricraft2:block/crop_hemp",
     "textures": {
         "crop": "floricraft2:blocks/crop_hemp_2"
     }

@@ -1,0 +1,6 @@
+{
+    "parent": "floricraft2:item/vial",
+    "textures": {
+        "layer0": "floricraft2:items/vial_moon"
+    }
+}

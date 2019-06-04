@@ -1,5 +1,5 @@
 {
-    "parent": "item/generated",
+    "parent": "floricraft2:item/sachet",
     "textures": {
         "layer0": "floricraft2:items/sachet_anti_skeleton"
     }

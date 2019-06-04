@@ -1,0 +1,6 @@
+{
+    "parent": "floricraft2:item/hemp",
+    "textures": {
+        "layer0": "floricraft2:items/hemp_spool"
+    }
+}

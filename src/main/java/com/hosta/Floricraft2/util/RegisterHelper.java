@@ -14,7 +14,9 @@ import com.hosta.Floricraft2.item.IMetaName;
 import com.hosta.Floricraft2.item.ItemBlockMeta;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
@@ -134,6 +136,17 @@ public class RegisterHelper {
 				{
 					RegisterHelper.registerRender(blockContainer.getTileEntityClass(), renderer);
 				}
+			}
+			else if (block instanceof BlockBasicFluid)
+			{
+				ModelLoader.setCustomStateMapper(block, new StateMapperBase()
+				{
+					@Override
+					protected ModelResourceLocation getModelResourceLocation(IBlockState state)
+					{
+						return new ModelResourceLocation(block.getRegistryName().toString());
+					}
+				});
 			}
 		});
 	}
