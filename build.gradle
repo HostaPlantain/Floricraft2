@@ -3,17 +3,8 @@ repositories {
         name 'DVS1 Maven FS'
         url 'http://dvs1.progwml6.com/files/maven'
     }
-    maven {     // TOP
-        name 'tterrag maven'
-        url "http://maven.tterrag.com"
-    }  
-    maven {     //Baubles
-        name "thiakil"
-        url "http://maven.thiakil.com"
-    }
-    maven {     // CoFH
-        name "CoFH Maven"
-        url "http://maven.covers1624.net"
+    maven {		//CurseForge
+        url "http://minecraft.curseforge.com/api/maven/"
     }
 }
 
@@ -31,13 +22,12 @@ configFile.withReader {
 }
 
 dependencies {
-	deobfCompile "slimeknights.mantle:Mantle:${config.mantle_version}"
-    deobfCompile "slimeknights:TConstruct:${config.tic_version}"
+	deobfCompile "slimeknights.mantle:Mantle:${config.minecraft_version_short}-${config.mantle_version}"
+    deobfCompile "slimeknights:TConstruct:${config.minecraft_version}-${config.tic_version}"
     deobfCompile "mezz.jei:jei_1.12.2:${config.jei_version}"
-    deobfCompile "mcjty.theoneprobe:TheOneProbe-1.12:${config.top_version}"
-    deobfCompile "com.azanor.baubles:Baubles:${config.baubles_version}"
-    deobfCompile "cofh:RedstoneFlux:${config.rf_version}:universal"
-    compile fileTree(dir: 'libs', include: '*.jar')
+    deobfCompile "baubles:Baubles:${config.minecraft_version_short}:${config.baubles_version}"
+    deobfCompile "thaumcraft:Thaumcraft:${config.minecraft_version}:${config.thaumcraft_version}"
+    //compile fileTree(dir: 'libs', include: '*.jar')
 }
 
 configurations {
