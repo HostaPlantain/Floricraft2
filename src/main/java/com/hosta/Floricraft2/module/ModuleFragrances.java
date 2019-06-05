@@ -2,8 +2,8 @@ package com.hosta.Floricraft2.module;
 
 import com.hosta.Floricraft2.item.ItemBasic;
 import com.hosta.Floricraft2.item.ItemBasicMeta;
-import com.hosta.Floricraft2.item.fragrance.ItemVial;
 import com.hosta.Floricraft2.item.fragrance.ItemSachet;
+import com.hosta.Floricraft2.item.fragrance.ItemVial;
 import com.hosta.Floricraft2.potion.EffectActive;
 import com.hosta.Floricraft2.potion.EffectAntiMob;
 
@@ -15,7 +15,9 @@ import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityWitherSkeleton;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.monster.EntityZombieVillager;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -92,7 +94,8 @@ public class ModuleFragrances implements IModule {
 		(
 				shapedRecipe(null, SACHET_SAC, "ttt", "c c", " c ", 't', ModuleCrops.HEMP_TWINE, 'c', ModuleCrops.HEMP_CLOTH),
 				shapedRecipe(null, new ItemStack(SACHET_FLOWER, 1, 0), "ppp", "ppp", "tst", 'p', "petalsDry", 's', SACHET_SAC, 't', ModuleCrops.HEMP_TWINE),
-				shapelessRecipe(null, new ItemStack(SACHET_FLOWER, 1, 0), new ItemStack(SACHET_FLOWER, 1, OreDictionary.WILDCARD_VALUE), "petalsDry")
+				shapelessRecipe(null, new ItemStack(SACHET_FLOWER, 1, 0), new ItemStack(SACHET_FLOWER, 1, OreDictionary.WILDCARD_VALUE), "petalsDry"),
+				shapedRecipe(null, new ItemStack(VIAL_EMPTY, 3), "b b", " b ", 'b', new ItemStack(Blocks.STAINED_GLASS_PANE, 1, EnumDyeColor.BROWN.getDyeDamage()))
 		);
 
 		register
@@ -107,6 +110,11 @@ public class ModuleFragrances implements IModule {
 					shapedRecipe("sachet_anti", new ItemStack(SACHET_ANTIS[i], 1, 0), "ppp", "ppp", "tst", 'p', anti[i], 's', new ItemStack(SACHET_FLOWER, 1, OreDictionary.WILDCARD_VALUE), 't', ModuleCrops.HEMP_TWINE),
 					shapelessRecipe(null, new ItemStack(SACHET_ANTIS[i], 1, 0), new ItemStack(SACHET_FLOWER, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(VIAL_ANTIS, 1, i)),
 					shapelessRecipe(null, new ItemStack(SACHET_ANTIS[i], 1, 0), new ItemStack(SACHET_ANTIS[i], 1, OreDictionary.WILDCARD_VALUE), "petalsDry")
+			);
+			
+			register
+			(
+					brewingRecipe(new ItemStack(VIAL_FLOWER), new ItemStack(anti[i]), new ItemStack(VIAL_ANTIS, 1, i))
 			);
 		}
 	}

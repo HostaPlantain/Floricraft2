@@ -1,6 +1,33 @@
 
 itemGroup.floricraft2=Floricraft2
 
+#############
+### Crops ###
+#############
+
+tile.crop_hemp.name=Hemp
+item.seed_hemp.name=Hemp Seed
+
+item.hemp_yarn.name=Hemp Yarn
+item.hemp_twine.name=Hemp Twine
+item.hemp_spool.name=Hemp Twine Spool
+item.hemp_cloth.name=Hemp Cloth
+
+
+#############
+### Dolls ###
+#############
+
+tile.doll_iron.name=Iron Golem Doll
+tile.doll_player.name=Player Doll
+
+
+############
+### Farm ###
+############
+
+
+
 ###############
 ### Flowers ###
 ###############
@@ -182,24 +209,20 @@ item.petals_sugared.rose.name=Crystallized Rose Petals
 item.petals_sugared.peony.name=Crystallized Peony Petals
 item.petals_sugared.sakura.name=Crystallized Sakura Petals
 
-#####################
-### Item & Blocks ###
-#####################
 
-item.ingot_twinkle.name=Twinkle Ingot
-item.nugget_twinkle.name=Twinkle Nugget
-tile.block_twinkle.name=Twinkle Block
+##################
+### Fragrances ###
+##################
 
-item.dust_salt.name=Salt
-tile.ore_salt.name=Salt Ore
-tile.block_salt.name=Salt Block
-
-tile.crop_hemp.name=Hemp
-item.seed_hemp.name=Hemp Seed
-item.hemp_yarn.name=Hemp Yarn
-item.hemp_twine.name=Hemp Twine
-item.hemp_spool.name=Hemp Twine Spool
-item.hemp_cloth.name=Hemp Cloth
+item.vial_empty.name=Empty Vial
+item.vial_water.name=Water Vial
+item.vial_flower.name=Flower Essence
+item.vial_anti.zombie.name=Anti-Zombie Essence
+item.vial_anti.skeleton.name=Anti-Skeleton Essence
+item.vial_anti.creeper.name=Anti-Creeper Essence
+item.vial_anti.spider.name=Anti-Spider Essence
+item.vial_anti.ender.name=Anti-Ender Essence
+item.vial_moon.name=Moon Drip
 
 item.sachet_sac.name=Sachet Sac
 item.sachet_flower.name=Flower Sachet
@@ -209,11 +232,7 @@ item.sachet_anti_creeper.name=Anti-Creeper Sachet
 item.sachet_anti_spider.name=Anti-Spider Sachet
 item.sachet_anti_ender.name=Anti-Ender Sachet
 
-item.pruner.name=Pruner
-
-###############
 ### Potions ###
-###############
 
 effect.floric=Floric
 effect.hillstep=Hill Step
@@ -224,9 +243,38 @@ effect.anti_creeper=Anti-Creeper
 effect.anti_spider=Anti-Spider
 effect.anti_ender=Anti-Ender
 
-####################
+
+#################
+### Materials ###
+#################
+
+item.ingot_twinkle.name=Twinkle Ingot
+item.nugget_twinkle.name=Twinkle Nugget
+tile.block_twinkle.name=Twinkle Block
+
+item.dust_salt.name=Salt
+tile.ore_salt.name=Salt Ore
+tile.block_salt.name=Salt Block
+
+
+##############
+### Plants ###
+##############
+
+
+
+#############
+### Tools ###
+#############
+
+item.pruner.name=Pruner
+
+
+##############
+### Others ###
+##############
+
 ### Enchantments ###
-####################
 
 enchantment.floric=Floric
 enchantment.floricraft2.floric.desc=Applies floric to the wielder, and generates flower particles when attacking
@@ -255,7 +303,7 @@ tc.research_category.FLORALIA=Floralia
 ### Floriconstract ###
 ######################
 
-fluid.molten_twinkle=Twinkling Molten Metal
+fluid.molten_twinkle.name=Twinkling Molten Metal
 
 material.twinkle.name=Twinkle
 
