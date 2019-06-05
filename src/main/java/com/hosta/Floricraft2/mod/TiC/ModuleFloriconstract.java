@@ -177,7 +177,11 @@ public class ModuleFloriconstract implements IModule {
 			{
 				if ((mod instanceof ModifierTrait || !(mod instanceof AbstractTrait)) && mod.canApply(stack.copy(), stack))
 				{
-					ModelRegisterUtil.registerModifierModel(mod, RegisterHelper.getResourceLocation("models/item/modifiers/" + mod.getIdentifier()));
+					String modName = mod.getIdentifier();
+					if (!modName.matches("beheading_cleaver") && !modName.matches("creative") && !modName.matches("extratrait"))
+					{
+						ModelRegisterUtil.registerModifierModel(mod, RegisterHelper.getResourceLocation("models/item/modifiers/" + modName));
+					}
 				}
 			}
 			catch (Exception e)	{	}
