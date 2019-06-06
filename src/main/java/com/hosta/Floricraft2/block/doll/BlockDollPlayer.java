@@ -1,7 +1,12 @@
 package com.hosta.Floricraft2.block.doll;
 
+import java.util.UUID;
+
+import com.google.gson.JsonObject;
 import com.hosta.Floricraft2.client.render.tileentity.TileEntityDollPlayerRenderer;
 import com.hosta.Floricraft2.tileentity.doll.TileEntityDollPlayer;
+import com.hosta.Floricraft2.util.Helper;
+import com.mojang.authlib.GameProfile;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -33,9 +38,31 @@ public class BlockDollPlayer extends BlockDoll {
 
 		TileEntityDollPlayer doll = (TileEntityDollPlayer) this.getTileEntityDoll(worldIn, pos);
 
-		if (doll != null && placer instanceof EntityPlayer)
+		if (doll != null)
 		{
-			doll.setDisplayedplayer((EntityPlayer) placer);
+			if (stack.hasDisplayName())
+			{
+				try
+				{
+					JsonObject json = Helper.getJsonFromURL("https://api.mojang.com/users/profiles/minecraft/" + stack.getDisplayName()).getAsJsonObject();
+					String id = json.get("id").getAsString();
+					id = id.substring(0, 8) + "-" + id.substring(8, 12) + "-" + id.substring(12, 16) + "-" + id.substring(16, 20) + "-" + id.substring(20);
+					UUID uuid = UUID.fromString(id);
+					String name = json.get("name").getAsString();
+					doll.setDisplayedplayer(new GameProfile(uuid, name));
+				}
+				catch (Exception e)
+				{
+					if (placer instanceof EntityPlayer)
+					{
+						doll.setDisplayedplayer((EntityPlayer) placer);
+					}
+				}
+			}
+			else if (placer instanceof EntityPlayer)
+			{
+				doll.setDisplayedplayer((EntityPlayer) placer);
+			}
 			doll.markDirty();
 		}
 	}
@@ -64,5 +91,4 @@ public class BlockDollPlayer extends BlockDoll {
 	{
 		return new TileEntityDollPlayerRenderer();
 	}
-
 }

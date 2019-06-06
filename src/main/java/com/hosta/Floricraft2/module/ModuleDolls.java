@@ -2,10 +2,12 @@ package com.hosta.Floricraft2.module;
 
 import com.hosta.Floricraft2.block.doll.BlockDollIronSit;
 import com.hosta.Floricraft2.block.doll.BlockDollPlayer;
+import com.hosta.Floricraft2.item.doll.ItemMessage;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -13,6 +15,7 @@ public class ModuleDolls implements IModule {
 
 	// Item Usable
 	// public static final Item ITEM_BALLON;
+	public static final Item	LETTER		= new ItemMessage("letter");
 
 	// Doll
 	public static final Block	DOLL_IRON	= new BlockDollIronSit("doll_iron");
@@ -25,6 +28,12 @@ public class ModuleDolls implements IModule {
 	public void registerBlocks()
 	{
 		this.register(DOLL_IRON, DOLL_PLAYER);
+	}
+
+	@Override
+	public void registerItems()
+	{
+		this.register(LETTER);
 	}
 
 	@Override

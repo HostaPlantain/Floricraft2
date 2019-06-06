@@ -5,6 +5,7 @@ import com.mojang.authlib.GameProfile;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
+import net.minecraft.tileentity.TileEntitySkull;
 
 public class TileEntityDollPlayer extends TileEntityDoll {
 
@@ -33,7 +34,7 @@ public class TileEntityDollPlayer extends TileEntityDoll {
 		if (this.getDisplayedplayer() != null)
 		{
 			NBTTagCompound nbtProfile = new NBTTagCompound();
-			NBTUtil.writeGameProfile(nbtProfile, this.getDisplayedplayer());
+			NBTUtil.writeGameProfile(nbtProfile, TileEntitySkull.updateGameprofile(this.getDisplayedplayer()));
 			nbt.setTag("Owner", nbtProfile);
 		}
 

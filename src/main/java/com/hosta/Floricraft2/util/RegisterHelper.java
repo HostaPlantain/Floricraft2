@@ -3,8 +3,6 @@ package com.hosta.Floricraft2.util;
 import java.util.HashMap;
 import java.util.List;
 
-import org.jline.utils.Log;
-
 import com.hosta.Floricraft2.Floricraft2;
 import com.hosta.Floricraft2.Reference;
 import com.hosta.Floricraft2.block.BlockBasicCrops;
@@ -42,7 +40,7 @@ public class RegisterHelper {
 
 	public static void warn(Object entry)
 	{
-		Log.warn("Too late! Registering has been faled!", entry);
+		// Log.warn("Too late! Registering has been failed!", entry);
 	}
 
 	public static ResourceLocation getResourceLocation(String path)

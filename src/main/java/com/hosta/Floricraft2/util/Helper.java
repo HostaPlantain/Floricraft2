@@ -1,6 +1,12 @@
 package com.hosta.Floricraft2.util;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.Random;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.item.EnumDyeColor;
@@ -10,6 +16,14 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class Helper {
+
+	public static JsonElement getJsonFromURL(String path) throws IOException
+	{
+		URL url = new URL(path);
+		InputStreamReader reader = new InputStreamReader(url.openStream());
+		JsonParser parser = new JsonParser();
+		return parser.parse(reader);
+	}
 
 	public static void spawnParticleOn(Entity entity, EnumParticleTypes particle)
 	{

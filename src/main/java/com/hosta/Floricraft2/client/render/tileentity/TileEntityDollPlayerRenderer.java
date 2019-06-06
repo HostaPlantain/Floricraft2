@@ -11,12 +11,10 @@ import com.mojang.authlib.minecraft.MinecraftProfileTexture.Type;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelPlayer;
-import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.resources.DefaultPlayerSkin;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -41,30 +39,22 @@ public class TileEntityDollPlayerRenderer extends TileEntityDollRenderer<TileEnt
 		GameProfile profile = te.getDisplayedplayer();
 		Minecraft minecraft = Minecraft.getMinecraft();
 
-		ResourceLocation skin = null;
+		ResourceLocation skin = SKIN_STEVE;
 		boolean isSteve = true;
 
 		if (profile != null)
 		{
 			Map<Type, MinecraftProfileTexture> map = minecraft.getSkinManager().loadSkinFromCache(profile);
-			UUID uuid = EntityPlayer.getUUID(profile);
-
 			if (map.containsKey(Type.SKIN))
 			{
-				skin = minecraft.getSkinManager().loadSkin((MinecraftProfileTexture) map.get(Type.SKIN), Type.SKIN);
-			} else
+				skin = minecraft.getSkinManager().loadSkin(map.get(Type.SKIN), Type.SKIN);
+			}
+			else
 			{
+				UUID uuid = profile.getId();
 				skin = DefaultPlayerSkin.getDefaultSkin(uuid);
+				isSteve = "default".equals(DefaultPlayerSkin.getSkinType(uuid));
 			}
-
-			NetworkPlayerInfo info = Minecraft.getMinecraft().getConnection().getPlayerInfo(uuid);
-			if (info != null)
-			{
-				isSteve = "default".equals(info.getSkinType());
-			}
-		} else
-		{
-			skin = SKIN_STEVE;
 		}
 
 		this.bindTexture(skin);
@@ -83,10 +73,10 @@ public class TileEntityDollPlayerRenderer extends TileEntityDollRenderer<TileEnt
 
 		if (isSteve)
 		{
-			MODEL_STEVE.render(Minecraft.getMinecraft().player, 0.4F, 0.75F, 0.0F, 0.0F, 0.0F, 0.05F);
+			MODEL_STEVE.render(minecraft.player, 0.4F, 0.75F, 0.0F, 0.0F, 0.0F, 0.05F);
 		} else
 		{
-			MODEL_ALEX.render(Minecraft.getMinecraft().player, 0.4F, 0.75F, 0.0F, 0.0F, 0.0F, 0.05F);
+			MODEL_ALEX.render(minecraft.player, 0.4F, 0.75F, 0.0F, 0.0F, 0.0F, 0.05F);
 		}
 
 		RenderHelper.disableStandardItemLighting();
