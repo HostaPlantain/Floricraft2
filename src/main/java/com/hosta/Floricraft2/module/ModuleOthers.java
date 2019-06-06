@@ -1,7 +1,9 @@
 package com.hosta.Floricraft2.module;
 
+import com.hosta.Floricraft2.Floricraft2;
 import com.hosta.Floricraft2.Reference;
 import com.hosta.Floricraft2.enchantment.EnchantmentFloric;
+import com.hosta.Floricraft2.inventory.GuiHandler;
 import com.hosta.Floricraft2.packet.PacketNBTParticle;
 import com.hosta.Floricraft2.packet.PacketNBTParticleHandler;
 import com.hosta.Floricraft2.recipe.RecipeNaming;
@@ -51,6 +53,7 @@ public class ModuleOthers implements IModule {
 	public void preInit()
 	{
 		NETWORK_PARTICLE.registerMessage(PacketNBTParticleHandler.class, PacketNBTParticle.class, 0, Side.CLIENT);
+		NetworkRegistry.INSTANCE.registerGuiHandler(Floricraft2.fc, new GuiHandler());
 	}
 
 	@Override

@@ -15,7 +15,7 @@ public class ModuleDolls implements IModule {
 
 	// Item Usable
 	// public static final Item ITEM_BALLON;
-	public static final Item	LETTER		= new ItemMessage("letter");
+	public static final Item	LETTER_RECEIVED		= new ItemMessage("letter_received");
 
 	// Doll
 	public static final Block	DOLL_IRON	= new BlockDollIronSit("doll_iron");
@@ -33,7 +33,7 @@ public class ModuleDolls implements IModule {
 	@Override
 	public void registerItems()
 	{
-		this.register(LETTER);
+		this.register(LETTER_RECEIVED);
 	}
 
 	@Override
