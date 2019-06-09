@@ -4,7 +4,6 @@ import com.hosta.Floricraft2.client.gui.GuiMessage;
 import com.hosta.Floricraft2.inventory.container.ContainerMessage;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
@@ -32,7 +31,7 @@ public class GuiHandler implements IGuiHandler {
 		switch (ID)
 		{
 			case MESSAGE_RECEIVED:
-				return new GuiMessage((Container)getServerGuiElement(ID, player, world, x, y, z));
+				return new GuiMessage(player);
 
 			default:
 				return null;

@@ -18,8 +18,15 @@ item.hemp_cloth.name=Hemp Cloth
 ### Dolls ###
 #############
 
+item.letter_bottled.name=Letter in a Bottle
+item.letter_received.name=Received Letter
 tile.doll_iron.name=Iron Golem Doll
 tile.doll_player.name=Player Doll
+
+### Custom ###
+
+custom.from.before= from 
+custom.from.after=
 
 
 ############

@@ -2,6 +2,7 @@ package com.hosta.Floricraft2.module;
 
 import com.hosta.Floricraft2.block.doll.BlockDollIronSit;
 import com.hosta.Floricraft2.block.doll.BlockDollPlayer;
+import com.hosta.Floricraft2.item.ItemBasic;
 import com.hosta.Floricraft2.item.doll.ItemMessage;
 
 import net.minecraft.block.Block;
@@ -15,6 +16,7 @@ public class ModuleDolls implements IModule {
 
 	// Item Usable
 	// public static final Item ITEM_BALLON;
+	public static final Item	LETTER_BOTTLED		= new ItemBasic("letter_bottled").setMaxStackSize(1);
 	public static final Item	LETTER_RECEIVED		= new ItemMessage("letter_received");
 
 	// Doll
@@ -33,7 +35,7 @@ public class ModuleDolls implements IModule {
 	@Override
 	public void registerItems()
 	{
-		this.register(LETTER_RECEIVED);
+		this.register(LETTER_BOTTLED, LETTER_RECEIVED);
 	}
 
 	@Override
@@ -41,6 +43,7 @@ public class ModuleDolls implements IModule {
 	{
 		this.register
 		(
+				shapelessRecipe(null, LETTER_RECEIVED, LETTER_BOTTLED),
 				shapedRecipe(null, new ItemStack(DOLL_IRON), " p ", "iii", " i ", 'p', Blocks.PUMPKIN, 'i', Items.IRON_INGOT),
 				shapedRecipe(null, new ItemStack(DOLL_PLAYER), " h ", "iii", " i ", 'h', new ItemStack(Items.SKULL, 1, OreDictionary.WILDCARD_VALUE), 'i', Items.IRON_INGOT)
 		);

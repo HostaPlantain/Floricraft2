@@ -1,8 +1,8 @@
 package com.hosta.Floricraft2.module;
 
+import com.hosta.Floricraft2.Floricraft2;
 import com.hosta.Floricraft2.block.flower.BlockStackDead;
 import com.hosta.Floricraft2.block.flower.BlockStackFlower;
-import com.hosta.Floricraft2.config.Config;
 import com.hosta.Floricraft2.item.ItemBasicMeta;
 import com.hosta.Floricraft2.item.flower.ItemFoodSugared;
 
@@ -19,7 +19,7 @@ public class ModuleFlowers implements IModule {
 	static 
 	{
 		String[] defaultFlowers = new String[] { "dandelion", "poppy", "blue_orchid", "allium", "azure_bluet", "red_tulip", "orange_tulip", "white_tulip", "pink_tulip", "oxeye_daisy", "sunflower", "lilac", "rose", "peony" };
-		String[] addedFlowers = Config.getAddedFlowers();
+		String[] addedFlowers = Floricraft2.CONFIG.getAddedFlowers();
 
 		FLOWERS = new String[defaultFlowers.length + addedFlowers.length];
 		System.arraycopy(defaultFlowers, 0, FLOWERS, 0, defaultFlowers.length);

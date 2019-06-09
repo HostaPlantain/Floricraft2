@@ -49,9 +49,9 @@ public class Floricraft2 {
 
 	// Module
 	private static boolean				readyForModules	= true;
+	public static final Config 			CONFIG			= new Config();
 	private static final List<IModule>	MODULES			= new ArrayList<IModule>();
 	{
-		Config.lord();
 		this.register
 		(
 				(IModule) new ModuleCrops(),
