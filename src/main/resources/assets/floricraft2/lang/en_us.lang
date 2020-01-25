@@ -20,6 +20,7 @@ item.hemp_cloth.name=Hemp Cloth
 
 item.letter_bottled.name=Letter in a Bottle
 item.letter_received.name=Received Letter
+
 tile.doll_iron.name=Iron Golem Doll
 tile.doll_player.name=Player Doll
 
@@ -223,21 +224,13 @@ item.petals_sugared.sakura.name=Crystallized Sakura Petals
 
 item.vial_empty.name=Empty Vial
 item.vial_water.name=Water Vial
-item.vial_flower.name=Flower Essence
-item.vial_anti.zombie.name=Anti-Zombie Essence
-item.vial_anti.skeleton.name=Anti-Skeleton Essence
-item.vial_anti.creeper.name=Anti-Creeper Essence
-item.vial_anti.spider.name=Anti-Spider Essence
-item.vial_anti.ender.name=Anti-Ender Essence
+item.vial_flower.name=Flower Essential Oil
 item.vial_moon.name=Moon Drip
+item.vial_potion.name=Volatility Potion
+item.vial_mix.name=Perfume
 
 item.sachet_sac.name=Sachet Sac
 item.sachet_flower.name=Flower Sachet
-item.sachet_anti_zombie.name=Anti-Zombie Sachet
-item.sachet_anti_skeleton.name=Anti-Skeleton Sachet
-item.sachet_anti_creeper.name=Anti-Creeper Sachet
-item.sachet_anti_spider.name=Anti-Spider Sachet
-item.sachet_anti_ender.name=Anti-Ender Sachet
 
 ### Potions ###
 
@@ -291,11 +284,7 @@ enchantment.floricraft2.floric.desc=Applies floric to the wielder, and generates
 ###############
 
 item.charm_sachet_flower.name=Flower Sachet Charm
-item.charm_sachet_anti_zombie.name=Anti-Zombie Sachet Charm
-item.charm_sachet_anti_skeleton.name=Anti-Skeleton Sachet Charm
-item.charm_sachet_anti_creeper.name=Anti-Creeper Sachet Charm
-item.charm_sachet_anti_spider.name=Anti-Spider Sachet Charm
-item.charm_sachet_anti_ender.name=Anti-Ender Sachet Charm
+
 
 ################
 ### Floralia ###
@@ -310,8 +299,7 @@ tc.research_category.FLORALIA=Floralia
 ### Floriconstract ###
 ######################
 
-fluid.molten_twinkle.name=Twinkling Molten Metal
-
+fluid.twinkle.name=Twinkling Molten Metal
 material.twinkle.name=Twinkle
 
 item.part_petal.name=Petal
@@ -323,3 +311,4 @@ modifier.floric.name=Floric
 modifier.floric.desc=§oBreeze brings you a smell of healing.§r\nApplies floric effect to the wielder and generates flower particles!
 modifier.twinkle.name=Twinkling
 modifier.twinkle.desc=§oTwinkle, twinkle, little star, How I wonder what you are!§r\nFairy's blessing for you.
+
