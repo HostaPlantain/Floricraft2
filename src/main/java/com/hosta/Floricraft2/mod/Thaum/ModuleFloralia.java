@@ -1,11 +1,11 @@
 package com.hosta.Floricraft2.mod.Thaum;
 
+import com.hosta.Floricraft2.Reference;
 import com.hosta.Floricraft2.module.IModule;
 import com.hosta.Floricraft2.module.ModuleCrops;
 import com.hosta.Floricraft2.module.ModuleFlowers;
 import com.hosta.Floricraft2.module.ModuleMaterials;
 import com.hosta.Floricraft2.module.ModuleOthers;
-import com.hosta.Floricraft2.util.RegisterHelper;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
@@ -26,8 +26,8 @@ import thaumcraft.api.research.ResearchCategories;
 
 public class ModuleFloralia implements IModule {
 
-	public static final Aspect	FLOWER	= new Aspect("flos", 0xFFADAD, new Aspect[] { Aspect.PLANT, Aspect.AIR }, RegisterHelper.getResourceLocation("textures/aspects/" + "flos" + ".png"), 1);
-	public static final Aspect	FAIRY	= new Aspect("fata", ModuleOthers.COLOR_FLORIC, new Aspect[] { Aspect.MAGIC, Aspect.FLIGHT }, RegisterHelper.getResourceLocation("textures/aspects/" + "nympha" + ".png"), 1);
+	public static final Aspect	FLOWER	= new Aspect("flos", 0xFFADAD, new Aspect[] { Aspect.PLANT, Aspect.AIR }, Reference.getResourceLocation("textures/aspects/" + "flos" + ".png"), 1);
+	public static final Aspect	FAIRY	= new Aspect("fata", ModuleOthers.COLOR_FLORIC, new Aspect[] { Aspect.MAGIC, Aspect.FLIGHT }, Reference.getResourceLocation("textures/aspects/" + "nympha" + ".png"), 1);
 
 	@Override
 	public void preInit()
@@ -84,8 +84,8 @@ public class ModuleFloralia implements IModule {
 
 	private void registerResearches()
 	{
-		ResearchCategories.registerCategory("FLORALIA", null, new AspectList(), RegisterHelper.getResourceLocation("textures/items/cut_flower_rose.png"), RegisterHelper.getResourceLocation("textures/gui/gui_floralia_back_1.jpg"), new ResourceLocation(Thaumcraft.MODID, "textures/gui/gui_research_back_over.png"));
-		ThaumcraftApi.registerResearchLocation(RegisterHelper.getResourceLocation("research/floralia"));
+		ResearchCategories.registerCategory("FLORALIA", null, new AspectList(), Reference.getResourceLocation("textures/items/cut_flower_rose.png"), Reference.getResourceLocation("textures/gui/gui_floralia_back_1.jpg"), new ResourceLocation(Thaumcraft.MODID, "textures/gui/gui_research_back_over.png"));
+		ThaumcraftApi.registerResearchLocation(Reference.getResourceLocation("research/floralia"));
 	}
 
 	private static void registerAspect(Item item, AspectList aspects, AspectEventProxy register)
@@ -103,16 +103,19 @@ public class ModuleFloralia implements IModule {
 		register.registerObjectTag(itemstack, aspects);
 	}
 
+	@SuppressWarnings("unused")
 	private static void registerAspect(String oreDict, AspectList aspects, AspectEventProxy register)
 	{
 		register.registerObjectTag(oreDict, aspects);
 	}
 
+	@SuppressWarnings("unused")
 	private static void registerAddAspect(Item item, AspectList aspects, AspectEventProxy register)
 	{
 		registerAddAspect(new ItemStack(item), aspects, register);
 	}
 
+	@SuppressWarnings("unused")
 	private static void registerAddAspect(Block block, AspectList aspects, AspectEventProxy register)
 	{
 		registerAddAspect(new ItemStack(block), aspects, register);
@@ -123,6 +126,7 @@ public class ModuleFloralia implements IModule {
 		register.registerComplexObjectTag(itemstack, aspects);
 	}
 
+	@SuppressWarnings("unused")
 	private static void registerAddAspect(String oreDict, AspectList aspects, AspectEventProxy register)
 	{
 		register.registerComplexObjectTag(oreDict, aspects);
@@ -130,6 +134,6 @@ public class ModuleFloralia implements IModule {
 
 	private void registerCrucibeRecipe(String path, String key, ItemStack result, ItemStack recipe, AspectList aspects)
 	{
-		ThaumcraftApi.addCrucibleRecipe(RegisterHelper.getResourceLocation(path), new CrucibleRecipe(key, result, recipe, aspects));
+		ThaumcraftApi.addCrucibleRecipe(Reference.getResourceLocation(path), new CrucibleRecipe(key, result, recipe, aspects));
 	}
 }

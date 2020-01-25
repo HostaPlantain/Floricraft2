@@ -28,7 +28,7 @@ public class ItemMessage extends ItemBasic {
 		this.setMessage(worldIn, playerIn.getHeldItem(handIn));
 		playerIn.openGui(Floricraft2.fc, GuiHandler.MESSAGE_RECEIVED, worldIn, (int)playerIn.posX, (int)playerIn.posY, (int)playerIn.posZ);
 
-		return new ActionResult(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
+		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
 	}
 
 	private void setMessage(World worldIn, ItemStack stack)

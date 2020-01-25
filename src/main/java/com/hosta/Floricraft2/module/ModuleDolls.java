@@ -12,7 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class ModuleDolls implements IModule {
+public class ModuleDolls implements IModule, IModuleRecipe {
 
 	// Item Usable
 	// public static final Item ITEM_BALLON;

@@ -10,7 +10,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class ModuleCrops implements IModule {
+public class ModuleCrops implements IModule, IModuleRecipe {
 
 	// Crop
 	public static final Block	CROP_HEMP	= new BlockBasicCrops("crop_hemp");

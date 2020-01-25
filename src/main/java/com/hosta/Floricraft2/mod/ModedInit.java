@@ -2,6 +2,7 @@ package com.hosta.Floricraft2.mod;
 
 import com.hosta.Floricraft2.Floricraft2;
 import com.hosta.Floricraft2.mod.Baubles.ModuleBaubles;
+import com.hosta.Floricraft2.mod.Botania.ModuleBotania;
 import com.hosta.Floricraft2.mod.Thaum.ModuleFloralia;
 import com.hosta.Floricraft2.mod.TiC.ModuleFloriconstract;
 import com.hosta.Floricraft2.module.IModule;
@@ -11,7 +12,7 @@ import net.minecraftforge.fml.common.Loader;
 public class ModedInit {
 
 	public static boolean	isBaublesLoaded;
-	// public static boolean isBotaniaLoaded;
+	public static boolean	isBotaniaLoaded;
 	public static boolean	isThaumLoaded;
 	public static boolean	isTiCLoaded;
 	// public static boolean isJEILoaded;
@@ -22,6 +23,12 @@ public class ModedInit {
 		if (isBaublesLoaded)
 		{
 			Floricraft2.register((IModule) new ModuleBaubles());
+		}
+
+		isBotaniaLoaded = Loader.isModLoaded("botania");
+		if (isBotaniaLoaded)
+		{
+			Floricraft2.register((IModule) new ModuleBotania());
 		}
 
 		isThaumLoaded = Loader.isModLoaded("thaumcraft");

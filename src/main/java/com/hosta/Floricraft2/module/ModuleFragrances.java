@@ -1,73 +1,67 @@
 package com.hosta.Floricraft2.module;
 
+import com.hosta.Floricraft2.Floricraft2;
 import com.hosta.Floricraft2.item.ItemBasic;
-import com.hosta.Floricraft2.item.ItemBasicMeta;
 import com.hosta.Floricraft2.item.fragrance.ItemSachet;
 import com.hosta.Floricraft2.item.fragrance.ItemVial;
+import com.hosta.Floricraft2.item.fragrance.ItemVialEssence;
 import com.hosta.Floricraft2.potion.EffectActive;
 import com.hosta.Floricraft2.potion.EffectAntiMob;
+import com.hosta.Floricraft2.util.Helper;
 
-import net.minecraft.entity.monster.EntityCaveSpider;
-import net.minecraft.entity.monster.EntityCreeper;
-import net.minecraft.entity.monster.EntityEnderman;
-import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.monster.EntitySpider;
-import net.minecraft.entity.monster.EntityWitherSkeleton;
-import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.entity.monster.EntityZombieVillager;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class ModuleFragrances implements IModule {
-
-	public static final String[]	ANTI_MOBS		= new String[] { "zombie", "skeleton", "creeper", "spider", "ender" };
+public class ModuleFragrances implements IModule, IModuleRecipe {
 
 	// Potion
-	public static final Potion		POTION_FLORIC	= new EffectActive("effect.floric", ModuleOthers.COLOR_FLORIC, false).setIconIndex(0, 0);
-	public static final Potion		POTION_HILLSTEP	= new EffectActive("effect.hillstep", 0xEEFFDA, false).setIconIndex(0, 0);
-	public static final Potion[]	POTION_ANTIS	= new Potion[ANTI_MOBS.length];
+	public static final Potion			POTION_FLORIC	= new EffectActive("effect.floric", ModuleOthers.COLOR_FLORIC, false).setIconIndex(0, 0);
+	public static final Potion			POTION_HILLSTEP	= new EffectActive("effect.hillstep", 0xEEFFDA, false).setIconIndex(0, 0);
+	public static final EffectAntiMob[]	POTION_ANTIS	= new EffectAntiMob[Floricraft2.CONFIG.getAddedAntiPotions().length];
 	static
 	{
 		int i = 0;
-		Class[][] antiClass = new Class[POTION_ANTIS.length][];
-		antiClass[i++] = new Class[] { EntityZombie.class, EntityZombieVillager.class };
-		antiClass[i++] = new Class[] { EntitySkeleton.class, EntityWitherSkeleton.class };
-		antiClass[i++] = new Class[] { EntityCreeper.class };
-		antiClass[i++] = new Class[] { EntitySpider.class, EntityCaveSpider.class };
-		antiClass[i++] = new Class[] { EntityEnderman.class };
-		String effectAnti = "effect.anti_";
-		for (int j = 0; j < i; j++)
+		for (String anti : Floricraft2.CONFIG.getAddedAntiPotions())
 		{
-			POTION_ANTIS[j] = new EffectAntiMob(effectAnti + ANTI_MOBS[j], 0xADDAAD, antiClass[j]).setIconIndex(0, 0);
+			POTION_ANTIS[i++] = getAntiEffect(anti);
 		}
 	}
+	
+	private static EffectAntiMob getAntiEffect(String anti)
+	{
+		String[] config = anti.split(";");
+		Class[] antiClass = new Class[config.length - 3];
+		for (int j = 0; j < antiClass.length; j++)
+		{
+			try
+			{
+				antiClass[j] = Class.forName(config[3 + j]);
+			}
+			catch (ClassNotFoundException e) {	}
+		}
+		return (EffectAntiMob)new EffectAntiMob("effect.anti_" + config[0], Integer.parseInt(config[1]), antiClass, config[2]).setIconIndex(0, 0);
+	}
+		
 	public static final Potion	POTION_NO_TARGET	= new EffectActive("effect.no_target", ModuleOthers.COLOR_FLORIC, true).setIconIndex(0, 0);
 
 	// Vial
 	public static final Item	VIAL_EMPTY			= new ItemVial("vial_empty");
 	public static final Item	VIAL_WATER			= new ItemBasic("vial_water").setMaxStackSize(1);
-	public static final Item	VIAL_FLOWER			= new ItemBasic("vial_flower").setMaxStackSize(1);
-	public static final Item	VIAL_ANTIS			= new ItemBasicMeta("vial_anti", ANTI_MOBS).setMaxStackSize(1);
+	public static final Item	VIAL_FLOWER			= new ItemVialEssence("vial_flower").setMaxStackSize(1);
 	public static final Item	VIAL_MOON			= new ItemBasic("vial_moon");
+	public static final Item	VIAL_POTION			= new ItemVialEssence("vial_potion").setMaxStackSize(1);
+	public static final Item	VIAL_MIX			= new ItemVialEssence("vial_mix").setMaxStackSize(1);
 
 	// Sachet
 	public static final Item	SACHET_SAC			= new ItemBasic("sachet_sac");
-	public static final Item	SACHET_FLOWER		= new ItemSachet("sachet_flower", (Potion) null);
+	public static final Item	SACHET_FLOWER		= new ItemSachet("sachet_flower");
 	// public static final Item SACHET_ENDEARING;
-	public static final Item[]	SACHET_ANTIS		= new Item[ANTI_MOBS.length];
-	static
-	{
-		String sachetAnti = "sachet_anti_";
-		for (int i = 0; i < SACHET_ANTIS.length; i++)
-		{
-			SACHET_ANTIS[i] = new ItemSachet(sachetAnti + ANTI_MOBS[i], POTION_ANTIS[i]);
-		}
-	}
 
 	// Potpourri
 	// public static final Block POTPOURRI;
@@ -75,8 +69,17 @@ public class ModuleFragrances implements IModule {
 	@Override
 	public void registerItems()
 	{
-		register(VIAL_EMPTY, VIAL_WATER, VIAL_FLOWER, VIAL_ANTIS, VIAL_MOON, SACHET_SAC, SACHET_FLOWER);
-		register(SACHET_ANTIS);
+		register(VIAL_EMPTY, VIAL_WATER, VIAL_FLOWER, VIAL_MOON, VIAL_POTION, VIAL_MIX, SACHET_SAC, SACHET_FLOWER);
+	}
+
+	@Override
+	public void registerOreDictionary()
+	{
+		OreDictionary.registerOre("vialBase", VIAL_FLOWER);
+		OreDictionary.registerOre("vialBase", VIAL_POTION);
+		OreDictionary.registerOre("vialEffective", VIAL_FLOWER);
+		OreDictionary.registerOre("vialEffective", VIAL_POTION);
+		OreDictionary.registerOre("vialEffective", VIAL_MIX);
 	}
 
 	@Override
@@ -92,30 +95,26 @@ public class ModuleFragrances implements IModule {
 	{
 		register
 		(
-				shapedRecipe(null, SACHET_SAC, "ttt", "c c", " c ", 't', ModuleCrops.HEMP_TWINE, 'c', ModuleCrops.HEMP_CLOTH),
-				shapedRecipe(null, new ItemStack(SACHET_FLOWER, 1, 0), "ppp", "ppp", "tst", 'p', "petalsDry", 's', SACHET_SAC, 't', ModuleCrops.HEMP_TWINE),
-				shapelessRecipe(null, new ItemStack(SACHET_FLOWER, 1, 0), new ItemStack(SACHET_FLOWER, 1, OreDictionary.WILDCARD_VALUE), "petalsDry"),
-				shapedRecipe(null, new ItemStack(VIAL_EMPTY, 3), "b b", " b ", 'b', new ItemStack(Blocks.STAINED_GLASS_PANE, 1, EnumDyeColor.BROWN.getDyeDamage()))
+			shapedRecipe(null, SACHET_SAC, "tpt", "cpc", " c ", 'p', "petalsDry", 't', ModuleCrops.HEMP_TWINE, 'c', ModuleCrops.HEMP_CLOTH),
+			shapedRecipe(null, Helper.setEffect(new ItemStack(SACHET_FLOWER, 1, 0), new PotionEffect(POTION_FLORIC)), "ccc", "ccc", "tst", 'c', "petalsDry", 't', ModuleCrops.HEMP_TWINE, 's', SACHET_SAC),
+			shapedRecipe(null, new ItemStack(VIAL_EMPTY, 3), "b b", " b ", 'b', new ItemStack(Blocks.STAINED_GLASS_PANE, 1, EnumDyeColor.BROWN.getMetadata()))
 		);
-
 		register
 		(
-				brewingRecipe(new ItemStack(VIAL_WATER), new ItemStack(ModuleFlowers.PETALS_RAW, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(VIAL_FLOWER))
+			effectRecipe(null, SACHET_FLOWER, "b", "a", 'a', SACHET_SAC, 'b', "vialEffective"),
+			effectRecipe(null, SACHET_FLOWER, "b", "a", 'a', SACHET_SAC, 'b', VIAL_MOON),
+			effectRecipe(null, VIAL_POTION, "b", "a", 'a', VIAL_MOON, 'b', Items.POTIONITEM),
+			effectRecipe(null, VIAL_MIX, "b", "a", 'a', VIAL_MOON, 'b', "vialBase"),
+			effectRecipe(null, VIAL_MIX, "b", "a", 'a', VIAL_MIX, 'b', "vialEffective")
 		);
 
-		Item[] anti = new Item[] { Items.ROTTEN_FLESH, Items.BONE, Items.GUNPOWDER, Items.SPIDER_EYE, Items.ENDER_PEARL };
-		for (int i = 0; i < anti.length; i++)
+		ItemStack vialFlower = Helper.setEffect(new ItemStack(VIAL_FLOWER), new PotionEffect(POTION_FLORIC, 400, 0));
+		register(brewingRecipe(new ItemStack(VIAL_WATER), new ItemStack(ModuleFlowers.PETALS_RAW, 1, OreDictionary.WILDCARD_VALUE), vialFlower));
+
+		for (EffectAntiMob anti : POTION_ANTIS)
 		{
-			register(
-					shapedRecipe("sachet_anti", new ItemStack(SACHET_ANTIS[i], 1, 0), "ppp", "ppp", "tst", 'p', anti[i], 's', new ItemStack(SACHET_FLOWER, 1, OreDictionary.WILDCARD_VALUE), 't', ModuleCrops.HEMP_TWINE),
-					shapelessRecipe(null, new ItemStack(SACHET_ANTIS[i], 1, 0), new ItemStack(SACHET_FLOWER, 1, OreDictionary.WILDCARD_VALUE), new ItemStack(VIAL_ANTIS, 1, i)),
-					shapelessRecipe(null, new ItemStack(SACHET_ANTIS[i], 1, 0), new ItemStack(SACHET_ANTIS[i], 1, OreDictionary.WILDCARD_VALUE), "petalsDry")
-			);
-			
-			register
-			(
-					brewingRecipe(new ItemStack(VIAL_FLOWER), new ItemStack(anti[i]), new ItemStack(VIAL_ANTIS, 1, i))
-			);
+			register(brewingRecipe(vialFlower, anti.getItemToCraft(), Helper.setEffect(new ItemStack(VIAL_FLOWER), new PotionEffect(anti, 400, 0))));
+			register(shapedRecipe(null, Helper.setEffect(new ItemStack(SACHET_FLOWER, 1, 0), new PotionEffect(anti)), "ccc", "ccc", "tst", 'c', anti.getItemToCraft(), 's', SACHET_SAC, 't', ModuleCrops.HEMP_TWINE));
 		}
 	}
 }

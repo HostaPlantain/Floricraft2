@@ -1,15 +1,11 @@
 [
 {
-  "modid": "floricraft2",
-  "name": "Floricraft2",
-  "description": "Ornamental Horticulture mod.",
-  "version": "0.0.9",
-  "mcversion": "1.12.2",
-  "url": "https://minecraft.curseforge.com/projects/floricraft",
-  "authorList": ["Hosta"],
-  "credits": "",
   "logoFile": "assets/floricraft2/logo.png",
-  "dependencies": ["baubles", "thaumcraft", "tconstruct"],
-  "useDependencyInformation": true
+  "name": "Floricraft2",
+  "modid": "floricraft2",
+  "credits": "",
+  "authorList": ["Hosta"],
+  "url": "https://minecraft.curseforge.com/projects/floricraft",
+  "description": "Ornamental Horticulture mod."
 }
 ]

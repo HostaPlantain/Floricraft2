@@ -11,7 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class ModuleMaterials implements IModule {
+public class ModuleMaterials implements IModule, IModuleRecipe {
 
 	// Ingot
 	public static final Item	INGOT_TWINKLE	= new ItemBasic("ingot_twinkle");

@@ -1,5 +1,7 @@
 package com.hosta.Floricraft2.tileentity.doll;
 
+import java.util.List;
+
 import javax.annotation.Nonnull;
 
 import com.hosta.Floricraft2.item.fragrance.ItemSachet;
@@ -11,6 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.items.ItemHandlerHelper;
 
 public abstract class TileEntityDoll extends TileEntityBasicRendering implements ITickable {
@@ -79,12 +82,26 @@ public abstract class TileEntityDoll extends TileEntityBasicRendering implements
 	@Override
 	public void update()
 	{
-		if (!this.world.isRemote && this.getDisplayedItem().isEmpty())
+		ItemStack stack = this.getDisplayedItem();
+		if (!this.world.isRemote && !stack.isEmpty())
 		{
-			Item item = this.getDisplayedItem().getItem();
+			Item item = stack.getItem();
 			if (item instanceof ItemSachet)
 			{
-				// TO DO
+				ItemSachet sachet = ((ItemSachet)item);
+				int range = 5;
+				AxisAlignedBB aabb = this.getAxisAlignedBB().expand(range, range, range).expand(-range, -range, -range);
+				List<EntityPlayer> list = this.world.getEntitiesWithinAABB(EntityPlayer.class, aabb);
+				for (EntityPlayer player : list)
+				{
+					int addedEffects = sachet.appendEffects(stack, player);
+					if (addedEffects > 0)
+					{
+						addedEffects = 1 << (addedEffects - 1);
+						this.setDisplayedItem(sachet.damageItem(stack, addedEffects));
+						this.markDirty();
+					}
+				}
 			}
 		}
 	}

@@ -2,12 +2,11 @@ package com.hosta.Floricraft2.client.gui;
 
 import org.lwjgl.opengl.GL11;
 
-import com.hosta.Floricraft2.Floricraft2;
+import com.hosta.Floricraft2.Reference;
 import com.hosta.Floricraft2.inventory.container.ContainerMessage;
 import com.hosta.Floricraft2.item.doll.ItemMessage;
 import com.hosta.Floricraft2.module.ModuleDolls;
 import com.hosta.Floricraft2.util.Message;
-import com.hosta.Floricraft2.util.RegisterHelper;
 import com.mojang.realmsclient.gui.ChatFormatting;
 
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -20,8 +19,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GuiMessage extends GuiContainer {
 
-	private static final ResourceLocation	BACK_LAYER		= RegisterHelper.getResourceLocation("textures/gui/gui_letter.png");
-	private static final String				FAIL_MESSAGE	= "Connecting to the Server...";
+	private static final ResourceLocation	BACK_LAYER		= Reference.getResourceLocation("textures/gui/gui_letter.png");
+	private static final Message	FAIL_MESSAGE	= new Message("Hosta_Plantain (Mod Author)", "Connecting to the Server...");
 	protected final String		AUTHOR;
 	protected final String		LINES;
 
@@ -38,12 +37,14 @@ public class GuiMessage extends GuiContainer {
 		if (main.getItem() instanceof ItemMessage)
 		{
 			message = ((ItemMessage) ModuleDolls.LETTER_RECEIVED).getMessage(main);
-		} else if (off.getItem() instanceof ItemMessage)
+		}
+		else if (off.getItem() instanceof ItemMessage)
 		{
 			message = ((ItemMessage) ModuleDolls.LETTER_RECEIVED).getMessage(off);
-		} else
+		}
+		else
 		{
-			message = Floricraft2.CONFIG.OFFLINE;
+			message = FAIL_MESSAGE;
 		}
 
 		this.AUTHOR = message.getAuthor();

@@ -5,7 +5,7 @@ import com.hosta.Floricraft2.item.tool.ItemPruner;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 
-public class ModuleTools implements IModule {
+public class ModuleTools implements IModule, IModuleRecipe {
 
 	// Cloth Armor
 	// public static final ArmorMaterial CLOTH;

@@ -13,7 +13,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class ModuleFlowers implements IModule {
+public class ModuleFlowers implements IModule, IModuleRecipe {
 
 	public static final String[]	FLOWERS;
 	static 
@@ -73,7 +73,10 @@ public class ModuleFlowers implements IModule {
 	public void registerOreDictionary()
 	{
 		OreDictionary.registerOre("dustSugar", Items.SUGAR);
-		OreDictionary.registerOre("petalsDry", new ItemStack(PETALS_DRY, 1, OreDictionary.WILDCARD_VALUE));
+		for (int i = 0; i < ((ItemBasicMeta)PETALS_DRY).getSubNames().length; i++)
+		{
+			OreDictionary.registerOre("petalsDry", new ItemStack(PETALS_DRY, 1, i));
+		}
 	}
 
 	@Override

@@ -1,15 +1,10 @@
 package com.hosta.Floricraft2.potion;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 import com.hosta.Floricraft2.module.ModuleFragrances;
 import com.hosta.Floricraft2.util.Helper;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.EnumParticleTypes;
 
 public class EffectActive extends EffectBasic {
@@ -35,23 +30,7 @@ public class EffectActive extends EffectBasic {
 
 			if (entityLivingBaseIn.ticksExisted % i == 0)
 			{
-				Collection<PotionEffect> collection = entityLivingBaseIn.getActivePotionEffects();
-				List<PotionEffect> list = new ArrayList<PotionEffect>();
-
-				for (PotionEffect effect : collection)
-				{
-					if (effect.getPotion().isBadEffect() && effect.getDuration() > 20)
-					{
-						PotionEffect effectNew = new PotionEffect(effect.getPotion(), effect.getDuration() - 20, (effect.getAmplifier() != 0 && entityLivingBaseIn.world.rand.nextInt(20) == 0) ? effect.getAmplifier() - 1 : effect.getAmplifier(), effect.getIsAmbient(), effect.doesShowParticles());
-						entityLivingBaseIn.removePotionEffect(effect.getPotion());
-						list.add(effectNew);
-					}
-				}
-
-				for (PotionEffect effectNew : list)
-				{
-					entityLivingBaseIn.addPotionEffect(effectNew);
-				}
+				Helper.healBadEffect(entityLivingBaseIn, 20);
 
 				if (entityLivingBaseIn.getHealth() < entityLivingBaseIn.getMaxHealth())
 				{

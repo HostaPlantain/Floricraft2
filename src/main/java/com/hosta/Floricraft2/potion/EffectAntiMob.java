@@ -9,17 +9,21 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAITasks;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.AxisAlignedBB;
 
 public class EffectAntiMob<T extends EntityCreature> extends EffectBasic {
 
 	private final Class<T>[] ANTI_CALSS;
+	public final String ITEM;
 
-	public EffectAntiMob(String name, int liquidColorIn, Class[] list)
+	public EffectAntiMob(String name, int liquidColorIn, Class<T>[] list, String item)
 	{
 		super(name, liquidColorIn, false);
 		ANTI_CALSS = list;
+		ITEM = item;
 	}
 
 	@Override
@@ -34,11 +38,13 @@ public class EffectAntiMob<T extends EntityCreature> extends EffectBasic {
 		if (entityLivingBaseIn instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer) entityLivingBaseIn;
-			AxisAlignedBB bb = player.getEntityBoundingBox().expand(8, 2, 8).expand(-8, -2, -8);
+			double rangeHori = 8;
+			double rangeVert = 2;
+			AxisAlignedBB antiArea = player.getEntityBoundingBox().expand(rangeHori, rangeVert, rangeHori).expand(-rangeHori, -rangeVert, -rangeHori);
 
 			for (Class<T> c : ANTI_CALSS)
 			{
-				List<T> list = player.world.<T>getEntitiesWithinAABB(c, bb);
+				List<T> list = player.world.<T>getEntitiesWithinAABB(c, antiArea);
 				for (T entity : list)
 				{
 					if (!entity.targetTasks.isControlFlagDisabled(8))
@@ -56,5 +62,13 @@ public class EffectAntiMob<T extends EntityCreature> extends EffectBasic {
 				}
 			}
 		}
+	}
+
+	public ItemStack getItemToCraft()
+	{
+		String[] splitCrux = ITEM.split(":");
+		Item item = Item.getByNameOrId(splitCrux[0]+":"+splitCrux[1]);
+		int meta = Integer.parseInt(splitCrux[2]);
+		return new ItemStack(item, 1, meta);
 	}
 }

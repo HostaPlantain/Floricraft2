@@ -3,6 +3,7 @@ package com.hosta.Floricraft2.mod.TiC;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.hosta.Floricraft2.Reference;
 import com.hosta.Floricraft2.block.BlockBasicFluid;
 import com.hosta.Floricraft2.mod.TiC.client.RenderThrowingRose;
 import com.hosta.Floricraft2.mod.TiC.modifier.ModifierFloric;
@@ -12,7 +13,7 @@ import com.hosta.Floricraft2.mod.TiC.ranged.ThrowingRose;
 import com.hosta.Floricraft2.module.IModule;
 import com.hosta.Floricraft2.module.ModuleFlowers;
 import com.hosta.Floricraft2.module.ModuleOthers;
-import com.hosta.Floricraft2.util.RegisterHelper;
+import com.hosta.Floricraft2.util.Registries;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -95,7 +96,7 @@ public class ModuleFloriconstract implements IModule {
 		// Parts
 		partPetal = new ToolPart(Material.VALUE_Ingot);
 		partPetal.setUnlocalizedName("part_petal");
-		partPetal.setRegistryName(RegisterHelper.getResourceLocation(partPetal.getUnlocalizedName().substring(5)));
+		partPetal.setRegistryName(Reference.getResourceLocation(partPetal.getUnlocalizedName().substring(5)));
 		event.getRegistry().register(partPetal);
 
 		// Stencil for parts
@@ -106,7 +107,7 @@ public class ModuleFloriconstract implements IModule {
 		// Tools
 		throwingRose = new ThrowingRose();
 		throwingRose.setUnlocalizedName("throwing_rose");
-		throwingRose.setRegistryName(RegisterHelper.getResourceLocation(throwingRose.getUnlocalizedName().substring(5)));
+		throwingRose.setRegistryName(Reference.getResourceLocation(throwingRose.getUnlocalizedName().substring(5)));
 		event.getRegistry().register(throwingRose);
 
 		// Modifiers
@@ -150,7 +151,7 @@ public class ModuleFloriconstract implements IModule {
 	@Override
 	public void registerEntities()
 	{
-		RegisterHelper.registerEntity(EntityThrowingRose.class, "throwing_rose", ModuleOthers.THROWING_ROSE);
+		Registries.registerEntity(EntityThrowingRose.class, "throwing_rose", ModuleOthers.THROWING_ROSE);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -180,7 +181,7 @@ public class ModuleFloriconstract implements IModule {
 					String modName = mod.getIdentifier();
 					if (!modName.matches("beheading_cleaver") && !modName.matches("creative") && !modName.matches("extratrait"))
 					{
-						ModelRegisterUtil.registerModifierModel(mod, RegisterHelper.getResourceLocation("models/item/modifiers/" + modName));
+						ModelRegisterUtil.registerModifierModel(mod, Reference.getResourceLocation("models/item/modifiers/" + modName));
 					}
 				}
 			}
