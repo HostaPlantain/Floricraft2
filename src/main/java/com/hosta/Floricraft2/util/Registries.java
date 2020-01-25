@@ -98,7 +98,7 @@ public abstract class Registries {
 		@Override
 		protected void setRegistryName(IForgeRegistryEntry entry)
 		{
-			setRegistryName(entry, ((Block) entry).getUnlocalizedName().substring(5));
+			Registries.setRegistryName(entry, ((Block) entry).getUnlocalizedName().substring(5));
 		}
 
 		public void registerItems(IForgeRegistry<Item> registry)
@@ -156,7 +156,7 @@ public abstract class Registries {
 		@Override
 		protected void setRegistryName(IForgeRegistryEntry entry)
 		{
-			setRegistryName(entry, ((Item) entry).getUnlocalizedName().substring(5));
+			Registries.setRegistryName(entry, ((Item) entry).getUnlocalizedName().substring(5));
 		}
 
 		@SideOnly(Side.CLIENT)
@@ -188,7 +188,7 @@ public abstract class Registries {
 															@Override
 															protected void setRegistryName(IForgeRegistryEntry entry)
 															{
-																setRegistryName(entry, ((Potion) entry).getName());
+																Registries.setRegistryName(entry, ((Potion) entry).getName());
 															}
 														};
 
@@ -197,7 +197,7 @@ public abstract class Registries {
 															@Override
 															protected void setRegistryName(IForgeRegistryEntry entry)
 															{
-																setRegistryName(entry, ((Enchantment) entry).getName());
+																Registries.setRegistryName(entry, ((Enchantment) entry).getName());
 															}
 														};
 
