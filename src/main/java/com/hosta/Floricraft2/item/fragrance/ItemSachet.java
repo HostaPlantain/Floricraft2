@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import com.hosta.Floricraft2.item.ItemBasicTool;
+import com.hosta.Floricraft2.item.ItemBaseTool;
 import com.hosta.Floricraft2.module.ModuleFragrances;
 import com.hosta.Floricraft2.util.Helper;
 
@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemSachet extends ItemBasicTool {
+public class ItemSachet extends ItemBaseTool {
 
 	public ItemSachet(String unlocalizedName)
 	{

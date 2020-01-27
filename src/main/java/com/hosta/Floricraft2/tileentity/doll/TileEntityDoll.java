@@ -5,7 +5,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import com.hosta.Floricraft2.item.fragrance.ItemSachet;
-import com.hosta.Floricraft2.tileentity.TileEntityBasicRendering;
+import com.hosta.Floricraft2.tileentity.TileEntityBaseRendering;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -16,7 +16,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-public abstract class TileEntityDoll extends TileEntityBasicRendering implements ITickable {
+public abstract class TileEntityDoll extends TileEntityBaseRendering implements ITickable {
 
 	private ItemStack itemDisplay = ItemStack.EMPTY;
 

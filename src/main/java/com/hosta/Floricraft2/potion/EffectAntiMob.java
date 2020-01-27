@@ -14,7 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.AxisAlignedBB;
 
-public class EffectAntiMob<T extends EntityCreature> extends EffectBasic {
+public class EffectAntiMob<T extends EntityCreature> extends EffectBase {
 
 	private final Class<T>[] ANTI_CALSS;
 	public final String ITEM;

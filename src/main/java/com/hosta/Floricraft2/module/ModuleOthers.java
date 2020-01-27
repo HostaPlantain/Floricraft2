@@ -45,7 +45,8 @@ public class ModuleOthers implements IModule {
 	public static final SimpleNetworkWrapper	NETWORK_PARTICLE	= NetworkRegistry.INSTANCE.newSimpleChannel(Reference.MOD_ID_SHORT + "." + "part");
 
 	// Entity
-	public static final int	THROWING_ROSE	= 0;
+	public static final int	THROWING_ROSE		= 0;
+	public static final int	PROJECTILE_IZANAGI	= 1;
 
 	// Advancement
 

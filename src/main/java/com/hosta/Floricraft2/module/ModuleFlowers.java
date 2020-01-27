@@ -3,7 +3,7 @@ package com.hosta.Floricraft2.module;
 import com.hosta.Floricraft2.Floricraft2;
 import com.hosta.Floricraft2.block.flower.BlockStackDead;
 import com.hosta.Floricraft2.block.flower.BlockStackFlower;
-import com.hosta.Floricraft2.item.ItemBasicMeta;
+import com.hosta.Floricraft2.item.ItemBaseMeta;
 import com.hosta.Floricraft2.item.flower.ItemFoodSugared;
 
 import net.minecraft.block.Block;
@@ -27,7 +27,7 @@ public class ModuleFlowers implements IModule, IModuleRecipe {
 	}
 
 	// Cut Flower
-	public static final Item	CUT_FLOWER		= new ItemBasicMeta("cut_flower", FLOWERS);
+	public static final Item	CUT_FLOWER		= new ItemBaseMeta("cut_flower", FLOWERS);
 	
 	// Stack Flower
 	public static final Block[]	STACK_FLOWER	= new Block[FLOWERS.length];
@@ -41,13 +41,13 @@ public class ModuleFlowers implements IModule, IModuleRecipe {
 	public static final Block	STACK_DEAD		= new BlockStackDead("stack_dead");
 	
 	// Petal
-	public static final Item	PETAL_RAW		= new ItemBasicMeta("petal_raw", FLOWERS);
-	public static final Item	PETAL_DRY		= new ItemBasicMeta("petal_dry", FLOWERS);
-	public static final Item	PETAL_SALTY		= new ItemBasicMeta("petal_salty", FLOWERS);
+	public static final Item	PETAL_RAW		= new ItemBaseMeta("petal_raw", FLOWERS);
+	public static final Item	PETAL_DRY		= new ItemBaseMeta("petal_dry", FLOWERS);
+	public static final Item	PETAL_SALTY		= new ItemBaseMeta("petal_salty", FLOWERS);
 	public static final Item	PETAL_SUGARED	= new ItemFoodSugared("petal_sugared", FLOWERS, 1, 0.5F);
-	public static final Item	PETALS_RAW		= new ItemBasicMeta("petals_raw", FLOWERS);
-	public static final Item	PETALS_DRY		= new ItemBasicMeta("petals_dry", FLOWERS);
-	public static final Item	PETALS_SALTY	= new ItemBasicMeta("petals_salty", FLOWERS);
+	public static final Item	PETALS_RAW		= new ItemBaseMeta("petals_raw", FLOWERS);
+	public static final Item	PETALS_DRY		= new ItemBaseMeta("petals_dry", FLOWERS);
+	public static final Item	PETALS_SALTY	= new ItemBaseMeta("petals_salty", FLOWERS);
 	public static final Item	PETALS_SUGARED	= new ItemFoodSugared("petals_sugared", FLOWERS, 2, 1.0F);
 	
 	// Torch
@@ -73,7 +73,7 @@ public class ModuleFlowers implements IModule, IModuleRecipe {
 	public void registerOreDictionary()
 	{
 		OreDictionary.registerOre("dustSugar", Items.SUGAR);
-		for (int i = 0; i < ((ItemBasicMeta)PETALS_DRY).getSubNames().length; i++)
+		for (int i = 0; i < ((ItemBaseMeta)PETALS_DRY).getSubNames().length; i++)
 		{
 			OreDictionary.registerOre("petalsDry", new ItemStack(PETALS_DRY, 1, i));
 		}

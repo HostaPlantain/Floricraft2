@@ -1,9 +1,9 @@
 package com.hosta.Floricraft2.module;
 
-import com.hosta.Floricraft2.block.BlockBasic;
-import com.hosta.Floricraft2.block.BlockBasicFalling;
-import com.hosta.Floricraft2.block.BlockBasicOre;
-import com.hosta.Floricraft2.item.ItemBasic;
+import com.hosta.Floricraft2.block.BlockBase;
+import com.hosta.Floricraft2.block.BlockBaseFalling;
+import com.hosta.Floricraft2.block.BlockBaseOre;
+import com.hosta.Floricraft2.item.ItemBase;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -14,14 +14,14 @@ import net.minecraftforge.oredict.OreDictionary;
 public class ModuleMaterials implements IModule, IModuleRecipe {
 
 	// Ingot
-	public static final Item	INGOT_TWINKLE	= new ItemBasic("ingot_twinkle");
-	public static final Item	NUGGET_TWINKLE	= new ItemBasic("nugget_twinkle");
-	public static final Block	BLOCK_TWINKLE	= new BlockBasic("block_twinkle", Material.IRON);
+	public static final Item	INGOT_TWINKLE	= new ItemBase("ingot_twinkle");
+	public static final Item	NUGGET_TWINKLE	= new ItemBase("nugget_twinkle");
+	public static final Block	BLOCK_TWINKLE	= new BlockBase("block_twinkle", Material.IRON);
 
 	// Salt
-	public static final Item	DUST_SALT		= new ItemBasic("dust_salt");
-	public static final Block	ORE_SALT		= new BlockBasicOre("ore_salt", DUST_SALT).setHardness(1.5F).setResistance(10.0F);
-	public static final Block	BLOCK_SALT		= new BlockBasicFalling("block_salt").setHardness(0.5F);
+	public static final Item	DUST_SALT		= new ItemBase("dust_salt");
+	public static final Block	ORE_SALT		= new BlockBaseOre("ore_salt", DUST_SALT).setHardness(1.5F).setResistance(10.0F);
+	public static final Block	BLOCK_SALT		= new BlockBaseFalling("block_salt").setHardness(0.5F);
 
 	@Override
 	public void registerBlocks()

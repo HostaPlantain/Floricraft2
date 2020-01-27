@@ -1,6 +1,6 @@
 package com.hosta.Floricraft2.item.flower;
 
-import com.hosta.Floricraft2.item.ItemBasicFoodMeta;
+import com.hosta.Floricraft2.item.ItemBaseFoodMeta;
 import com.hosta.Floricraft2.module.ModuleFlowers;
 import com.hosta.Floricraft2.module.ModuleFragrances;
 
@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
-public class ItemFoodSugared extends ItemBasicFoodMeta {
+public class ItemFoodSugared extends ItemBaseFoodMeta {
 
 	public ItemFoodSugared(String unlocalizedName, String[] subName, int amount, float saturation)
 	{

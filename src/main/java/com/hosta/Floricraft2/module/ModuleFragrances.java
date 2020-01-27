@@ -1,7 +1,7 @@
 package com.hosta.Floricraft2.module;
 
 import com.hosta.Floricraft2.Floricraft2;
-import com.hosta.Floricraft2.item.ItemBasic;
+import com.hosta.Floricraft2.item.ItemBase;
 import com.hosta.Floricraft2.item.fragrance.ItemSachet;
 import com.hosta.Floricraft2.item.fragrance.ItemVial;
 import com.hosta.Floricraft2.item.fragrance.ItemVialEssence;
@@ -52,14 +52,14 @@ public class ModuleFragrances implements IModule, IModuleRecipe {
 
 	// Vial
 	public static final Item	VIAL_EMPTY			= new ItemVial("vial_empty");
-	public static final Item	VIAL_WATER			= new ItemBasic("vial_water").setMaxStackSize(1);
+	public static final Item	VIAL_WATER			= new ItemBase("vial_water").setMaxStackSize(1);
 	public static final Item	VIAL_FLOWER			= new ItemVialEssence("vial_flower").setMaxStackSize(1);
-	public static final Item	VIAL_MOON			= new ItemBasic("vial_moon");
+	public static final Item	VIAL_MOON			= new ItemBase("vial_moon");
 	public static final Item	VIAL_POTION			= new ItemVialEssence("vial_potion").setMaxStackSize(1);
 	public static final Item	VIAL_MIX			= new ItemVialEssence("vial_mix").setMaxStackSize(1);
 
 	// Sachet
-	public static final Item	SACHET_SAC			= new ItemBasic("sachet_sac");
+	public static final Item	SACHET_SAC			= new ItemBase("sachet_sac");
 	public static final Item	SACHET_FLOWER		= new ItemSachet("sachet_flower");
 	// public static final Item SACHET_ENDEARING;
 

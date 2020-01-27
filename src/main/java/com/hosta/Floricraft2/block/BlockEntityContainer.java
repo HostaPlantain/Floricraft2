@@ -3,7 +3,7 @@ package com.hosta.Floricraft2.block;
 import javax.annotation.Nullable;
 
 import com.hosta.Floricraft2.module.ModuleOthers;
-import com.hosta.Floricraft2.tileentity.TileEntityBasic;
+import com.hosta.Floricraft2.tileentity.TileEntityBase;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -48,7 +48,7 @@ public abstract class BlockEntityContainer extends BlockContainer {
 		{
 			TileEntity tileEntity = worldIn.getTileEntity(pos);
 
-			if (tileEntity != null && tileEntity instanceof TileEntityBasic)
+			if (tileEntity != null && tileEntity instanceof TileEntityBase)
 			{
 				NBTTagCompound nbt = tileEntity.writeToNBT(new NBTTagCompound());
 				NBTTagCompound nbtCopy = nbt.copy();

@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.oredict.DyeUtils;
 
-public class RecipeNaming extends RecipeBasic {
+public class RecipeNaming extends RecipeBase {
 
 	public RecipeNaming(ResourceLocation group)
 	{

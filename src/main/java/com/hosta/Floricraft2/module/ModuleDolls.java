@@ -2,7 +2,7 @@ package com.hosta.Floricraft2.module;
 
 import com.hosta.Floricraft2.block.doll.BlockDollIronSit;
 import com.hosta.Floricraft2.block.doll.BlockDollPlayer;
-import com.hosta.Floricraft2.item.ItemBasic;
+import com.hosta.Floricraft2.item.ItemBase;
 import com.hosta.Floricraft2.item.doll.ItemMessage;
 
 import net.minecraft.block.Block;
@@ -16,7 +16,7 @@ public class ModuleDolls implements IModule, IModuleRecipe {
 
 	// Item Usable
 	// public static final Item ITEM_BALLON;
-	public static final Item	LETTER_BOTTLED		= new ItemBasic("letter_bottled").setMaxStackSize(1);
+	public static final Item	LETTER_BOTTLED		= new ItemBase("letter_bottled").setMaxStackSize(1);
 	public static final Item	LETTER_RECEIVED		= new ItemMessage("letter_received");
 
 	// Doll

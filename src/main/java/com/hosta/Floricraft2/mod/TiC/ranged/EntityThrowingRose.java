@@ -5,7 +5,6 @@ import com.hosta.Floricraft2.util.Matrix;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import slimeknights.tconstruct.common.Sounds;
 import slimeknights.tconstruct.library.entity.EntityProjectileBase;
@@ -38,8 +37,9 @@ public class EntityThrowingRose extends EntityProjectileBase {
 		this.setLocationAndAngles(player.posX, player.posY + player.getEyeHeight(), player.posZ, player.rotationYaw + yaw, player.rotationPitch);
 		this.setPosition(this.posX, this.posY, this.posZ);
 
-		Matrix mat = new Matrix(-MathHelper.sin(Matrix.radian(yaw)), 0, MathHelper.cos(Matrix.radian(yaw)));
-		mat.rotate(Matrix.radian(player.rotationYaw), Matrix.radian(player.rotationPitch));
+		Matrix mat = Matrix.getDefault();
+		mat.rotate(Matrix.radian(yaw), 0);
+		mat.rotateLook(player);
 
 		this.motionX = mat.x;
 		this.motionZ = mat.z;

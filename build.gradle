@@ -29,7 +29,7 @@ dependencies {
 	deobfCompile "slimeknights.mantle:Mantle:${config.minecraft_version_short}-${config.mantle_version}"
     deobfCompile "slimeknights:TConstruct:${config.minecraft_version}-${config.tic_version}"
     deobfCompile "mezz.jei:jei_${config.minecraft_version}:${config.jei_version}"
-    deobfCompile "cofh:RedstoneFlux:${config.minecraft_version_short}-${config.re_version}:universal"
+    deobfCompile "cofh:RedstoneFlux:${config.minecraft_version_short}-${config.rf_version}:universal"
     deobfCompile "baubles:Baubles:${config.minecraft_version_short}:${config.baubles_version}"
     deobfCompile "thaumcraft:Thaumcraft:${config.minecraft_version}:${config.thaumcraft_version}"
     compile fileTree(dir: 'libs', include: '*.jar')

@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import com.hosta.Floricraft2.item.ItemBasic;
+import com.hosta.Floricraft2.item.ItemBase;
 
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemVialEssence extends ItemBasic {
+public class ItemVialEssence extends ItemBase {
 
 	public ItemVialEssence(String name)
 	{

@@ -11,16 +11,20 @@ import java.util.Random;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.chunk.Chunk;
 
 public class Helper {
 
@@ -171,6 +175,26 @@ public class Helper {
 			default:
 				return "˜f";
 		}
+	}
+
+	public static BlockPos getFloor(World world, BlockPos pos)
+	{
+		Chunk chunk = world.getChunkFromBlockCoords(pos);
+        BlockPos blockpos;
+        BlockPos blockposDown;
+
+        for (blockpos = new BlockPos(pos); blockpos.getY() >= 0; blockpos = blockposDown)
+        {
+            blockposDown = blockpos.down();
+            IBlockState state = chunk.getBlockState(blockposDown);
+
+            if (state != Blocks.AIR.getDefaultState())
+            {
+                break;
+            }
+        }
+
+        return blockpos;
 	}
 
 	public static <T> List<T> toList(T[] array)

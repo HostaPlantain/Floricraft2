@@ -151,5 +151,6 @@ public class Floricraft2 {
 	{
 		Registries.ITEMS.registerRenders();
 		Registries.BLOCKS.registerRenders();
+		MODULES.forEach(module -> module.registerModels());
 	}
 }

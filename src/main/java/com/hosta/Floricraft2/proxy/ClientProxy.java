@@ -1,11 +1,14 @@
 package com.hosta.Floricraft2.proxy;
 
-import com.hosta.Floricraft2.client.particle.ParticleBasic;
+import com.hosta.Floricraft2.client.event.EventCutIn;
+import com.hosta.Floricraft2.client.particle.ParticleBase;
 import com.hosta.Floricraft2.client.particle.ParticleFloric;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 public class ClientProxy extends CommonProxy {
 
@@ -15,6 +18,7 @@ public class ClientProxy extends CommonProxy {
 	public void registerEvents()
 	{
 		super.registerEvents();
+		MinecraftForge.EVENT_BUS.register(new EventCutIn());
 	}
 
 	@Override
@@ -22,8 +26,14 @@ public class ClientProxy extends CommonProxy {
 	{
 		for (int i = 0; i < number; i++)
 		{
-			ParticleBasic particle = new ParticleFloric(world != null ? world : mc.world, pos, meta, genByBlock);
+			ParticleBase particle = new ParticleFloric(world != null ? world : mc.world, pos, meta, genByBlock);
 			mc.effectRenderer.addEffect(particle);
 		}
+	}
+
+	@Override
+	public void setCutIn(EntityPlayer player)
+	{
+		EventCutIn.setCutIn(player);
 	}
 }

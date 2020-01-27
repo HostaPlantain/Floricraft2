@@ -1,5 +1,7 @@
 package com.hosta.Floricraft2.util;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
@@ -14,6 +16,18 @@ public class Matrix {
 		this.x = x;
 		this.y = y;
 		this.z = z;
+	}
+
+	public Matrix(double x, double y, double z)
+	{
+		this.x = (float)x;
+		this.y = (float)y;
+		this.z = (float)z;
+	}
+
+	public void rotateLook(Entity entity)
+	{
+		this.rotate(Matrix.radian(entity.rotationYaw), Matrix.radian(entity.rotationPitch));
 	}
 
 	public void rotate(float yaw, float pitch)
@@ -39,6 +53,37 @@ public class Matrix {
 		this.x = x;
 		this.y = y;
 		this.z = z;
+	}
+
+	public void marge(Matrix mat)
+	{
+		this.x += mat.x;
+		this.y += mat.y;
+		this.z += mat.z;
+	}
+
+	public void multipy(float f)
+	{
+		this.x *= f;
+		this.y *= f;
+		this.z *= f;
+	}
+
+	public void divide(float f)
+	{
+		this.x /= f;
+		this.y /= f;
+		this.z /= f;
+	}
+
+	public BlockPos move(BlockPos pos)
+	{
+		return new BlockPos(this.x + pos.getX(), this.y + pos.getY(), this.z + pos.getZ());
+	}
+
+	public static Matrix getDefault()
+	{
+		return new Matrix(0, 0, 1);
 	}
 
 	public static float radian(float angle)

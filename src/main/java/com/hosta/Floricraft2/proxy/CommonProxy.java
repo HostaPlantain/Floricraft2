@@ -4,6 +4,7 @@ import com.hosta.Floricraft2.module.ModuleOthers;
 import com.hosta.Floricraft2.packet.PacketNBT;
 import com.hosta.Floricraft2.packet.PacketNBTParticle;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -27,4 +28,6 @@ public class CommonProxy {
 		NetworkRegistry.TargetPoint point = new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.x, pos.y, pos.z, 32);
 		ModuleOthers.NETWORK_PARTICLE.sendToAllAround(packet, point);
 	}
+
+	public void setCutIn(EntityPlayer player) {}
 }

@@ -2,7 +2,7 @@ package com.hosta.Floricraft2.block.flower;
 
 import javax.annotation.Nullable;
 
-import com.hosta.Floricraft2.block.BlockBasicHorizontal;
+import com.hosta.Floricraft2.block.BlockBaseHorizontal;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -18,7 +18,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockStack extends BlockBasicHorizontal {
+public class BlockStack extends BlockBaseHorizontal {
 
 	protected static final AxisAlignedBB STACK_AABB[] = new AxisAlignedBB[] {
 			new AxisAlignedBB(0.2D, 0.1D, 0.9375D, 0.8D, 0.9D, 1.0D),

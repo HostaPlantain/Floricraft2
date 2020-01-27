@@ -60,4 +60,6 @@ public interface IModule {
 	{
 		Registries.RECIPES.register(entry);
 	}
+
+	public default void registerModels() {}
 }

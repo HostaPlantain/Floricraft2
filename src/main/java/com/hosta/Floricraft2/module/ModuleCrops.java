@@ -1,8 +1,8 @@
 package com.hosta.Floricraft2.module;
 
-import com.hosta.Floricraft2.block.BlockBasicCrops;
-import com.hosta.Floricraft2.item.ItemBasic;
-import com.hosta.Floricraft2.item.ItemBasicSeeds;
+import com.hosta.Floricraft2.block.BlockBaseCrops;
+import com.hosta.Floricraft2.item.ItemBase;
+import com.hosta.Floricraft2.item.ItemBaseSeeds;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -13,14 +13,14 @@ import net.minecraftforge.oredict.OreDictionary;
 public class ModuleCrops implements IModule, IModuleRecipe {
 
 	// Crop
-	public static final Block	CROP_HEMP	= new BlockBasicCrops("crop_hemp");
-	public static final Item	SEED_HEMP	= new ItemBasicSeeds("seed_hemp", CROP_HEMP, Blocks.FARMLAND);
+	public static final Block	CROP_HEMP	= new BlockBaseCrops("crop_hemp");
+	public static final Item	SEED_HEMP	= new ItemBaseSeeds("seed_hemp", CROP_HEMP, Blocks.FARMLAND);
 
 	// Hemp
-	public static final Item	HEMP_YARN	= new ItemBasic("hemp_yarn");
-	public static final Item	HEMP_TWINE	= new ItemBasic("hemp_twine");
-	public static final Item	HEMP_SPOOL	= new ItemBasic("hemp_spool");
-	public static final Item	HEMP_CLOTH	= new ItemBasic("hemp_cloth");
+	public static final Item	HEMP_YARN	= new ItemBase("hemp_yarn");
+	public static final Item	HEMP_TWINE	= new ItemBase("hemp_twine");
+	public static final Item	HEMP_SPOOL	= new ItemBase("hemp_spool");
+	public static final Item	HEMP_CLOTH	= new ItemBase("hemp_cloth");
 
 	@Override
 	public void registerBlocks()

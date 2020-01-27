@@ -1,0 +1,6 @@
+{
+    "parent": "floricraft2:item/sword_double",
+    "textures": {
+        "layer0": "floricraft2:items/sword_izanagi"
+    }
+}

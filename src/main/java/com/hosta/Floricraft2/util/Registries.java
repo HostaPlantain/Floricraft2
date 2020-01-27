@@ -6,8 +6,8 @@ import java.util.List;
 
 import com.hosta.Floricraft2.Floricraft2;
 import com.hosta.Floricraft2.Reference;
-import com.hosta.Floricraft2.block.BlockBasicCrops;
-import com.hosta.Floricraft2.block.BlockBasicFluid;
+import com.hosta.Floricraft2.block.BlockBaseCrops;
+import com.hosta.Floricraft2.block.BlockBaseFluid;
 import com.hosta.Floricraft2.block.BlockEntityContainer;
 import com.hosta.Floricraft2.item.IMetaName;
 import com.hosta.Floricraft2.item.ItemBlockMeta;
@@ -105,7 +105,7 @@ public abstract class Registries {
 		{
 			for (IForgeRegistryEntry block : LIST)
 			{
-				if (!(block instanceof BlockBasicCrops) && !(block instanceof BlockBasicFluid))
+				if (!(block instanceof BlockBaseCrops) && !(block instanceof BlockBaseFluid))
 				{
 					Registries.ITEMS.registerUnnamed(registry, (block instanceof IMetaName) ? new ItemBlockMeta((Block) block) : new ItemBlock((Block) block));
 				}
@@ -128,7 +128,7 @@ public abstract class Registries {
 						ClientRegistry.bindTileEntitySpecialRenderer(blockContainer.getTileEntityClass(), renderer);
 					}
 				}
-				else if (block instanceof BlockBasicFluid)
+				else if (block instanceof BlockBaseFluid)
 				{
 					ModelLoader.setCustomStateMapper((Block) block, new StateMapperBase()
 					{

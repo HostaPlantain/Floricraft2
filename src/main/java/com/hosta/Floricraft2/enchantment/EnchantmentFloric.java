@@ -10,7 +10,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.Vec3d;
 
-public class EnchantmentFloric extends EnchantmentBasic {
+public class EnchantmentFloric extends EnchantmentBase {
 
 	public EnchantmentFloric(String name, Rarity rarityIn, EnumEnchantmentType typeIn, EntityEquipmentSlot[] slots)
 	{

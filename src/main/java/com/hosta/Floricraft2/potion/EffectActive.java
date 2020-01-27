@@ -7,7 +7,7 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumParticleTypes;
 
-public class EffectActive extends EffectBasic {
+public class EffectActive extends EffectBase {
 
 	public EffectActive(String name, int liquidColorIn, boolean isBadEffect)
 	{

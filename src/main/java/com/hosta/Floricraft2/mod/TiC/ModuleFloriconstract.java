@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.hosta.Floricraft2.Reference;
-import com.hosta.Floricraft2.block.BlockBasicFluid;
+import com.hosta.Floricraft2.block.BlockBaseFluid;
 import com.hosta.Floricraft2.mod.TiC.client.RenderThrowingRose;
 import com.hosta.Floricraft2.mod.TiC.modifier.ModifierFloric;
 import com.hosta.Floricraft2.mod.TiC.modifier.TraitTwinkle;
@@ -86,7 +86,7 @@ public class ModuleFloriconstract implements IModule {
 	@Override
 	public void registerBlocks()
 	{
-		moltenTwinkle = new BlockBasicFluid("molten_twinkle", FLUID_TWINKLE, net.minecraft.block.material.Material.LAVA);
+		moltenTwinkle = new BlockBaseFluid("molten_twinkle", FLUID_TWINKLE, net.minecraft.block.material.Material.LAVA);
 		register(moltenTwinkle);
 	}
 

@@ -15,7 +15,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ParticleFloric extends ParticleBasic {
+public class ParticleFloric extends ParticleBase {
 
 	public ParticleFloric(World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, TextureAtlasSprite texture, boolean genByBlock)
 	{

@@ -2,7 +2,7 @@ package com.hosta.Floricraft2.item.doll;
 
 import com.hosta.Floricraft2.Floricraft2;
 import com.hosta.Floricraft2.inventory.GuiHandler;
-import com.hosta.Floricraft2.item.ItemBasic;
+import com.hosta.Floricraft2.item.ItemBase;
 import com.hosta.Floricraft2.util.Message;
 
 import net.minecraft.client.resources.I18n;
@@ -14,7 +14,7 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
-public class ItemMessage extends ItemBasic {
+public class ItemMessage extends ItemBase {
 
 	public ItemMessage(String name)
 	{
